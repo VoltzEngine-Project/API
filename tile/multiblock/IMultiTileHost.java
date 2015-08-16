@@ -1,6 +1,5 @@
 package com.builtbroken.mc.api.tile.multiblock;
 
-import codechicken.lib.vec.Vector3;
 import com.builtbroken.jlib.data.vector.IPos3D;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.Explosion;
@@ -51,7 +50,7 @@ public interface IMultiTileHost
      * @param side   - side clicked
      * @param hit    - hit data of where the tile was clicked
      */
-    void onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, Vector3 hit);
+    void onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit);
 
     /**
      * Called when the player left clicks a tile. No additional data is provided beyond
