@@ -3,6 +3,7 @@ package com.builtbroken.mc.api.tile.client;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 /**
  * Used by a tile to provide icon objects to a block.
@@ -14,13 +15,12 @@ import net.minecraft.util.IIcon;
 public interface IIconCallBack
 {
     /**
-     * Gets the icon for the side. World x y z should already
-     * be contained in the tile for getting additional information.
-     * For example metadata, block connections, or adjacent blocks.
+     * Gets the icon for the side. Location passed in is the
+     * block looking for an icon.
      *
      * @param side - side of the block
      * @return valid icon for side, or null for default icon
      */
     @SideOnly(Side.CLIENT)
-    IIcon getIconForSide(int side);
+    IIcon getIconForSide(World world, int x, int y, int z, int side);
 }
