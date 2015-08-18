@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 
 /** Automated implementation for allowing a tile to be picked up by the player.
- * This works in combination with an event based system inside of RE. In which
+ * This works in combination with an event based system inside of VE. In which
  * depending on the sub interface the tile can be picked up and placed inside
  * the player's inventory.
  *
