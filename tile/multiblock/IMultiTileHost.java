@@ -50,7 +50,7 @@ public interface IMultiTileHost
      * @param side   - side clicked
      * @param hit    - hit data of where the tile was clicked
      */
-    void onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit);
+    boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit);
 
     /**
      * Called when the player left clicks a tile. No additional data is provided beyond
