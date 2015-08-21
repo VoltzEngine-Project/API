@@ -3,7 +3,6 @@ package com.builtbroken.mc.api.tile;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
-import com.builtbroken.mc.api.tile.node.IExternalInventory;
 
 /** Used with IExternalInventory to move the inventory functionality
  * outside of the tile class. Designed to make it easier to abstract inventory

@@ -1,7 +1,5 @@
 package com.builtbroken.mc.api.tile;
 
-import net.minecraft.item.ItemStack;
-
 /** Designed to be used with a linking tool to grab a tile's location and a pass code to
  * allowing linking to another machine. Basically an auth system.
  *

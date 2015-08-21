@@ -1,8 +1,6 @@
 package com.builtbroken.mc.api.tile.node;
 
-import com.builtbroken.mc.api.ISave;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 
 /**

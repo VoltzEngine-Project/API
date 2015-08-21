@@ -1,6 +1,5 @@
 package com.builtbroken.mc.api.items;
 
-import com.builtbroken.jlib.type.IntRange;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 

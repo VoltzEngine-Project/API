@@ -13,6 +13,7 @@ import java.util.Collection;
  * <p/>
  * Created by robert on 1/9/2015.
  */
+@SuppressWarnings("TypeParameterExplicitlyExtendsObject")
 public interface IMachineRecipe<O extends Object, I extends Object>
 {
     /**

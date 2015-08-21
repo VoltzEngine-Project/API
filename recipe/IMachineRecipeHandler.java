@@ -7,6 +7,7 @@ import java.util.Collection;
  * For example grinding ore into dust is always about the same process
  * Created by robert on 1/9/2015.
  */
+@SuppressWarnings("TypeParameterExplicitlyExtendsObject")
 public interface IMachineRecipeHandler<O extends Object, R extends IMachineRecipe>
 {
     /**

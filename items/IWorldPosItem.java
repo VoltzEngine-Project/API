@@ -1,8 +1,6 @@
 package com.builtbroken.mc.api.items;
 
 import com.builtbroken.mc.api.IWorldPosition;
-import com.builtbroken.mc.lib.transform.vector.Location;
-import net.minecraft.dispenser.ILocation;
 import net.minecraft.item.ItemStack;
 
 /** Simple way to store a location inside an Item's NBT
