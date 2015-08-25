@@ -2,7 +2,6 @@ package com.builtbroken.mc.api.tile.multiblock;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.Explosion;
 
 import java.util.HashMap;
 
@@ -23,8 +22,10 @@ public interface IMultiTileHost
      * Called when a peace of the structure has been removed from the world
      *
      * @param tileMulti - tile that was destroyed
+     * @param source    - what broke the block (Player or Explosion), can be null
+     * @param harvest   - should the block be harvested, only used when a player breaks the tile
      */
-    void onMultiTileBroken(IMultiTile tileMulti);
+    boolean onMultiTileBroken(IMultiTile tileMulti, Object source, boolean harvest);
 
     /**
      * Called when a tile has been invalidated. Most likely this is
@@ -33,14 +34,6 @@ public interface IMultiTileHost
      * @param tileMulti - tile that was invalidated
      */
     void onTileInvalidate(IMultiTile tileMulti);
-
-    /**
-     * Called when a peace of the structure is destroyed by an explosion
-     *
-     * @param tile - tile that was destroyed
-     * @param ex   - source of the explosion
-     */
-    void onMultiTileBrokenByExplosion(IMultiTile tile, Explosion ex);
 
     /**
      * Called when a player right clicks a tile
