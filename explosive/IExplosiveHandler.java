@@ -1,7 +1,8 @@
 package com.builtbroken.mc.api.explosive;
 
-import com.builtbroken.mc.api.event.TriggerCause;
 import com.builtbroken.mc.api.edit.IWorldChangeAction;
+import com.builtbroken.mc.api.event.TriggerCause;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -37,7 +38,7 @@ public interface IExplosiveHandler
      * @param lines - list to add info to display for the item tooltip
      * @return min and max pair
      */
-    void addInfoToItem(ItemStack stack, List<String> lines);
+    void addInfoToItem(EntityPlayer player, ItemStack stack, List<String> lines);
 
     /**
      * Called when the explosive is registered
