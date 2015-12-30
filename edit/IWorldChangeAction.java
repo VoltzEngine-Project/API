@@ -42,4 +42,12 @@ public interface IWorldChangeAction
      * @param beforeBlocksPlaced - if true this means no blocks have been placed, false all blocks have been placed
      */
     void doEffectOther(boolean beforeBlocksPlaced);
+
+    /**
+     * Called to kill the action when the world or thread has closed. This prevents
+     * the action from running when the game is not longer functioning. Take
+     * this time to cleanup any references and prep for actionsave. If the action
+     * is an instance of {@link com.builtbroken.mc.api.ISave} it will be saved.
+     */
+    void killAction(boolean willSave);
 }
