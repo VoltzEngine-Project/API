@@ -2,8 +2,10 @@ package com.builtbroken.mc.api.explosive;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.client.event.TextureStitchEvent;
 
 /**
  * Client side version of the {@link IExplosiveHandler} that allows the handler to apply textures to items
@@ -33,4 +35,11 @@ public interface ITexturedExplosiveHandler extends IExplosiveHandler
      */
     @SideOnly(Side.CLIENT)
     IIcon getBottomLeftCornerIcon(ItemStack stack);
+
+    /**
+     * Called to register the icons for the explosive handler. This
+     * is called every texture event by {@link com.builtbroken.mc.core.ClientProxy#onStitch(TextureStitchEvent.Pre)}
+     */
+    @SideOnly(Side.CLIENT)
+    void registerExplosiveHandlerIcons(IIconRegister reg);
 }
