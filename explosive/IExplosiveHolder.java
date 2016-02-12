@@ -18,18 +18,4 @@ public interface IExplosiveHolder extends IExplosive
      */
     boolean setExplosive(IExplosiveHandler ex, double size, NBTTagCompound nbt);
 
-    /**
-     * Returns the NBTTag for additonal data used
-     * when spawning explosive blasts.
-     *
-     * @return null if no data
-     */
-    NBTTagCompound getAdditionalExplosiveData();
-
-    /**
-     * Gets the current size of the explosive
-     *
-     * @return size greater than 0
-     */
-    double getExplosiveSize();
 }

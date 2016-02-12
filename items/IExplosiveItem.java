@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.items;
 
 import com.builtbroken.mc.api.explosive.IExplosiveHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /** Applied to items that contain an explosive instance.
  *
@@ -19,4 +20,19 @@ public interface IExplosiveItem
      * @return explosive instance, or null if it doesn't contain one
      */
     IExplosiveHandler getExplosive(ItemStack stack);
+
+    /**
+     * Returns the NBTTag for additonal data used
+     * when spawning explosive blasts.
+     *
+     * @return null if no data
+     */
+    NBTTagCompound getAdditionalExplosiveData(ItemStack stack);
+
+    /**
+     * Gets the current size of the explosive
+     *
+     * @return size greater than 0
+     */
+    double getExplosiveSize(ItemStack stack);
 }
