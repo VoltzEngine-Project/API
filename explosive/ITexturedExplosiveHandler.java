@@ -41,5 +41,5 @@ public interface ITexturedExplosiveHandler extends IExplosiveHandler
      * is called every texture event by {@link com.builtbroken.mc.core.ClientProxy#onStitch(TextureStitchEvent.Pre)}
      */
     @SideOnly(Side.CLIENT)
-    void registerExplosiveHandlerIcons(IIconRegister reg);
+    void registerExplosiveHandlerIcons(IIconRegister reg, boolean blocks);
 }
