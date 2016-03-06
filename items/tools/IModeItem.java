@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.tools;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

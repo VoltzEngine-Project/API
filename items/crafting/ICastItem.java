@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.crafting;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

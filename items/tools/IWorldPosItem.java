@@ -1,11 +1,11 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.tools;
 
 import com.builtbroken.mc.api.IWorldPosition;
 import net.minecraft.item.ItemStack;
 
 /** Simple way to store a location inside an Item's NBT
  *
- * Designed to be used with {@link com.builtbroken.mc.api.items.IPassCodeItem}
+ * Designed to be used with {@link IPassCodeItem}
  *      as a dual authentication system for linking machines
  *
  * Created by robert on 4/15/2015.

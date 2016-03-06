@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.tools;
 
 /**
  * Applied to items that act like locks for tiles

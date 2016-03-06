@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.explosives;
 
 import com.builtbroken.mc.api.explosive.IExplosiveHandler;
 import net.minecraft.item.ItemStack;

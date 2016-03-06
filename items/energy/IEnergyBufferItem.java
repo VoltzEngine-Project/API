@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.energy;
 
 import net.minecraft.item.ItemStack;
 

@@ -1,5 +1,6 @@
-package com.builtbroken.mc.api.items;
+package com.builtbroken.mc.api.items.tools;
 
+import com.builtbroken.mc.api.items.tools.IWorldPosItem;
 import net.minecraft.item.ItemStack;
 
 /** Very simple interface used to short, or transport a pass code for
@@ -8,7 +9,7 @@ import net.minecraft.item.ItemStack;
  *  this is to prevent location data from being the only factor in linking
  *  devices. As this can lead to users hacking that data with a machines XYZ.
  *
- *  Designed to be used with {@link com.builtbroken.mc.api.items.IWorldPosItem}
+ *  Designed to be used with {@link IWorldPosItem}
  *          as a dual authentication system for linking machines
  *
  * Created by robert on 4/15/2015.
