@@ -4,15 +4,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
 
-/** Object that can tell a block or entity how it was triggered. Used as
+/**
+ * Object that can tell a block or entity how it was triggered. Used as
  * an internal event system for explosive triggering.
  * Created on 11/18/2014.
+ *
  * @author Darkguardsman
  */
 public abstract class TriggerCause
 {
+    /** Name of the trigger cause */
     public final String triggerName;
-    public int size = 1;
+    /** Amount to change the size of the effect */
+    public float effectScaleChange = 1;
 
     public TriggerCause(String name)
     {
@@ -23,6 +27,7 @@ public abstract class TriggerCause
     public static class TriggerCauseSide extends TriggerCause
     {
         public final ForgeDirection triggeredSide;
+
         public TriggerCauseSide(String name, ForgeDirection side)
         {
             super(name);
@@ -39,6 +44,7 @@ public abstract class TriggerCause
         {
             this("entity", source);
         }
+
         public TriggerCauseEntity(String name, Entity source)
         {
             super(name);
