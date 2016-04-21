@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.map.radio;
 
+import com.builtbroken.mc.lib.transform.region.Cube;
+
 /**
  * Applied to tiles that connect to {@link IRadioWaveReceiver} but are not antenna's
  *
@@ -19,4 +21,11 @@ public interface IRadioWaveExternalReceiver
      * @param data          - data from the message
      */
     void receiveExternalRadioWave(float hz, IRadioWaveSender sender, IRadioWaveReceiver receiver, String messageHeader, Object[] data);
+
+    /**
+     * Called when receiver changes its coverage range
+     *
+     * @param range - new range, null if receiver died
+     */
+    void onRangeChange(IRadioWaveReceiver receiver, Cube range);
 }
