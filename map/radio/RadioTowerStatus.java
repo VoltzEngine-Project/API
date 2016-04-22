@@ -18,4 +18,19 @@ public enum RadioTowerStatus
     RECEIVE_ONLY,
     /** Tower is fully functional */
     ONLINE;
+
+    /**
+     * Used for methods that toggle between status
+     * See ICBM's TileAntenna
+     *
+     * @return next value
+     */
+    public RadioTowerStatus next()
+    {
+        if (this == ONLINE)
+        {
+            return OFFLINE;
+        }
+        return values()[ordinal() + 1];
+    }
 }
