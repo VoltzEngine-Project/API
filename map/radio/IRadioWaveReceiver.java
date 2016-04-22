@@ -24,7 +24,11 @@ public interface IRadioWaveReceiver extends IWorldPosition
 
     /**
      * Gets the range of the receive as
-     * a cube.
+     * a cube. The range should be equal
+     * to the size of the antenna. As
+     * a receiver can not pick up a signal
+     * outside of its body area.
+     *
      *
      * Keep in mind a receiver is
      * a passive object and has a constant

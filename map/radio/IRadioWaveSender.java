@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.map.radio;
 
 import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.lib.transform.region.Cube;
+import com.builtbroken.mc.lib.world.radio.RadioRegistry;
 
 /**
  * Applied to objects that send radio waves
@@ -28,7 +29,10 @@ public interface IRadioWaveSender extends IWorldPosition
      * @param header   - description of the data
      * @param data     - data that was sent
      */
-    void onMessageReceived(IRadioWaveReceiver receiver, float hz, String header, Object[] data);
+    default void onMessageReceived(IRadioWaveReceiver receiver, float hz, String header, Object[] data)
+    {
+        //Optional, not really used by most tiles, only exists for special use cases
+    }
 
     /**
      * Either called internally or by an external machine to
@@ -41,7 +45,10 @@ public interface IRadioWaveSender extends IWorldPosition
      * @param header - description of the data
      * @param data   - data being sent
      */
-    void sendRadioMessage(float hz, String header, Object... data);
+    default void sendRadioMessage(float hz, String header, Object... data)
+    {
+        RadioRegistry.popMessage(world(), this, hz, header, data);
+    }
 
     /**
      * Gets the range of the sender as
