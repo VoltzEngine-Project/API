@@ -1,7 +1,6 @@
 package com.builtbroken.mc.api.map.radio.wireless;
 
-import com.builtbroken.mc.api.map.radio.IRadioWaveReceiver;
-import com.builtbroken.mc.api.map.radio.IRadioWaveSender;
+import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.lib.transform.region.Cube;
 
 /**
@@ -11,7 +10,7 @@ import com.builtbroken.mc.lib.transform.region.Cube;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 4/21/2016.
  */
-public interface IWirelessNetworkHub extends IRadioWaveReceiver, IRadioWaveSender
+public interface IWirelessNetworkHub extends IWorldPosition
 {
     /** Area that wirless connections can be made */
     Cube getWirelessCoverageArea();
@@ -30,16 +29,4 @@ public interface IWirelessNetworkHub extends IRadioWaveReceiver, IRadioWaveSende
      * @return value greater than zero
      */
     float getBroadCastFrequency();
-
-    @Override
-    default Cube getRadioReceiverRange()
-    {
-        return getWirelessCoverageArea();
-    }
-
-    @Override
-    default Cube getRadioSenderRange()
-    {
-        return getWirelessCoverageArea();
-    }
 }
