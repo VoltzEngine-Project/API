@@ -59,19 +59,25 @@ public interface IWirelessNetwork
      *
      * @param connector
      */
-    void onConnectionAdded(IWirelessConnector connector, IWirelessNetworkObject object);
+    boolean addConnection(IWirelessConnector connector, IWirelessNetworkObject object);
+
+    /**
+     * Called when a connector is added
+     * @param connector
+     */
+    boolean addConnector(IWirelessConnector connector);
 
     /**
      * Called when a connector is removed
      *
      * @param connector
      */
-    void onConnectionRemoved(IWirelessConnector connector, IWirelessNetworkObject object);
+    boolean removeConnection(IWirelessConnector connector, IWirelessNetworkObject object);
 
     /**
      * Called when a connector invalidates
      *
      * @param connector - connector
      */
-    void onConnectionRemoved(IWirelessConnector connector);
+    boolean removeConnector(IWirelessConnector connector);
 }
