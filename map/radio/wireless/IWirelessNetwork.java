@@ -55,6 +55,13 @@ public interface IWirelessNetwork
     List<IWirelessNetworkObject> getAttachedObjects();
 
     /**
+     * Frequency
+     *
+     * @return
+     */
+    float getHz();
+
+    /**
      * Called when a connector is added
      *
      * @param connector
@@ -63,6 +70,7 @@ public interface IWirelessNetwork
 
     /**
      * Called when a connector is added
+     *
      * @param connector
      */
     boolean addConnector(IWirelessConnector connector);
