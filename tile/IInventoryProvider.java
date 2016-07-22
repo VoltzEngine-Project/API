@@ -18,8 +18,14 @@ public interface IInventoryProvider
     IInventory getInventory();
 
     /** Call back for IExternalInventory to check if the item can be stored */
-    boolean canStore(ItemStack stack, int slot, ForgeDirection side);
+    default boolean canStore(ItemStack stack, int slot, ForgeDirection side)
+    {
+        return false;
+    }
 
     /** Call back for IExternalInventory to check if the item can be removed */
-    boolean canRemove(ItemStack stack, int slot, ForgeDirection side);
+    default boolean canRemove(ItemStack stack, int slot, ForgeDirection side)
+    {
+        return false;
+    }
 }
