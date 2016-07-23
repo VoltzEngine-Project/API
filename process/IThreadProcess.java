@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.process;
 
+import com.builtbroken.mc.api.VoltzEngineAPI;
+
 /**
  * Process that runs on the multi-threaded system
  *
@@ -21,7 +23,7 @@ public interface IThreadProcess
      */
     default void queProcess()
     {
-        for (IWorkerThread thread : IWorkerThread.threads.values())
+        for (IWorkerThread thread : VoltzEngineAPI.WORKER_THREADS.values())
         {
             if (thread.contains(this))
             {
@@ -31,7 +33,7 @@ public interface IThreadProcess
         int lowest = Integer.MAX_VALUE;
         IWorkerThread lowestThread = null;
         //Tries to find the most empty thread
-        for (IWorkerThread thread : IWorkerThread.threads.values())
+        for (IWorkerThread thread : VoltzEngineAPI.WORKER_THREADS.values())
         {
             if (thread.containedProcesses() < lowest)
             {
