@@ -26,7 +26,7 @@ public interface IWorldAction
     void runQue(World world, Side side);
 
     /**
-     * Called to check if the que is done
+     * Called to check if the add is done
      *
      * @return true if done
      */
