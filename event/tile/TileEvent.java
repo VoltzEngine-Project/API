@@ -14,21 +14,43 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class TileEvent extends Event
 {
+    /** Location of tile with world */
     public final Location location;
+    /** Internal cache value */
+    protected TileEntity tile;
+
+    public TileEvent(TileEntity tile)
+    {
+        this.location = new Location(tile);
+        this.tile = tile;
+    }
 
     public TileEvent(World world, int x, int y, int z)
     {
         location = new Location(world, x, y, z);
     }
 
+    public TileEntity tile()
+    {
+        if (tile == null || tile.isInvalid())
+        {
+            tile = location.getTileEntity();
+        }
+        return tile;
+    }
+
+    /**
+     * Call this from your {@link TileEntity#validate()}
+     * @param tile
+     */
     public static void onLoad(TileEntity tile)
     {
-        MinecraftForge.EVENT_BUS.post(new TileLoadEvent(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord));
+        MinecraftForge.EVENT_BUS.post(new TileLoadEvent(tile));
     }
 
     public static void onUnLoad(TileEntity tile)
     {
-        MinecraftForge.EVENT_BUS.post(new TileUnLoadEvent(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord));
+        MinecraftForge.EVENT_BUS.post(new TileUnLoadEvent(tile));
     }
 
     /**
@@ -37,6 +59,12 @@ public class TileEvent extends Event
      */
     public static class TileLoadEvent extends TileEvent
     {
+        //Make sure to call this version as world.getTileEntity may not return same result
+        public TileLoadEvent(TileEntity tile)
+        {
+            super(tile);
+        }
+
         public TileLoadEvent(World world, int x, int y, int z)
         {
             super(world, x, y, z);
@@ -49,6 +77,12 @@ public class TileEvent extends Event
      */
     public static class TileUnLoadEvent extends TileEvent
     {
+        //Make sure to call this version as world.getTileEntity may not return same result
+        public TileUnLoadEvent(TileEntity tile)
+        {
+            super(tile);
+        }
+
         public TileUnLoadEvent(World world, int x, int y, int z)
         {
             super(world, x, y, z);
