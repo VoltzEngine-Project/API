@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.modules;
 
+import com.builtbroken.mc.api.ISave;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -8,7 +9,7 @@ import net.minecraft.item.ItemStack;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 10/28/2015.
  */
-public interface IModule
+public interface IModule extends ISave
 {
     /**
      * Converts the module back into an item
