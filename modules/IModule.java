@@ -25,4 +25,7 @@ public interface IModule extends ISave
      */
     String getUnlocalizedName();
 
+    /** Called to save the object to NBT */
+    void save(ItemStack stack);
+
 }
