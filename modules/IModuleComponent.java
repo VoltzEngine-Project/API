@@ -9,6 +9,13 @@ package com.builtbroken.mc.api.modules;
 public interface IModuleComponent
 {
     /**
+     * Gets the current host of the module.
+     *
+     * @return host
+     */
+    IModule getHost();
+
+    /**
      * Called when the trigger is installed
      *
      * @param module

@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.event;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -52,6 +53,61 @@ public abstract class TriggerCause
         }
     }
 
+    /** Triggered by an entity */
+    public static class TriggerCauseImpact extends TriggerCauseEntity
+    {
+        public final float velocity;
+
+        public TriggerCauseImpact(Entity source, float velocity)
+        {
+            this("entity", source, velocity);
+        }
+
+        public TriggerCauseImpact(String name, Entity source, float velocity)
+        {
+            super(name, source);
+            this.velocity = velocity;
+        }
+    }
+
+    /** Triggered by an entity during impact of the ground */
+    public static class TriggerBlockImpact extends TriggerCauseImpact
+    {
+        public final Block impactBlock;
+
+        public TriggerBlockImpact(Block block, Entity source, float velocity)
+        {
+            this("impact", block, source, velocity);
+        }
+
+        public TriggerBlockImpact(String name, Block block, Entity source, float velocity)
+        {
+            super(name, source, velocity);
+            this.impactBlock = block;
+        }
+    }
+
+    /** Triggered by an entity during impact of an entity */
+    public static class TriggerEntityImpact extends TriggerCauseImpact
+    {
+        /** Entity that was hit by the impacting entity. */
+        public final Entity entityHit;
+
+        public TriggerEntityImpact(Entity entityHit, Entity source, float velocity)
+        {
+            this("impact", entityHit, source, velocity);
+        }
+
+        public TriggerEntityImpact(String name, Entity entityHit, Entity source, float velocity)
+        {
+            super(name, source, velocity);
+            this.entityHit = entityHit;
+        }
+    }
+
+    /**
+     * Trigger event for explosions hitting the object in question.
+     */
     public static class TriggerCauseExplosion extends TriggerCause
     {
         public final Explosion source;
