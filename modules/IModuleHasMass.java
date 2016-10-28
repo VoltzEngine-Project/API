@@ -1,20 +1,15 @@
 package com.builtbroken.mc.api.modules;
 
+import com.builtbroken.mc.api.IHasMass;
+
 /**
  * Applied to modules that have wieght that effects the object that contains them.
  *
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 10/27/2016.
  */
-public interface IModuleWeighted extends IModule
+public interface IModuleHasMass extends IModule, IHasMass
 {
-    /**
-     * Gets the weight of just this part
-     *
-     * @return in grams
-     */
-    double getMass();
-
     /**
      * Get the weight of part contained
      * inside of this part. Do not include
@@ -29,10 +24,10 @@ public interface IModuleWeighted extends IModule
             double mass = 0;
             for(IModule module : ((IModuleContainer)this).getSubModules())
             {
-                if(module instanceof IModuleWeighted)
+                if(module instanceof IModuleHasMass)
                 {
-                    mass += ((IModuleWeighted) module).getMass();
-                    mass += ((IModuleWeighted) module).getSubPartMass();
+                    mass += ((IModuleHasMass) module).getMass();
+                    mass += ((IModuleHasMass) module).getSubPartMass();
                 }
             }
             return mass;
@@ -53,9 +48,9 @@ public interface IModuleWeighted extends IModule
         if(this instanceof IModuleComponent)
         {
             IModule module = ((IModuleComponent)this).getHost();
-            if(module instanceof IModuleWeighted)
+            if(module instanceof IModuleHasMass)
             {
-                return ((IModuleWeighted) module).getObjectMass();
+                return ((IModuleHasMass) module).getObjectMass();
             }
         }
         return getMass() + getSubPartMass();
