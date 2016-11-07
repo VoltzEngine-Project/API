@@ -20,11 +20,23 @@ public interface IInventoryProvider
     /** Call back for IExternalInventory to check if the item can be stored */
     default boolean canStore(ItemStack stack, int slot, ForgeDirection side)
     {
-        return false;
+        return canStore(stack, side);
     }
 
     /** Call back for IExternalInventory to check if the item can be removed */
     default boolean canRemove(ItemStack stack, int slot, ForgeDirection side)
+    {
+        return canRemove(stack, side);
+    }
+
+    /** Call back for IExternalInventory to check if the item can be stored */
+    default boolean canStore(ItemStack stack, ForgeDirection side)
+    {
+        return false;
+    }
+
+    /** Call back for IExternalInventory to check if the item can be removed */
+    default boolean canRemove(ItemStack stack, ForgeDirection side)
     {
         return false;
     }
