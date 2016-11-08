@@ -4,7 +4,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
-/** Used with IExternalInventory to move the inventory functionality
+/**
+ * Used with IExternalInventory to move the inventory functionality
  * outside of the tile class. Designed to make it easier to abstract inventory
  * functionality. Though for ISidedInventory it still requires the methods
  * to be present in the tile. Though this can easily be achieved with compile
@@ -39,5 +40,10 @@ public interface IInventoryProvider
     default boolean canRemove(ItemStack stack, ForgeDirection side)
     {
         return false;
+    }
+
+    /** Called when the inventory changes */
+    default void onInventoryChanged(int slot, ItemStack prev, ItemStack item)
+    {
     }
 }
