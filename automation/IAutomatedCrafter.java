@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.automation;
 
+import com.builtbroken.mc.api.tile.IInventoryProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 11/9/2016.
  */
-public interface IAutomatedCrafter extends IAutomation
+public interface IAutomatedCrafter extends IAutomation, IInventoryProvider
 {
     /**
      * Can the machine start crafting
@@ -38,28 +39,39 @@ public interface IAutomatedCrafter extends IAutomation
     List<ItemStack> getRequiredItems();
 
     /**
-     * Called to check if the item can be stored
-     * <p>
-     * This method is shared intentionally with {@link com.builtbroken.mc.api.tile.IInventoryProvider}
-     * as you should be able to store the item in the inventory or crafting if this returns true.
-     * Use different methods if you want to have more fine tune control over how items are inserted
-     * for example {@link #insertRequiredItem(ItemStack, IAutomation)} can be used to reject
-     * items that this method returned true for.
-     *
-     * @param stack - what is being stored
-     * @param side  - side it is being stored on
-     * @return true if it can be stored, regardless of inventory fullness.
-     */
-    boolean canStore(ItemStack stack, ForgeDirection side);
-
-    /**
-     * Called by automation when inserting items.
-     * <p>
-     * Make sure o
+     * Called by automation when inserting items without knowing
+     * exactly which slot to use.
      *
      * @param stack  - stack to be inserted
      * @param entity - what is trying to insert the item
      * @return what is left of the stack after inserting
      */
-    ItemStack insertRequiredItem(ItemStack stack, IAutomation entity);
+    ItemStack insertRequiredItem(ItemStack stack, IAutomation entity, ForgeDirection side);
+
+    /**
+     * Called by automation when inserting items
+     *
+     * @param stack  - stack to be inserted
+     * @param entity - what is trying to insert the item
+     * @return what is left of the stack after inserting
+     */
+    ItemStack insertRequiredItem(ItemStack stack, int slot, IAutomation entity, ForgeDirection side);
+
+    /**
+     * Gets the slots that are used for output
+     *
+     * @param entity - machine accessing the crafter
+     * @param side   - side being accessed from
+     * @return slots, or empty array
+     */
+    int[] getCraftingOutputSlots(IAutomation entity, ForgeDirection side);
+
+    /**
+     * Gets the slots that are used for inputs
+     *
+     * @param entity - machine accessing the crafter
+     * @param side-  side being accessed from
+     * @return slots, or empty array
+     */
+    int[] getCraftingInputSlots(IAutomation entity, ForgeDirection side);
 }
