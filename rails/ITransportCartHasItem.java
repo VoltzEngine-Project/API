@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.rails;
 
+import com.builtbroken.mc.prefab.inventory.filters.IInventoryFilter;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -26,10 +27,22 @@ public interface ITransportCartHasItem extends ITransportCart
     ItemStack setTransportedItem(ItemStack stack);
 
     /**
-     * Checks if the item can be transported
+     * Checks if the item can be transported.
+     * <p>
+     * This is called in place of using {@link #getInventoryFilter()} in
+     * some case so using the filter in this method might
+     * be useful.
      *
      * @param stack - stack to validate, ignore stacksize
      * @return true if yes
      */
     boolean canAcceptItemForTransport(ItemStack stack);
+
+    /**
+     * Helps filter down items that can be inserted into
+     * this cart when searching large inventories.
+     *
+     * @return filter, or null to not care
+     */
+    IInventoryFilter getInventoryFilter();
 }
