@@ -12,7 +12,7 @@ public interface IAmmoType
      *
      * @return valid string value
      */
-    String getCategory();
+    String getAmmoCategory();
 
     /**
      * Gets the type of the ammo
@@ -20,7 +20,7 @@ public interface IAmmoType
      *
      * @return valid string value
      */
-    String getType();
+    String getAmmoType();
 
     /** Name to use for translation */
     String getUnlocalizedName();
