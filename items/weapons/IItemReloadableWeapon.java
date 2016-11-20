@@ -1,12 +1,13 @@
 package com.builtbroken.mc.api.items.weapons;
 
+import com.builtbroken.mc.api.data.weapon.IAmmoType;
 import net.minecraft.item.ItemStack;
 
 /**
  * Normally applied to projectile weapons but can be applied to any weapon that can be reloaded.
  * Created by robert on 12/28/2014.
  */
-public interface IReloadableWeapon
+public interface IItemReloadableWeapon
 {
     /**
      * Loaded the weapon with some ammo

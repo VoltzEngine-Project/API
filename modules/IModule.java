@@ -25,6 +25,20 @@ public interface IModule extends ISave
      */
     String getUnlocalizedName();
 
+    /**
+     * A unique ID that can be used to
+     * save/load and transmitted the module
+     * over the network.
+     * <p>
+     * Works about the same way as TileEntity
+     * registry IDs. Make sure to register
+     * this with the module builder so the
+     * module can be reconstructed
+     *
+     * @return unique save ID
+     */
+    String getSaveID();
+
     /** Called to save the object to NBT */
     void save(ItemStack stack);
 

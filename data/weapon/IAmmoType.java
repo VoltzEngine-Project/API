@@ -1,10 +1,10 @@
-package com.builtbroken.mc.api.items.weapons;
+package com.builtbroken.mc.api.data.weapon;
 
 /**
  * Applied to an object that is used to identify ammo types
  * Created by robert on 12/28/2014.
  */
-public interface IAmmoType
+public interface IAmmoType extends IData
 {
     /**
      * Primary group the ammo counts as
