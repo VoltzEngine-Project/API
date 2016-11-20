@@ -3,7 +3,7 @@ package com.builtbroken.mc.api.items.weapons;
 import com.builtbroken.mc.api.data.weapon.IAmmoData;
 import net.minecraft.item.ItemStack;
 
-import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
@@ -17,5 +17,5 @@ public interface IItemClip extends IItemAmmo
      * @param clipStack - this
      * @return queue of ammo being fired
      */
-    Queue<IAmmoData> getStoredAmmo(ItemStack clipStack);
+    Stack<IAmmoData> getStoredAmmo(ItemStack clipStack);
 }
