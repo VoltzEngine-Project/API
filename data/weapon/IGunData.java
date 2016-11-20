@@ -18,6 +18,24 @@ public interface IGunData extends IWeaponData
     ReloadType getReloadType();
 
     /**
+     * All weapons normally have a built
+     * int clip data object to allow firing
+     * a single round.
+     * <p>
+     * However, in some cases this may return
+     * null if the weapon can literally not
+     * function without a clip inserted. Examples
+     * of this are laser weapons and plasma weapons.
+     * <p>
+     * This is also used for weapons that have
+     * built in clips and can not have clips
+     * inserted into the weapon.
+     *
+     * @return built in clip
+     */
+    IClipData getBuiltInClipData();
+
+    /**
      * Type of gun
      * <p>
      * This is mainly used for display to the user

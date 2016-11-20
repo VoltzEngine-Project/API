@@ -33,4 +33,16 @@ public interface IClip
      * @return stack (Last in, First Out... same way a real clip works)
      */
     Stack<IAmmoData> getAmmo();
+
+    /**
+     * Called to consume ammo from the clip.
+     * <p>
+     * Make sure to call this instead of calling
+     * {@link #getAmmo()) then {@link Stack#pop()}
+     * as the changes may not be saved correctly
+     *
+     * @param count - amount of ammo to consumed, normally
+     *              this should be 1 but might be more for faster firing weapons
+     */
+    void consumeAmmo(int count);
 }

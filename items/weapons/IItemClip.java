@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.items.weapons;
 
 import com.builtbroken.mc.api.data.weapon.IAmmoData;
+import com.builtbroken.mc.api.modules.weapon.IClip;
 import net.minecraft.item.ItemStack;
 
 import java.util.Stack;
@@ -18,4 +19,13 @@ public interface IItemClip extends IItemAmmo
      * @return queue of ammo being fired
      */
     Stack<IAmmoData> getStoredAmmo(ItemStack clipStack);
+
+    /**
+     * Wrappers the stack in side of a clip object
+     * for easier access and usability.
+     *
+     * @param clipStack - this
+     * @return new clip instance
+     */
+    IClip toClip(ItemStack clipStack);
 }

@@ -56,8 +56,8 @@ public interface IItemAmmo
      * Called to consume ammo from the stack. Use this to define how ammo is consumed
      * when using stack size is not enough.
      *
-     * @param weapon     - weapon the round was fired from
-     * @param ammoStack  - ammo that was fired
+     * @param weapon     - weapon the round was fired from, may be null
+     * @param ammoStack  - ammo that was fired, may be null
      * @param shotsFired - number of shots that were fired
      */
     void consumeAmmo(IItemReloadableWeapon weapon, ItemStack weaponStack, ItemStack ammoStack, int shotsFired);
