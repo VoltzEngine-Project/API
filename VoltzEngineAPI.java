@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class VoltzEngineAPI
 {
     /** Version of the API */
-    public static final String VERSION = "0.9.0";
+    public static final String VERSION = "0.9.1";
 
     /** Threads that can be tasked with completing processes out side of the main game loop */
     public static final ConcurrentHashMap<String, IWorkerThread> WORKER_THREADS = new ConcurrentHashMap();
