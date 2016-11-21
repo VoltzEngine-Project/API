@@ -26,6 +26,27 @@ public interface IAmmoData extends IData
     float getBaseDamage();
 
     /**
+     * How fast does the projectile that
+     * this ammo represents travel when
+     * fired by the weapon.
+     * <p>
+     * This is the base speed driven by
+     * the casing of gunpowder (Or other content)
+     * that actually moves the projectile.
+     * <p>
+     * Speed can be modified by the weapon's
+     * modifications and damage.
+     * <p>
+     * Speed is used to determine if an entity
+     * or raytrace is to be used. As well how
+     * much energy is transferred into the entity
+     * impacted.
+     *
+     * @return speed in m/s or -1 to ignore for special or default handling
+     */
+    float getProjectileVelocity();
+
+    /**
      * Called to apply the damage to the entity
      *
      * @param shooter - what shot the round, or the round itself
