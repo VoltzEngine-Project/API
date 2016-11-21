@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.items.weapons;
 
 import com.builtbroken.mc.api.data.weapon.IAmmoData;
+import com.builtbroken.mc.api.data.weapon.IClipData;
 import com.builtbroken.mc.api.modules.weapon.IClip;
 import net.minecraft.item.ItemStack;
 
@@ -21,6 +22,16 @@ public interface IItemClip extends IItemAmmo
     Stack<IAmmoData> getStoredAmmo(ItemStack clipStack);
 
     /**
+     * Called to load ammo into the clip
+     *
+     * @param clipStack - this
+     * @param data      - ammo type
+     * @param count     - number to load
+     * @return number loaded
+     */
+    int loadAmmo(ItemStack clipStack, IAmmoData data, int count);
+
+    /**
      * Wrappers the stack in side of a clip object
      * for easier access and usability.
      *
@@ -28,4 +39,12 @@ public interface IItemClip extends IItemAmmo
      * @return new clip instance
      */
     IClip toClip(ItemStack clipStack);
+
+    /**
+     * Information about the clip
+     *
+     * @param clipStack
+     * @return
+     */
+    IClipData getClipData(ItemStack clipStack);
 }

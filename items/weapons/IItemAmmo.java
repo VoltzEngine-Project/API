@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.items.weapons;
 
-import com.builtbroken.mc.api.data.weapon.IAmmoType;
+import com.builtbroken.mc.api.data.weapon.IAmmoData;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
@@ -36,12 +36,14 @@ public interface IItemAmmo
     }
 
     /**
-     * Gets the type of ammo. For example
+     * Gets the type of ammo. For example (pmm, 20mm)
+     * <p>
+     * For clips this will and should return null
      *
      * @param stack - stack that is ammo
      * @return type
      */
-    IAmmoType getAmmoType(ItemStack stack);
+    IAmmoData getAmmoData(ItemStack stack);
 
     /**
      * How many rounds are in the stack.

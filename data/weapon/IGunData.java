@@ -36,6 +36,13 @@ public interface IGunData extends IWeaponData
     IClipData getBuiltInClipData();
 
     /**
+     * Type of ammo this weapon can load
+     *
+     * @return
+     */
+    IAmmoType getAmmoType();
+
+    /**
      * Type of gun
      * <p>
      * This is mainly used for display to the user

@@ -45,4 +45,54 @@ public interface IClip
      *              this should be 1 but might be more for faster firing weapons
      */
     void consumeAmmo(int count);
+
+    /**
+     * Called to load a single round of ammo
+     *
+     * @param data
+     * @return
+     */
+    default boolean loadAmmo(IAmmoData data)
+    {
+        return loadAmmo(data, 1) == 1;
+    }
+
+    /**
+     * Called to load ammo into the clip
+     *
+     * @param data
+     * @param count
+     * @return
+     */
+    int loadAmmo(IAmmoData data, int count);
+
+    /**
+     * Gets how full the weapon is as a percent
+     *
+     * @return
+     */
+    default float getPercentFull()
+    {
+        return (float) getAmmoCount() / (float) getClipData().getMaxAmmo();
+    }
+
+    /**
+     * Gets how full the weapon is as a percent
+     *
+     * @return
+     */
+    default String getAmmoRatio()
+    {
+        return getAmmoCount() + "/" + getClipData().getMaxAmmo();
+    }
+
+    /**
+     * Gets how much space is in the clip
+     *
+     * @return
+     */
+    default int getEmptyAmmoSpace()
+    {
+        return getClipData().getMaxAmmo() - getAmmoCount();
+    }
 }
