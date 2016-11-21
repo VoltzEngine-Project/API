@@ -49,21 +49,26 @@ public interface IAmmoData extends IData
     /**
      * Called to apply the damage to the entity
      *
-     * @param shooter - what shot the round, or the round itself
-     * @param entity  - what was hit by the round
+     * @param shooter  - what shot the round, or the round itself
+     * @param entity   - what was hit by the round
+     * @param velocity - how fast the projectile is going
+     * @return should the projectile stop & die
      */
-    void onImpactEntity(Entity shooter, Entity entity);
+    boolean onImpactEntity(Entity shooter, Entity entity, float velocity);
 
     /**
      * Called when the round hits the ground
      *
-     * @param world - world
-     * @param x     - block pos
-     * @param y     - block pos
-     * @param z     - block pos
-     * @param hitX  - round pos
-     * @param hitY  - round pos
-     * @param hitZ  - round pos
+     * @param shooter  - what shot the round, or the round itself
+     * @param world    - world
+     * @param x        - block pos
+     * @param y        - block pos
+     * @param z        - block pos
+     * @param hitX     - round pos
+     * @param hitY     - round pos
+     * @param hitZ     - round pos
+     * @param velocity - how fast the projectile is going
+     * @return should the projectile stop & die
      */
-    void onImpactGround(World world, int x, int y, int z, double hitX, double hitY, double hitZ);
+    boolean onImpactGround(Entity shooter, World world, int x, int y, int z, double hitX, double hitY, double hitZ, float velocity);
 }
