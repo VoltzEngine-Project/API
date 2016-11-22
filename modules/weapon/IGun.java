@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.modules.weapon;
 
+import com.builtbroken.mc.api.data.weapon.IAmmoData;
 import com.builtbroken.mc.api.data.weapon.IGunData;
 import com.builtbroken.mc.api.modules.IModule;
 
@@ -18,6 +19,18 @@ public interface IGun extends IWeapon, IModule
      * @return data
      */
     IGunData getGunData();
+
+    /**
+     * Gets the current round chambered to fire on the
+     * next trigger pull.
+     * <p>
+     * For weapons with multiple shots still return
+     * only one value. With that value being the first
+     * round that will be sent down range.
+     *
+     * @return
+     */
+    IAmmoData getChamberedRound();
 
     /**
      * Current clip inside of the weapon.

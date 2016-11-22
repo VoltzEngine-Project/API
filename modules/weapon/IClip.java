@@ -1,7 +1,9 @@
 package com.builtbroken.mc.api.modules.weapon;
 
 import com.builtbroken.mc.api.data.weapon.IAmmoData;
+import com.builtbroken.mc.api.data.weapon.IAmmoType;
 import com.builtbroken.mc.api.data.weapon.IClipData;
+import com.builtbroken.mc.api.data.weapon.ReloadType;
 
 import java.util.Stack;
 
@@ -94,5 +96,35 @@ public interface IClip
     default int getEmptyAmmoSpace()
     {
         return getClipData().getMaxAmmo() - getAmmoCount();
+    }
+
+    /**
+     * Wrapper method call for {@link IClipData#getMaxAmmo()}
+     *
+     * @return
+     */
+    default int getMaxAmmo()
+    {
+        return getClipData().getMaxAmmo();
+    }
+
+    /**
+     * Wrapper method call for {@link IClipData#getReloadType()}
+     *
+     * @return
+     */
+    default ReloadType getReloadType()
+    {
+        return getClipData().getReloadType();
+    }
+
+    /**
+     * Wrapper method call for {@link IClipData#getAmmoType()} )}
+     *
+     * @return
+     */
+    default IAmmoType getAmmoType()
+    {
+        return getClipData().getAmmoType();
     }
 }
