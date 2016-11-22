@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.data.weapon;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
@@ -17,6 +18,14 @@ public interface IAmmoData extends IData
      * @return type
      */
     IAmmoType getAmmoType();
+
+    /**
+     * Gets the ItemStack that represents
+     * this ammo data.
+     *
+     * @return
+     */
+    ItemStack toStack();
 
     /**
      * Gets the base damage without modifiers
