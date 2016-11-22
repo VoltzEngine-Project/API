@@ -1,9 +1,6 @@
 package com.builtbroken.mc.api.modules.weapon;
 
-import com.builtbroken.mc.api.data.weapon.IAmmoData;
-import com.builtbroken.mc.api.data.weapon.IAmmoType;
-import com.builtbroken.mc.api.data.weapon.IClipData;
-import com.builtbroken.mc.api.data.weapon.ReloadType;
+import com.builtbroken.mc.api.data.weapon.*;
 
 import java.util.Stack;
 
