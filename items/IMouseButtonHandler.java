@@ -19,6 +19,7 @@ public interface IMouseButtonHandler
      * @param stack  - item
      * @param player - who is holding the item
      * @param button - button on the mouse that was changed
+     *               -1 is scroll wheel movement but is never passed into this method
      *               0 is left
      *               1 is right
      *               2 is scroll wheel

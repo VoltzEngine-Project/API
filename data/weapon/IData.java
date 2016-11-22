@@ -26,4 +26,16 @@ public interface IData
      * @return unique type
      */
     String getDataType();
+
+    /**
+     * Override for changing the string
+     * displayed to users and in GUIs
+     * when showing this data
+     *
+     * @return
+     */
+    default String getDisplayString()
+    {
+        return toString();
+    }
 }
