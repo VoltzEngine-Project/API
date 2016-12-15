@@ -28,7 +28,7 @@ public abstract class TriggerCause
     }
 
     /** Side based Trigger */
-    public static class TriggerCauseSide extends TriggerCause
+    public abstract static class TriggerCauseSide extends TriggerCause
     {
         public final ForgeDirection triggeredSide;
 
@@ -63,7 +63,7 @@ public abstract class TriggerCause
 
         public TriggerCauseImpact(Entity source, float velocity)
         {
-            this("impactEntity", source, velocity);
+            this("entityImpact", source, velocity);
         }
 
         public TriggerCauseImpact(String name, Entity source, float velocity)

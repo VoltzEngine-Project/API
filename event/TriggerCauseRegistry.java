@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.event;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import java.util.HashMap;
 
@@ -29,14 +30,14 @@ public class TriggerCauseRegistry
      * @param tag
      * @return
      */
-    public static TriggerCause rebuild(NBTTagCompound tag)
+    public static TriggerCause rebuild(NBTTagCompound tag, World world)
     {
         if (tag != null && tag.hasKey("id"))
         {
             String id = tag.getString("id");
             if (data.containsKey(id))
             {
-                return data.get(id).buildCause(tag);
+                return data.get(id).buildCause(tag, world);
             }
         }
         return null;
@@ -48,6 +49,10 @@ public class TriggerCauseRegistry
         if (cause != null)
         {
             tag.setString("id", cause.triggerName);
+            if (data.containsKey(cause.triggerName))
+            {
+                return data.get(cause.triggerName).cache(tag, cause);
+            }
         }
         return tag;
     }
@@ -63,6 +68,14 @@ public class TriggerCauseRegistry
          * @param tag - nbt data to read
          * @return new trigger cause
          */
-        TriggerCause buildCause(NBTTagCompound tag);
+        TriggerCause buildCause(NBTTagCompound tag, World world);
+
+        /**
+         * Called to cache the trigger into NBT
+         *
+         * @param tag
+         * @return
+         */
+        NBTTagCompound cache(NBTTagCompound tag, TriggerCause cause);
     }
 }
