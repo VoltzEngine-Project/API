@@ -9,12 +9,15 @@ import net.minecraftforge.common.util.ForgeDirection;
  * Object that can tell a block or entity how it was triggered. Used as
  * an internal event system for explosive triggering.
  * Created on 11/18/2014.
+ * <p>
+ * Make sure to register a {@link TriggerCauseRegistry.TriggerNBTBuilder} so
+ * that packet syncing and NBT saving work correctly.
  *
  * @author Darkguardsman
  */
 public abstract class TriggerCause
 {
-    /** Name of the trigger cause */
+    /** Name of the trigger cause, unique lookup id, and translation key. */
     public final String triggerName;
     /** Amount to change the size of the effect */
     public float effectScaleChange = 1;
@@ -60,7 +63,7 @@ public abstract class TriggerCause
 
         public TriggerCauseImpact(Entity source, float velocity)
         {
-            this("entity", source, velocity);
+            this("impactEntity", source, velocity);
         }
 
         public TriggerCauseImpact(String name, Entity source, float velocity)
@@ -77,7 +80,7 @@ public abstract class TriggerCause
 
         public TriggerBlockImpact(Block block, Entity source, float velocity)
         {
-            this("impact", block, source, velocity);
+            this("entityImpactBlock", block, source, velocity);
         }
 
         public TriggerBlockImpact(String name, Block block, Entity source, float velocity)
@@ -95,7 +98,7 @@ public abstract class TriggerCause
 
         public TriggerEntityImpact(Entity entityHit, Entity source, float velocity)
         {
-            this("impact", entityHit, source, velocity);
+            this("entityImpactEntity", entityHit, source, velocity);
         }
 
         public TriggerEntityImpact(String name, Entity entityHit, Entity source, float velocity)
