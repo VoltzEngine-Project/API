@@ -40,9 +40,25 @@ public interface IExplosiveHandler
      * Mainly used for displaying information
      * to users
      *
+     * @param stack used to get specific data about the explosive
+     *              item that is requesting yield data
      * @return scale
      */
-    default double getSizeScaleFactor()
+    default double getYieldModifier(ItemStack stack)
+    {
+        return getYieldModifier();
+    }
+
+    /**
+     * Gets the scale that is applied to
+     * the input size value.
+     * <p>
+     * Mainly used for displaying information
+     * to users
+     *
+     * @return scale
+     */
+    default double getYieldModifier()
     {
         return 1;
     }
