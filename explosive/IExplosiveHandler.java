@@ -18,21 +18,37 @@ import java.util.List;
 public interface IExplosiveHandler
 {
 
-	/** Attempt to trigger the explosive at the location for the trigger cause.
+    /**
+     * Attempt to trigger the explosive at the location for the trigger cause.
      * Most of the time this will be call once so avoid chance logic as it maybe not
      * get called again.
-	 *
-	 * @param world  The world in which the explosion takes place.
-	 * @param x      The X-Coord
-	 * @param y      The Y-Coord
-	 * @param z      The Z-Coord
-	 * @param triggerCause - object that describes what caused the explosion to try
-     * @param size  - size of the explosive, will be used to set radius using ex. (size * min_radius)
+     *
+     * @param world        The world in which the explosion takes place.
+     * @param x            The X-Coord
+     * @param y            The Y-Coord
+     * @param z            The Z-Coord
+     * @param triggerCause - object that describes what caused the explosion to try
+     * @param size         - size of the explosive, will be used to set radius using ex. (size * min_radius)
      * @return instanceof IWorldChangeAction that tells what blocks and entities are to be effected
-	 */
+     */
     IWorldChangeAction createBlastForTrigger(World world, double x, double y, double z, TriggerCause triggerCause, double size, NBTTagCompound tag);
 
-    /** Gets estimated range info for the given trigger and size
+    /**
+     * Gets the scale that is applied to
+     * the input size value.
+     * <p>
+     * Mainly used for displaying information
+     * to users
+     *
+     * @return scale
+     */
+    default double getSizeScaleFactor()
+    {
+        return 1;
+    }
+
+    /**
+     * Gets estimated range info for the given trigger and size
      *
      * @param stack - item that contains the explosive
      * @param lines - list to add info to display for the item tooltip
@@ -42,7 +58,8 @@ public interface IExplosiveHandler
 
     /**
      * Called when the explosive is registered
-     * @param id - name the explosive was registered with
+     *
+     * @param id    - name the explosive was registered with
      * @param modID - mod the explosive was registered by
      */
     void onRegistered(String id, String modID);
