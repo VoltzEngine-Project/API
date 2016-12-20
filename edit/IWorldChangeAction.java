@@ -20,7 +20,10 @@ public interface IWorldChangeAction
      * thread an explosive if its rather larger as creating threads for a single small explosives
      * is wasteful.
      *
-     * @return number of blocks to change per tick, zero and bellow are treated as not mutli-threaded
+     * @return number of blocks to change per tick
+     * <p>
+     * 0 or -1 is no threading
+     * -2 is thread but instant placement of blocks
      */
     int shouldThreadAction();
 
