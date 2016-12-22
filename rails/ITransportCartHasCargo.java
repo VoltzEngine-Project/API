@@ -1,18 +1,25 @@
 package com.builtbroken.mc.api.rails;
 
 import com.builtbroken.mc.api.tile.IInventoryProvider;
+import com.builtbroken.mc.api.tile.node.IExternalInventory;
 import com.builtbroken.mc.prefab.inventory.filters.IInventoryFilter;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
- * Applied to carts that have extended inventory
+ * Applied to carts that have extended inventory.
+ * <p>
+ * {@link #getInventoryFilter()} is required for this class by the rail system
+ * due to the possibility of large inventories.
  *
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 11/9/2016.
  */
-public interface ITransportCartHasCargo extends ITransportCart, IInventoryProvider
+public interface ITransportCartHasCargo extends ITransportCartCargo, IInventoryProvider
 {
+    /** External inventory object */
+    IExternalInventory getInventory();
+
     /**
      * Checks if the item can be transported.
      * <p>
@@ -32,12 +39,4 @@ public interface ITransportCartHasCargo extends ITransportCart, IInventoryProvid
         }
         return canStore(stack, ForgeDirection.UNKNOWN);
     }
-
-    /**
-     * Helps filter down items that can be inserted into
-     * this cart when searching large inventories.
-     *
-     * @return filter, or null to not care
-     */
-    IInventoryFilter getInventoryFilter();
 }
