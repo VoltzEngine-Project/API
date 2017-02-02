@@ -13,10 +13,10 @@ import net.minecraftforge.common.util.ForgeDirection;
  *
  * @author Darkguardsman
  */
-public interface IInventoryProvider
+public interface IInventoryProvider<I extends IInventory>
 {
     /** External inventory object */
-    IInventory getInventory();
+    I getInventory();
 
     /** Call back for IExternalInventory to check if the item can be stored */
     default boolean canStore(ItemStack stack, int slot, ForgeDirection side)

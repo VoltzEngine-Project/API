@@ -3,8 +3,6 @@ package com.builtbroken.mc.api.tile;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Map;
-
 /**
  * Simple interface for checking connections to an object from a direction.
  * <p>
@@ -19,19 +17,21 @@ public interface ITileConnection
      * Should be simple as side == side, and connection instanceof type
      *
      * @param connection - what is trying to connect, can be null
-     * @param type       - what type of connector is the connection
-     * @param from       - desired side to connect, may be null for internal connectons
+     * @param type       - what type of connector is the connection.
+     *                   Make sure to check for general connection type before specific
+     * @param from       - desired side to connect, may be null for internal connections.
+     *                   Side going into the machine towards the center
      * @return true if the object can connect based on direction, and type
      */
     boolean canConnect(TileEntity connection, ConnectionType type, ForgeDirection from);
 
     /**
-     * Map of connections by the sides they connected to. Is not limited to one
-     * connection per side, however all connections must return a side. Even if
-     * this side ends up being ForgeDirection.Unknown
+     * Checks if the tile has a connection on the given side
      *
-     * @return map of connections, or empty map in place of null/no connections
+     * @param type - type of connection, can be null for any connection
+     * @param side - side of the tile, facing away from center
+     * @return true if there is a connection of the type on the side
      */
-    Map<TileEntity, ForgeDirection> getConnections();
+    boolean hasConnection(ConnectionType type, ForgeDirection side);
 
 }
