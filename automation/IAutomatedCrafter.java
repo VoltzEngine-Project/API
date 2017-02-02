@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.automation;
 
 import com.builtbroken.mc.api.tile.IInventoryProvider;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 11/9/2016.
  */
-public interface IAutomatedCrafter extends IAutomation, IInventoryProvider
+public interface IAutomatedCrafter<I extends IInventory> extends IAutomation, IInventoryProvider<I>
 {
     /**
      * Can the machine start crafting

@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.rails;
 
 import com.builtbroken.mc.api.tile.IInventoryProvider;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -13,7 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 11/4/2016.
  */
-public interface IRailInventoryTile extends IInventoryProvider
+public interface IRailInventoryTile<I extends IInventory> extends IInventoryProvider<I>
 {
     /**
      * Slots that will be accessed to load items into the cart.
