@@ -71,7 +71,7 @@ public interface ITransportCart extends IWorldPosition
      * @param y
      * @param z
      */
-    void setMotion(double x, double y, double z);
+    void setCartMotion(double x, double y, double z);
 
     /**
      * Sets the rotation of the cart
@@ -79,7 +79,7 @@ public interface ITransportCart extends IWorldPosition
      * @param yaw
      * @param pitch
      */
-    void setRotation(float yaw, float pitch);
+    void setCartRotation(float yaw, float pitch);
 
     /**
      * Returns the speed by which rails will try
