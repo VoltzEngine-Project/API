@@ -71,6 +71,12 @@ public interface IAmmoData extends IData
      */
     default boolean onImpactEntity(Entity shooter, Entity entity, double hitX, double hitY, double hitZ, float velocity)
     {
+        return onImpactEntity(shooter, entity, velocity);
+    }
+
+    @Deprecated
+    default boolean onImpactEntity(Entity shooter, Entity entity, float velocity)
+    {
         return true;
     }
 
