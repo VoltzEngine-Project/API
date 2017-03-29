@@ -60,10 +60,13 @@ public interface IAmmoData extends IData
      *
      * @param shooter  - what shot the round, or the round itself
      * @param entity   - what was hit by the round
+     * @param hitX     - round pos
+     * @param hitY     - round pos
+     * @param hitZ     - round pos
      * @param velocity - how fast the projectile is going
      * @return should the projectile stop & die
      */
-    boolean onImpactEntity(Entity shooter, Entity entity, float velocity);
+    boolean onImpactEntity(Entity shooter, Entity entity, double hitX, double hitY, double hitZ, float velocity);
 
     /**
      * Called when the round hits the ground
