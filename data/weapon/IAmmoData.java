@@ -53,7 +53,10 @@ public interface IAmmoData extends IData
      *
      * @return speed in m/s or -1 to ignore for special or default handling
      */
-    float getProjectileVelocity();
+    default float getProjectileVelocity()
+    {
+        return -1;
+    }
 
     /**
      * Called to apply the damage to the entity
@@ -66,7 +69,10 @@ public interface IAmmoData extends IData
      * @param velocity - how fast the projectile is going
      * @return should the projectile stop & die
      */
-    boolean onImpactEntity(Entity shooter, Entity entity, double hitX, double hitY, double hitZ, float velocity);
+    default boolean onImpactEntity(Entity shooter, Entity entity, double hitX, double hitY, double hitZ, float velocity)
+    {
+        return true;
+    }
 
     /**
      * Called when the round hits the ground
@@ -82,5 +88,8 @@ public interface IAmmoData extends IData
      * @param velocity - how fast the projectile is going
      * @return should the projectile stop & die
      */
-    boolean onImpactGround(Entity shooter, World world, int x, int y, int z, double hitX, double hitY, double hitZ, float velocity);
+    default boolean onImpactGround(Entity shooter, World world, int x, int y, int z, double hitX, double hitY, double hitZ, float velocity)
+    {
+        return true;
+    }
 }
