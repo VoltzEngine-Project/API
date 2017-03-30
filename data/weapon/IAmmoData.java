@@ -4,6 +4,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 /**
  * Information about an ammo
  *
@@ -97,5 +99,16 @@ public interface IAmmoData extends IData
     default boolean onImpactGround(Entity shooter, World world, int x, int y, int z, double hitX, double hitY, double hitZ, float velocity)
     {
         return true;
+    }
+
+    /**
+     * Gets the items that should be ejected from the weapon
+     * when the ammo is fired.
+     *
+     * @param items - list to add items to
+     */
+    default void getEjectedItems(List<ItemStack> items)
+    {
+
     }
 }
