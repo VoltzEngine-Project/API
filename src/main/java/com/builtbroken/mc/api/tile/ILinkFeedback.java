@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.tile;
 
-import com.builtbroken.mc.api.IWorldPosition;
+import com.builtbroken.mc.imp.transform.vector.Location;
 
 /** Used to receive feed back when machines are linked to each other.
  * Called normally in {@link com.builtbroken.mc.api.tile.ILinkable#link(com.builtbroken.mc.imp.transform.vector.Location, short)}
@@ -12,5 +12,5 @@ public interface ILinkFeedback
      * Called when this tile is linked to another tile
      * @param location - location of the machine this one was linked to
      */
-    void onLinked(IWorldPosition location);
+    void onLinked(Location location);
 }
