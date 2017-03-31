@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.map.radio;
 
-import com.builtbroken.mc.lib.transform.region.Cube;
+import com.builtbroken.mc.imp.transform.region.Cube;
 
 /**
  * Applied to tiles that connect to {@link IRadioWaveReceiver} but are not antenna's

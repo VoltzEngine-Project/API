@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.map.radio.wireless;
 
 import com.builtbroken.mc.api.IWorldPosition;
-import com.builtbroken.mc.lib.transform.region.Cube;
+import com.builtbroken.mc.imp.transform.region.Cube;
 
 /**
  * Applied to tiles that act as a wifi-style hub for a wireless network. In other words this is the same

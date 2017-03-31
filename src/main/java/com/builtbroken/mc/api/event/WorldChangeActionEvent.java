@@ -1,8 +1,8 @@
 package com.builtbroken.mc.api.event;
 
+import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.edit.IWorldChangeAction;
 import com.builtbroken.mc.api.edit.IWorldEdit;
-import com.builtbroken.mc.lib.transform.vector.Location;
 import cpw.mods.fml.common.eventhandler.Cancelable;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
@@ -32,10 +32,10 @@ public abstract class WorldChangeActionEvent extends WorldEvent
     @Cancelable
     public static class ActionCreated extends WorldChangeActionEvent
     {
-        public final Location startingPoint;
-        public ActionCreated(Location v, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
+        public final IWorldPosition startingPoint;
+        public ActionCreated(IWorldPosition v, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
         {
-            super(v.world, worldChangeAction, triggerCause);
+            super(v.world(), worldChangeAction, triggerCause);
             startingPoint = v;
         }
     }
@@ -45,10 +45,10 @@ public abstract class WorldChangeActionEvent extends WorldEvent
      */
     public static class PostWorldChangeEvent extends WorldChangeActionEvent
     {
-        public final Location startingPoint;
-        public PostWorldChangeEvent(Location v, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
+        public final IWorldPosition startingPoint;
+        public PostWorldChangeEvent(IWorldPosition v, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
         {
-            super(v.world, worldChangeAction, triggerCause);
+            super(v.world(), worldChangeAction, triggerCause);
             startingPoint = v;
         }
     }
@@ -59,11 +59,11 @@ public abstract class WorldChangeActionEvent extends WorldEvent
      */
     public static class FinishedCalculatingEffectEvent extends WorldChangeActionEvent
     {
-        public final Location startingPoint;
+        public final IWorldPosition startingPoint;
         public final Collection<IWorldEdit> blocks;
-        public FinishedCalculatingEffectEvent(Location v, Collection<IWorldEdit> blocks, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
+        public FinishedCalculatingEffectEvent(IWorldPosition v, Collection<IWorldEdit> blocks, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
         {
-            super(v.world, worldChangeAction, triggerCause);
+            super(v.world(), worldChangeAction, triggerCause);
             this.startingPoint = v;
             this.blocks = blocks;
         }

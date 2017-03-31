@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.map.radio;
 
 import com.builtbroken.mc.api.IWorldPosition;
-import com.builtbroken.mc.lib.transform.region.Cube;
+import com.builtbroken.mc.imp.transform.region.Cube;
 
 /**
  * Applied to objects that act like radio receivers

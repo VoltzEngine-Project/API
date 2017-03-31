@@ -2,7 +2,6 @@ package com.builtbroken.mc.api.edit;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.api.IWorldPosition;
-import com.builtbroken.mc.lib.world.edit.BlockEditResult;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;

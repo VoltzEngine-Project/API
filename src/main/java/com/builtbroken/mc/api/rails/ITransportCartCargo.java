@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.rails;
 
-import com.builtbroken.mc.prefab.inventory.filters.IInventoryFilter;
+import com.builtbroken.mc.api.IInventoryFilter;
 import net.minecraft.item.ItemStack;
 
 /**

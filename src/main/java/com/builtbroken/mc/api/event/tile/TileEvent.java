@@ -1,7 +1,6 @@
 package com.builtbroken.mc.api.event.tile;
 
-import com.builtbroken.mc.lib.transform.vector.Location;
-import cpw.mods.fml.common.eventhandler.Event;
+import com.builtbroken.mc.api.event.PositionEvent;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,35 +11,34 @@ import net.minecraftforge.common.MinecraftForge;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 8/11/2016.
  */
-public class TileEvent extends Event
+public class TileEvent extends PositionEvent
 {
-    /** Location of tile with world */
-    public final Location location;
     /** Internal cache value */
     protected TileEntity tile;
 
     public TileEvent(TileEntity tile)
     {
-        this.location = new Location(tile);
+        super(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
         this.tile = tile;
     }
 
     public TileEvent(World world, int x, int y, int z)
     {
-        location = new Location(world, x, y, z);
+        super(world, x, y, z);
     }
 
     public TileEntity tile()
     {
         if (tile == null || tile.isInvalid())
         {
-            tile = location.getTileEntity();
+            tile = world.getTileEntity(x, y, z);
         }
         return tile;
     }
 
     /**
      * Call this from your {@link TileEntity#validate()}
+     *
      * @param tile
      */
     public static void onLoad(TileEntity tile)

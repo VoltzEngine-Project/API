@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.tile;
 
-import com.builtbroken.mc.lib.transform.vector.Location;
+import com.builtbroken.mc.api.IWorldPosition;
 
 /** Used to allow interfacing with tiles to link machines to them
  *
@@ -15,5 +15,5 @@ public interface ILinkable
      * @return translation key of the response to linking, if it starts with error
      * it will not link
      */
-    String link(Location pos, short pass);
+    String link(IWorldPosition pos, short pass);
 }

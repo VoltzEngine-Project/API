@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Simple tool item that is used for crafting. This item does not leave the crafting grid but instead takes damage.
  * <p/>
- * This interface is designed for usage with the {@link com.builtbroken.mc.prefab.recipe.item.RecipeTool} or classes very similar too it
+ * This interface is designed for usage with the {@link com.builtbroken.mc.lib.recipe.item.RecipeTool} or classes very similar too it
  *
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 10/2/2015.

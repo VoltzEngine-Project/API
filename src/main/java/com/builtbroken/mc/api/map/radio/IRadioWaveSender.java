@@ -1,8 +1,7 @@
 package com.builtbroken.mc.api.map.radio;
 
 import com.builtbroken.mc.api.IWorldPosition;
-import com.builtbroken.mc.lib.transform.region.Cube;
-import com.builtbroken.mc.lib.world.radio.RadioRegistry;
+import com.builtbroken.mc.imp.transform.region.Cube;
 
 /**
  * Applied to objects that send radio waves
@@ -45,10 +44,7 @@ public interface IRadioWaveSender extends IWorldPosition
      * @param header - description of the data
      * @param data   - data being sent
      */
-    default void sendRadioMessage(float hz, String header, Object... data)
-    {
-        RadioRegistry.popMessage(world(), this, hz, header, data);
-    }
+    void sendRadioMessage(float hz, String header, Object... data);
 
     /**
      * Gets the range of the sender as

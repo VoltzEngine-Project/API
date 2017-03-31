@@ -1,8 +1,8 @@
 package com.builtbroken.mc.api.rails;
 
+import com.builtbroken.mc.api.IInventoryFilter;
 import com.builtbroken.mc.api.tile.IInventoryProvider;
 import com.builtbroken.mc.api.tile.node.IExternalInventory;
-import com.builtbroken.mc.prefab.inventory.filters.IInventoryFilter;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
