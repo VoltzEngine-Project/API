@@ -9,11 +9,41 @@ import net.minecraft.world.World;
  */
 public interface IWorldPosition
 {
-	World world();
+    World world();
 
     double x();
 
     double y();
 
     double z();
+
+    default int xi()
+    {
+        return (int) Math.floor(x());
+    }
+
+    default int yi()
+    {
+        return (int) Math.floor(y());
+    }
+
+    default int zi()
+    {
+        return (int) Math.floor(z());
+    }
+
+    default float xf()
+    {
+        return (float) x();
+    }
+
+    default float yf()
+    {
+        return (float) y();
+    }
+
+    default float zf()
+    {
+        return (float) z();
+    }
 }
