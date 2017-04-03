@@ -11,7 +11,10 @@ import net.minecraft.entity.Entity;
 public interface IResistanceListener extends ITileEventListener
 {
     /**
-     * Called to get the explosion resistance of the tile
+     * Called to get the explosion resistance of the tile.
+     * <p>
+     * Least resistance value of all listeners is used. Though in the future this may be
+     * changed to allow the user to invert this check.
      *
      * @param entity
      * @return
@@ -22,7 +25,10 @@ public interface IResistanceListener extends ITileEventListener
     }
 
     /**
-     * Called to get the explosion resistance of the tile
+     * Called to get the explosion resistance of the tile.
+     * <p>
+     * Least resistance value of all listeners is used. Though in the future this may be
+     * changed to allow the user to invert this check.
      *
      * @param entity
      * @param explosionX
