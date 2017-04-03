@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 4/3/2017.
  */
-public interface IActivationListener
+public interface IActivationListener extends ITileEventListener
 {
     /**
      * Called when the player right-clicks the block
@@ -34,5 +34,11 @@ public interface IActivationListener
     default boolean onPlayerClicked(EntityPlayer player)
     {
         return false;
+    }
+
+    @Override
+    default String getListenerKey()
+    {
+        return "activation";
     }
 }
