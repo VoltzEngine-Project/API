@@ -3,10 +3,12 @@ package com.builtbroken.mc.api.tile.listeners;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
+ * Applied to objects that listen for block action events
+ *
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 4/3/2017.
  */
-public interface IActivatable
+public interface IActivationListener
 {
     /**
      * Called when the player right-clicks the block
@@ -23,6 +25,12 @@ public interface IActivatable
         return false;
     }
 
+    /**
+     * Called when the player left clicks a tile
+     *
+     * @param player
+     * @return
+     */
     default boolean onPlayerClicked(EntityPlayer player)
     {
         return false;
