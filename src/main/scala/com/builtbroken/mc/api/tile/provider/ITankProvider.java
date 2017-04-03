@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.tile;
+package com.builtbroken.mc.api.tile.provider;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;

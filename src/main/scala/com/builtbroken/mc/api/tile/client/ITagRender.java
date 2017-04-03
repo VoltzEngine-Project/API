@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.tile;
+package com.builtbroken.mc.api.tile.client;
 
 import net.minecraft.entity.player.EntityPlayer;
 

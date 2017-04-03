@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.tile;
+package com.builtbroken.mc.api.tile.access;
 
 import net.minecraft.item.ItemStack;
 

@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.tile;
+package com.builtbroken.mc.api.tile.provider;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

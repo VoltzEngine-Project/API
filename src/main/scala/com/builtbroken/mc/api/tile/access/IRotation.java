@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.tile;
+package com.builtbroken.mc.api.tile.access;
 
 import net.minecraftforge.common.util.ForgeDirection;
 

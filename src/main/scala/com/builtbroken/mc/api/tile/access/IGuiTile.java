@@ -1,4 +1,4 @@
-package com.builtbroken.mc.api.tile;
+package com.builtbroken.mc.api.tile.access;
 
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -26,4 +26,28 @@ public interface IGuiTile
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
     Object getClientGuiElement(int ID, EntityPlayer player);
+
+
+    /**
+     * Called to see if right click should be handled
+     * automatically and the GUI should be open.
+     *
+     * @param player - who is trying to open the GUI, in rare cases can be null
+     * @return true if should open
+     */
+    default boolean shouldOpenOnRightClick(EntityPlayer player)
+    {
+        return true;
+    }
+
+    /**
+     * Gets the default ID that should be opened
+     *
+     * @param player - who is trying to open the GUI, in rare cases can be null
+     * @return ID of the GUI
+     */
+    default int getDefaultGuiID(EntityPlayer player)
+    {
+        return 0;
+    }
 }

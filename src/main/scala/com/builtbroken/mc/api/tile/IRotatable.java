@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.tile;
 
+import com.builtbroken.mc.api.tile.access.IRotation;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
