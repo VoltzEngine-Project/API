@@ -2,6 +2,9 @@ package com.builtbroken.mc.api.tile.listeners;
 
 import com.builtbroken.mc.api.IWorldPosition;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Extended by listener classes that are applied to tiles or hosted by tiles.
  *
@@ -16,5 +19,19 @@ public abstract interface ITileEventListener extends IWorldPosition
      *
      * @return unique key for the group
      */
+    @Deprecated
     String getListenerKey();
+
+    /**
+     * Get used to ID(s) the listener group
+     * this listener should be registered with
+     *
+     * @return unique key for the group
+     */
+    default List<String> getListenerKeys()
+    {
+        List<String> list = new ArrayList();
+        list.add(getListenerKey());
+        return list;
+    }
 }

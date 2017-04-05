@@ -55,6 +55,18 @@ public interface IGunData extends IWeaponData
     String getGunType();
 
     /**
+     * Does the weapon needs to be sighted in
+     * order to be fired.
+     * <p>
+     * This is used for weapons like RPGs
+     * and AT rifles that can not be fired
+     * from the hip.
+     *
+     * @return true if needs to be sighted
+     */
+    boolean isSightedRequiredToFire();
+
+    /**
      * How long it takes to reload the weapon.
      * <p>
      * This is a base value for an average sized clip.

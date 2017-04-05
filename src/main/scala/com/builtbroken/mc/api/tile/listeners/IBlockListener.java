@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.tile.listeners;
 
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
@@ -23,8 +24,10 @@ public interface IBlockListener
      */
     void inject(World world, int x, int y, int z);
 
+    void inject(IBlockAccess world, int x, int y, int z);
+
     default void eject()
     {
-        inject(null, 0, 0, 0);
+
     }
 }
