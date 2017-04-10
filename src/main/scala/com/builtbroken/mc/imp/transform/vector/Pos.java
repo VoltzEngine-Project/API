@@ -2,6 +2,7 @@ package com.builtbroken.mc.imp.transform.vector;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.api.IWorldPosition;
+import com.google.gson.JsonObject;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -100,6 +101,30 @@ public class Pos extends AbstractPos<Pos> implements IPos3D
     public Pos(Vec3 vec)
     {
         this(vec.xCoord, vec.yCoord, vec.zCoord);
+    }
+
+    /**
+     * Creates a pos from a json object containing x, y, z fields
+     *
+     * @param offsetObject
+     * @return
+     */
+    public static Pos fromJsonObject(JsonObject offsetObject)
+    {
+        double x = 0, y = 0, z = 0;
+        if (offsetObject.has("x"))
+        {
+            x = offsetObject.getAsJsonPrimitive("x").getAsDouble();
+        }
+        if (offsetObject.has("y"))
+        {
+            y = offsetObject.getAsJsonPrimitive("y").getAsDouble();
+        }
+        if (offsetObject.has("z"))
+        {
+            z = offsetObject.getAsJsonPrimitive("z").getAsDouble();
+        }
+        return new Pos(x, y, z);
     }
 
     @Override
