@@ -2,7 +2,6 @@ package com.builtbroken.mc.imp.transform.region;
 
 import com.builtbroken.jlib.data.network.IByteBufWriter;
 import com.builtbroken.jlib.data.vector.IPos3D;
-import com.builtbroken.mc.api.map.radio.IRadioWaveReceiver;
 import com.builtbroken.mc.imp.transform.vector.Point;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import io.netty.buffer.ByteBuf;
@@ -586,7 +585,6 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
      * Gets a lit of chunk coords, used when a list of chunks is not actually need.
      *
      * @return list of coords using cube bounds
-     * @see {@link com.builtbroken.mc.lib.world.radio.RadioMap#add(IRadioWaveReceiver)}
      * for an example of usage.
      */
     public List<ChunkCoordIntPair> getChunkCoords()
@@ -767,6 +765,14 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
             two = new Pos(min().x(), 255, min().y());
         }
         set(one, two);
+        return this;
+    }
+
+    public Cube expand(int range)
+    {
+        Pos start = min().sub(range);
+        Pos end = max().add(range);
+        set(start, end);
         return this;
     }
 }
