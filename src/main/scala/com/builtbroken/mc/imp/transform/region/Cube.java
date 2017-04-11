@@ -24,10 +24,15 @@ import java.util.List;
  */
 public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 {
+    public static final Cube EMPTY = new Cube().disableEdits();
+    public static final Cube FULL = new Cube(0, 0, 0, 1, 1, 1).disableEdits();
+
     private IPos3D pointOne;
     private IPos3D pointTwo;
     private Pos lowerPoint;
     private Pos higherPoint;
+
+    private boolean canEdit = true;
 
     public Cube()
     {
@@ -72,6 +77,18 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
     public Cube(ByteBuf buf)
     {
         this(new Pos(buf), new Pos(buf));
+    }
+
+    public Cube enableEdits()
+    {
+        canEdit = true;
+        return this;
+    }
+
+    public Cube disableEdits()
+    {
+        canEdit = false;
+        return this;
     }
 
     @Override
@@ -131,7 +148,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public Cube add(double x, double y, double z)
     {
-        if (isValid())
+        if (isValid() && canEdit)
         {
             pointOne = new Pos(pointOne.x() + x, pointOne.y() + y, pointOne.z() + z);
             pointTwo = new Pos(pointTwo.x() + x, pointTwo.y() + y, pointTwo.z() + z);
@@ -147,7 +164,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public Cube subtract(double x, double y, double z)
     {
-        if (isValid())
+        if (isValid() && canEdit)
         {
             pointOne = new Pos(pointOne.x() - x, pointOne.y() - y, pointOne.z() - z);
             pointTwo = new Pos(pointTwo.x() - x, pointTwo.y() - y, pointTwo.z() - z);
@@ -607,21 +624,30 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public void setPointOne(IPos3D pos)
     {
-        this.pointOne = pos;
-        recalc();
+        if (canEdit)
+        {
+            this.pointOne = pos;
+            recalc();
+        }
     }
 
     public void setPointTwo(IPos3D pos)
     {
-        this.pointTwo = pos;
-        recalc();
+        if (canEdit)
+        {
+            this.pointTwo = pos;
+            recalc();
+        }
     }
 
     public void set(IPos3D min, IPos3D max)
     {
-        this.pointOne = min;
-        this.pointTwo = max;
-        recalc();
+        if (canEdit)
+        {
+            this.pointOne = min;
+            this.pointTwo = max;
+            recalc();
+        }
     }
 
     public Cube set(Cube cube)
@@ -642,15 +668,18 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
      */
     protected void recalc()
     {
-        if (pointOne != null && pointTwo != null)
+        if (canEdit)
         {
-            lowerPoint = new Pos(Math.min(pointOne.x(), pointTwo.x()), Math.min(pointOne.y(), pointTwo.y()), Math.min(pointOne.z(), pointTwo.z()));
-            higherPoint = new Pos(Math.max(pointOne.x(), pointTwo.x()), Math.max(pointOne.y(), pointTwo.y()), Math.max(pointOne.z(), pointTwo.z()));
-            this.center = new Pos(min().x() + (getSizeX() / 2), min().y() + (getSizeY() / 2), min().z() + (getSizeZ() / 2));
-        }
-        else
-        {
-            this.center = null;
+            if (pointOne != null && pointTwo != null)
+            {
+                lowerPoint = new Pos(Math.min(pointOne.x(), pointTwo.x()), Math.min(pointOne.y(), pointTwo.y()), Math.min(pointOne.z(), pointTwo.z()));
+                higherPoint = new Pos(Math.max(pointOne.x(), pointTwo.x()), Math.max(pointOne.y(), pointTwo.y()), Math.max(pointOne.z(), pointTwo.z()));
+                this.center = new Pos(min().x() + (getSizeX() / 2), min().y() + (getSizeY() / 2), min().z() + (getSizeZ() / 2));
+            }
+            else
+            {
+                this.center = null;
+            }
         }
     }
 
