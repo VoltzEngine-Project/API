@@ -17,7 +17,13 @@ public enum ReloadType
     /** Anything that slots something into the weapon (Most weapons) */
     CLIP,
     /** Same as clip but with slightly different handling (Keep in mind belts in boxes or drums are considered clips) */
-    BELT;
+    BELT,
+    /** Weapon is energy based and is reloaded via a battery like system */
+    ENERGY,
+    /** Weapon is fluid based and is reload via a tank like system */
+    FLUID,
+    /** Weapon has not reload system */
+    NONE;
 
     /**
      * Gets a type by meta
