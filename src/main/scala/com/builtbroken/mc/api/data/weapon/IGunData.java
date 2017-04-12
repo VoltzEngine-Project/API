@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.data.weapon;
 
+import com.builtbroken.mc.imp.transform.vector.Pos;
+
 /**
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 11/20/2016.
@@ -53,6 +55,30 @@ public interface IGunData extends IWeaponData
      * @return weapon type (Handgun, Rifle(AutoRifle, AssaultRifle SniperRifle), LMG, HMG, SMG)
      */
     String getGunType();
+
+    /**
+     * Offset from entities weapon hold position
+     * that projectiles or raytraces should spawn
+     *
+     * @return pos
+     */
+    Pos getProjectileSpawnOffset();
+
+    /**
+     * Offset from entities weapon hold position
+     * that ejected items spawn at
+     *
+     * @return pos
+     */
+    Pos getEjectionSpawnOffset();
+
+    /**
+     * Direction that ejected items will
+     * move towards when thrown out of a weapon
+     *
+     * @return pos
+     */
+    Pos getEjectionSpawnVector();
 
     /**
      * Does the weapon needs to be sighted in
