@@ -111,4 +111,17 @@ public interface IAmmoData extends IData
     {
 
     }
+
+    /**
+     * Gets the energy cost of firing the round
+     * from a weapon. This is designed to be
+     * used by energy based weapons and electromagnetic weapons.
+     * However, there are no limits on how this functions.
+     *
+     * @return energy, must be greater than zero to be used.
+     */
+    default int getEnergyCost()
+    {
+        return -1;
+    }
 }

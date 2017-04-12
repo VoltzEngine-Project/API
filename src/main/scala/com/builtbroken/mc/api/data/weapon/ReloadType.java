@@ -9,21 +9,28 @@ package com.builtbroken.mc.api.data.weapon;
 public enum ReloadType
 {
     /** Weapons that feed ammo from the front (Muskets, RPG, Motor, Cannons) */
-    FRONT_LOADED,
+    FRONT_LOADED(true),
     /** Weapons that are feed ammo from the back and only have 1 shot (Bolt actions, Civil war era breach rifles, Breach loaded cannons) */
-    BREACH_LOADED,
+    BREACH_LOADED(true),
     /** Weapons that contain an internal clip and are hand feed (Shot guns, Revolvers, Grenade Launchers) */
-    HAND_FEED,
+    HAND_FEED(true),
     /** Anything that slots something into the weapon (Most weapons) */
-    CLIP,
+    CLIP(true),
     /** Same as clip but with slightly different handling (Keep in mind belts in boxes or drums are considered clips) */
-    BELT,
+    BELT(true),
     /** Weapon is energy based and is reloaded via a battery like system */
-    ENERGY,
+    ENERGY(false),
     /** Weapon is fluid based and is reload via a tank like system */
-    FLUID,
+    FLUID(false),
     /** Weapon has not reload system */
-    NONE;
+    NONE(false);
+
+    private final boolean needsAmmoItem;
+
+    ReloadType(boolean needsAmmoItem)
+    {
+        this.needsAmmoItem = needsAmmoItem;
+    }
 
     /**
      * Gets a type by meta
@@ -56,5 +63,10 @@ public enum ReloadType
             }
         }
         return CLIP;
+    }
+
+    public boolean requiresItems()
+    {
+        return needsAmmoItem;
     }
 }
