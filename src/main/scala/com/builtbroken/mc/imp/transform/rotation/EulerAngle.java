@@ -19,7 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * <p>
  * Original version by Calclavia
  */
-public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteBufReader
+public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteBufReader, IRotation
 {
     protected double yaw = 0;
     protected double pitch = 0;
@@ -246,12 +246,10 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
      */
     public EulerAngle ceil()
     {
-        {
-            this.yaw = Math.ceil(yaw);
-            this.pitch = Math.ceil(pitch);
-            this.roll = Math.ceil(roll);
-            return this;
-        }
+        this.yaw = Math.ceil(yaw);
+        this.pitch = Math.ceil(pitch);
+        this.roll = Math.ceil(roll);
+        return this;
     }
 
     /**
@@ -413,12 +411,6 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
         return new Pos(vector).transform(toQuaternion());
     }
 
-    @Deprecated
-    public IPos3D toVector()
-    {
-        return new Pos(-Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), -Math.cos(yaw) * Math.cos(pitch));
-    }
-
     /**
      * Converts object to {@link Pos}
      *
@@ -426,7 +418,7 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
      */
     public Pos toPos()
     {
-        return new Pos(-Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), -Math.cos(yaw) * Math.cos(pitch));
+        return new Pos(-Math.sin(yaw_radian()) * Math.cos(pitch_radian()), Math.sin(pitch_radian()), -Math.cos(yaw_radian()) * Math.cos(pitch_radian()));
     }
 
     /**
@@ -738,6 +730,21 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
     public double roll()
     {
         return roll;
+    }
+
+    public double yaw_radian()
+    {
+        return Math.toRadians(yaw);
+    }
+
+    public double pitch_radian()
+    {
+        return Math.toRadians(pitch);
+    }
+
+    public double roll_radian()
+    {
+        return Math.toRadians(roll);
     }
 
     /**
