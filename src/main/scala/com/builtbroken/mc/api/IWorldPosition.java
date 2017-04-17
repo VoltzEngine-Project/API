@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api;
 
+import com.builtbroken.jlib.data.vector.IPos3D;
 import net.minecraft.world.World;
 
 /**
@@ -7,43 +8,7 @@ import net.minecraft.world.World;
  *
  * @author DarkGuardsman
  */
-public interface IWorldPosition
+public interface IWorldPosition extends IPos3D
 {
     World world();
-
-    double x();
-
-    double y();
-
-    double z();
-
-    default int xi()
-    {
-        return (int) Math.floor(x());
-    }
-
-    default int yi()
-    {
-        return (int) Math.floor(y());
-    }
-
-    default int zi()
-    {
-        return (int) Math.floor(z());
-    }
-
-    default float xf()
-    {
-        return (float) x();
-    }
-
-    default float yf()
-    {
-        return (float) y();
-    }
-
-    default float zf()
-    {
-        return (float) z();
-    }
 }

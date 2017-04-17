@@ -3,6 +3,8 @@ package com.builtbroken.mc.imp.transform.vector;
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.jlib.data.vector.ITransform;
 import com.builtbroken.jlib.data.vector.Pos3D;
+import com.builtbroken.mc.api.tile.node.ITileNode;
+import com.builtbroken.mc.api.tile.node.ITileNodeHost;
 import com.builtbroken.mc.imp.transform.rotation.EulerAngle;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -446,7 +448,7 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
 
     public Block getBlock(IBlockAccess world)
     {
-        if (world != null)
+        if (world != null) //TODO check if chunk is loaded
         {
             return world.getBlock(xi(), yi(), zi());
         }
@@ -470,14 +472,21 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
 
     public TileEntity getTileEntity(IBlockAccess world)
     {
-        if (world != null)
+        if (world != null) //TODO check if chunk is loaded
         {
             return world.getTileEntity(xi(), yi(), zi());
         }
-        else
+        return null;
+    }
+
+    public ITileNode getTileNode(IBlockAccess world)
+    {
+        TileEntity tile = getTileEntity(world);
+        if (tile instanceof ITileNodeHost)
         {
-            return null;
+            return ((ITileNodeHost) tile).getTileNode();
         }
+        return null;
     }
 
     public float getHardness(World world)
