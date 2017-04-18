@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.tile.node;
 
 import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.data.IPacket;
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -32,4 +33,37 @@ public interface ITileNodeHost extends IWorldPosition
      * @return
      */
     IPacket getPacketForData(Object... data);
+
+    /**
+     * Call back to get the block
+     * the host represents
+     * <p>
+     * This is provided so entities can
+     * fake values
+     *
+     * @return
+     */
+    Block getHostBlock();
+
+    /**
+     * Call back to get the meta
+     * value the host represents
+     * <p>
+     * This is provided so entities can
+     * fake values
+     *
+     * @return
+     */
+    int getHostMeta();
+
+    /**
+     * Check to see if the node can
+     * access the world at this moment.
+     * This is only used by entities
+     * that are moving to prevent block
+     * access.
+     *
+     * @return true if can access world
+     */
+    boolean canAccessWorld();
 }
