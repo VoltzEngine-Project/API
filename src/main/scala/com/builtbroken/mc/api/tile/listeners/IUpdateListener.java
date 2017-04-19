@@ -11,7 +11,7 @@ public interface IUpdateListener extends ITileEventListener
         return "update";
     }
 
-    default void update(int ticks)
+    default void update(long ticks)
     {
 
     }
