@@ -9,13 +9,13 @@ import net.minecraft.tileentity.TileEntity;
  */
 public interface ITileRenderListener extends ITileEventListener
 {
-    default void renderDynamic(TileEntity tile, double xx, double yy, double zz, int pass)
+    default void renderDynamic(TileEntity tile, double xx, double yy, double zz, float f)
     {
 
     }
 
     default String getListenerKey()
     {
-        return "TileRender";
+        return "tilerender";
     }
 }
