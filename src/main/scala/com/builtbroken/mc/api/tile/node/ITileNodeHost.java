@@ -3,6 +3,7 @@ package com.builtbroken.mc.api.tile.node;
 import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.data.IPacket;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -33,6 +34,17 @@ public interface ITileNodeHost extends IWorldPosition
      * @return
      */
     IPacket getPacketForData(Object... data);
+
+    /**
+     * Checks to see if the host is
+     * still a valid object in the world.
+     * <p>
+     * For Tiles this is {@link TileEntity#isInvalid()} check
+     * For entities this is {@link Entity#isEntityAlive()}
+     *
+     * @return true if still valid
+     */
+    boolean isHostValid();
 
     /**
      * Call back to get the block
