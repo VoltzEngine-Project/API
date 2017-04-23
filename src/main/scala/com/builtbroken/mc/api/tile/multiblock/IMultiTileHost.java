@@ -44,7 +44,7 @@ public interface IMultiTileHost extends IWorldPosition
      * @param side   - side clicked
      * @param hit    - hit data of where the tile was clicked
      */
-    boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit);
+    boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, float xHit, float yHit, float zHit);
 
     /**
      * Called when the player left clicks a tile. No additional data is provided beyond
