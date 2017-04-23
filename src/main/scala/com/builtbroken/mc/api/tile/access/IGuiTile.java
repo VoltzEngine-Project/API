@@ -29,6 +29,11 @@ public interface IGuiTile
      */
     Object getClientGuiElement(int ID, EntityPlayer player);
 
+    default boolean openGui(EntityPlayer player, int requestedID)
+    {
+        return openGui(player, null);
+    }
+
     default boolean openGui(EntityPlayer player, Object currentGui, Object... data)
     {
         if (currentGui == null && this instanceof ITile)
