@@ -346,7 +346,6 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
 
                 if (hit != null)
                 {
-
                     if (bounds.isVecInside(toVec3()))
                     {
                         if (0 < closetDistance || closetDistance == 0)
