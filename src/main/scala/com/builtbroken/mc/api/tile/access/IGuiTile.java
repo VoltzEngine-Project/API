@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.tile.access;
 
+import com.builtbroken.mc.api.tile.ITile;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
@@ -26,6 +28,16 @@ public interface IGuiTile
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
     Object getClientGuiElement(int ID, EntityPlayer player);
+
+    default boolean openGui(EntityPlayer player, Object currentGui, Object... data)
+    {
+        if (currentGui == null && this instanceof ITile)
+        {
+            player.openGui(Loader.instance().getIndexedModList().get(((ITile) this).modID()), getDefaultGuiID(player), ((ITile) this).world(), ((ITile) this).xi(), ((ITile) this).yi(), ((ITile) this).zi());
+            return true;
+        }
+        return false;
+    }
 
 
     /**
