@@ -9,11 +9,17 @@ import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * 2D position/point on a plane. Used to traction the location data of something.
- * <p/>
+ * <p>
  * Created by robert on 1/11/2015.
  */
 public class Point extends Pos2D<Point> implements IByteBufWriter, IPos2D
 {
+    public static final Point ZERO = new Point(0, 0);
+    public static final Point UP = new Point(0, 1);
+    public static final Point DOWN = new Point(0, -1);
+    public static final Point LEFT = new Point(-1, 0);
+    public static final Point RIGHT = new Point(0, 1);
+
     public Point(double x, double y)
     {
         super(x, y);
