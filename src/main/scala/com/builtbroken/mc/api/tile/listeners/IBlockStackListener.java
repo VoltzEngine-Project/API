@@ -25,6 +25,19 @@ public interface IBlockStackListener extends ITileEventListener
      */
     default ItemStack getPickBlock(MovingObjectPosition target, EntityPlayer player)
     {
+        return toStack();
+    }
+
+    /**
+     * Gets the stack of the listener,
+     * this is normally only used for
+     * Tiles and nodes. Thus its only
+     * a call back for defaults.
+     *
+     * @return
+     */
+    default ItemStack toStack()
+    {
         return null;
     }
 
