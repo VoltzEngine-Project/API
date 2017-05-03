@@ -1,7 +1,9 @@
 package com.builtbroken.mc.api.tile.listeners;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
@@ -52,9 +54,37 @@ public interface IPlacementListener extends ITileEventListener
     /**
      * Called to see if the tile can be placed
      *
-     * @return
+     * @return true if can place
      */
     default boolean canPlaceAt()
+    {
+        return true;
+    }
+
+    /**
+     * Called to see if the tile can be placed
+     *
+     * @param entity - entity trying to place the block, only
+     *               used for com.builtbroken.mc.framework.block.ItemBlockBase
+     * @return true if can place
+     */
+    default boolean canPlaceAt(Entity entity)
+    {
+        return canPlaceAt();
+    }
+
+    /**
+     * Called to check if the block can be replace and be placed at the location.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @param side
+     * @param stack
+     * @return
+     */
+    default boolean canReplace(World world, int x, int y, int z, int side, ItemStack stack)
     {
         return true;
     }
