@@ -20,7 +20,10 @@ public interface IWrenchListener extends ITileEventListener
      * @param hitZ
      * @return
      */
-    boolean onPlayerRightClickWrench(EntityPlayer player, int side, float hitX, float hitY, float hitZ);
+    default boolean onPlayerRightClickWrench(EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+    {
+        return false;
+    }
 
     /**
      * Can this tile handle the wrench activation
