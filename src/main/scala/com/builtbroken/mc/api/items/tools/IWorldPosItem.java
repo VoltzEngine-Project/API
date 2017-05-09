@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.items.tools;
 
 import com.builtbroken.mc.api.IWorldPosition;
+import com.builtbroken.mc.imp.transform.vector.Location;
 import net.minecraft.item.ItemStack;
 
 /** Simple way to store a location inside an Item's NBT
@@ -17,7 +18,7 @@ public interface IWorldPosItem
      * Creates a new object each method call
      * @return Location(World, x, y, z)
      */
-    IWorldPosition getLocation(ItemStack stack);
+    Location getLocation(ItemStack stack);
 
     /**
      * Sets the location data in the Item's NBT
