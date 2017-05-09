@@ -23,7 +23,7 @@ public abstract interface ITileEventListener extends IWorldPosition
     String getListenerKey();
 
     /**
-     * Get used to ID(s) the listener group
+     * Gets the ID(s) of the listener group
      * this listener should be registered with
      *
      * @return unique key for the group
