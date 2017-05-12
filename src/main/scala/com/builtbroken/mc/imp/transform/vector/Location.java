@@ -21,6 +21,8 @@ import java.util.Random;
 
 public class Location extends AbstractLocation<Location> implements IWorldPosition, IPos3D, Comparable<IWorldPosition>
 {
+    public static final Location NULL = new Location(null, 0, 0, 0);
+
     public Location(World world, double x, double y, double z)
     {
         super(world, x, y, z);
@@ -135,10 +137,14 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
     public int compareTo(IWorldPosition that)
     {
         if (world().provider.dimensionId < that.world().provider.dimensionId || x() < that.x() || y() < that.y() || z() < that.z())
+        {
             return -1;
+        }
 
         if (world().provider.dimensionId > that.world().provider.dimensionId || x() > that.x() || y() > that.y() || z() > that.z())
+        {
             return 1;
+        }
 
         return 0;
     }
