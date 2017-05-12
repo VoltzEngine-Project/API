@@ -70,4 +70,17 @@ public interface IWorldEdit extends IWorldPosition, IPos3D
      * @return tile entity or null if there is non
      */
     TileEntity getTileEntity();
+
+    /**
+     * Called to log the previous block before the edit
+     */
+    IWorldEdit logPrevBlock();
+
+    /**
+     * Called to change the edit result
+     *
+     * @param newBlock
+     * @param newMeta
+     */
+    IWorldEdit set(Block newBlock, int newMeta);
 }
