@@ -48,6 +48,16 @@ public interface ITileNode extends IWorldPosition, ISave, ITile
     }
 
     /**
+     * Does this node update each tick
+     *
+     * @return true if yes
+     */
+    default boolean requiresPerTickUpdate()
+    {
+        return true;
+    }
+
+    /**
      * Called to destroy the controller
      */
     default void destroy()
