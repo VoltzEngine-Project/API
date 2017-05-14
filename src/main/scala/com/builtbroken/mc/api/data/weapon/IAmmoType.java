@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.data.weapon;
 
+import com.builtbroken.mc.api.data.EnumProjectileTypes;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -50,4 +52,11 @@ public interface IAmmoType extends IData
 
     /** Name to use for translation */
     String getUnlocalizedName();
+
+    /**
+     * Type of projectile
+     *
+     * @return
+     */
+    EnumProjectileTypes getProjectileType();
 }
