@@ -30,7 +30,17 @@ public interface IItemActivationListener extends IItemEventListener
         return stack;
     }
 
+    default boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+    {
+        return false;
+    }
+
     default boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hit_x, float hit_y, float hit_z)
+    {
+        return false;
+    }
+
+    default boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player)
     {
         return false;
     }

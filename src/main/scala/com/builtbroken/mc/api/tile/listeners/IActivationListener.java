@@ -1,6 +1,8 @@
 package com.builtbroken.mc.api.tile.listeners;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * Applied to objects that listen for block action events
