@@ -23,7 +23,7 @@ public interface IWorldAction
      * @param world -current world to run the action
      * @param side
      */
-    void runQue(World world, Side side);
+    int runQue(World world, Side side);
 
     /**
      * Called to check if the add is done
