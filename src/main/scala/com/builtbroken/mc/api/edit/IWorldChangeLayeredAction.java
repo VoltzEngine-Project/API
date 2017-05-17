@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.edit;
 
+import java.util.List;
+
 /**
  * Version of {@link IWorldChangeAction} that pops edits in layers.
  *
@@ -24,4 +26,12 @@ public interface IWorldChangeLayeredAction
      * @return true if next calls should be processed
      */
     boolean shouldContinueAction(int layer);
+
+    /**
+     * Called to resume the blast calculation code
+     *
+     * @param list  - place to add edits to
+     * @param layer - current layer
+     */
+    void getEffectedBlocks(List<IWorldEdit> list, int layer);
 }
