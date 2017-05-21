@@ -22,6 +22,13 @@ public interface IBlast extends IWorldChangeAction, IWorldPosition
     IBlast setYield(double size);
 
     /**
+     * Gets the yield of the blast.
+     *
+     * @return size of the blast in meters.
+     */
+    double getYield();
+
+    /**
      * Sets the energy cost of the blast. Normally this
      * is set by the data stored in {@link #setAdditionBlastData(NBTTagCompound)}
      * but can optionally bet set by this method
