@@ -21,7 +21,10 @@ public interface IVirtualObject extends ISave
 	 * Will only be called after an object has been loaded. Allows the object to know were its been
 	 * loaded from and decide if it wants to use the location as its getSaveFile return
 	 */
-	void setSaveFile(File file);
+	default void setSaveFile(File file)
+	{
+
+	}
 
     /**
      * Save events are triggered when the world saves. Use this to
