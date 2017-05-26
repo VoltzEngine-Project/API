@@ -698,12 +698,12 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
         return this;
     }
 
-    private final double clampAngleTo360(double value)
+    public static double clampAngleTo360(double value)
     {
         return clampAngle(value, -360, 360);
     }
 
-    private final double clampAngle(double value, double min, double max)
+    public static double clampAngle(double value, double min, double max)
     {
         double result = value % 360;
         while (result < min)
