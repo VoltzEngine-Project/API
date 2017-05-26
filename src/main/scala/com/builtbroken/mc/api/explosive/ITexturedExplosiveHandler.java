@@ -34,7 +34,16 @@ public interface ITexturedExplosiveHandler extends IExplosiveHandler
      * result in a default icon being used.
      */
     @SideOnly(Side.CLIENT)
-    IIcon getBottomLeftCornerIcon(ItemStack stack);
+    default IIcon getBottomLeftCornerIcon(ItemStack stack, int pass)
+    {
+        return getBottomLeftCornerIcon(stack);
+    }
+
+    @SideOnly(Side.CLIENT)
+    default IIcon getBottomLeftCornerIcon(ItemStack stack)
+    {
+        return null;
+    }
 
     /**
      * Called to register the icons for the explosive handler. This
@@ -42,4 +51,10 @@ public interface ITexturedExplosiveHandler extends IExplosiveHandler
      */
     @SideOnly(Side.CLIENT)
     void registerExplosiveHandlerIcons(IIconRegister reg, boolean blocks);
+
+    @SideOnly(Side.CLIENT)
+    default int getBottomLeftCornerIconColor(ItemStack item, int pass)
+    {
+        return 16777215;
+    }
 }
