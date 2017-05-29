@@ -32,4 +32,25 @@ public interface IWorkerThread
      * Called to terminate the thread after it's next cycle
      */
     void kill();
+
+    /**
+     * Called to clear all activate processes
+     *
+     * @return true if cleared processes
+     */
+    boolean clearProcesses();
+
+    /**
+     * Pauses the processes on the thread
+     *
+     * @return true if paused
+     */
+    boolean pauseWorker();
+
+    /**
+     * Resumes the processes on the thread
+     *
+     * @return true if resumed
+     */
+    boolean resumeWorker();
 }
