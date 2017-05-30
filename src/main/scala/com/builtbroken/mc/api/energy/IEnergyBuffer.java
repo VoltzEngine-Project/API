@@ -32,4 +32,18 @@ public interface IEnergyBuffer
      * @return Actual energy stored in buffer
      */
     int getEnergyStored();
+
+    /**
+     * Sets the amount of energy stored in the buffer.
+     * <p>
+     * Do not use this add or remove energy. Instead, use
+     * {@link #addEnergyToStorage(int, boolean)} and {@link #removeEnergyFromStorage(int, boolean)}
+     * in order to trigger actions and events correctly.
+     * <p>
+     * This method is only added for edge cases such as packet
+     * handling and EMPs.
+     *
+     * @param energy - energy to set
+     */
+    void setEnergyStored(int energy);
 }
