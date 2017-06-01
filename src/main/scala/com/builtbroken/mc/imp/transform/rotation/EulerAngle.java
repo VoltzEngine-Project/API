@@ -418,7 +418,22 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
      */
     public Pos toPos()
     {
-        return new Pos(-Math.sin(yaw_radian()) * Math.cos(pitch_radian()), Math.sin(pitch_radian()), -Math.cos(yaw_radian()) * Math.cos(pitch_radian()));
+        return new Pos(x(), y(), z());
+    }
+
+    public double x()
+    {
+        return -Math.sin(yaw_radian()) * Math.cos(pitch_radian());
+    }
+
+    public double y()
+    {
+        return Math.sin(pitch_radian());
+    }
+
+    public double z()
+    {
+        return Math.sin(-Math.cos(yaw_radian()) * Math.cos(pitch_radian()));
     }
 
     /**
