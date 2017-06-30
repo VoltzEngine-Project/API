@@ -22,6 +22,11 @@ public abstract interface ITileEventListener extends IWorldPosition
     @Deprecated
     String getListenerKey();
 
+    default boolean isValidForTile()
+    {
+        return true;
+    }
+
     /**
      * Gets the ID(s) of the listener group
      * this listener should be registered with
