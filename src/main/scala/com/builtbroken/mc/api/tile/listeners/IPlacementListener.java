@@ -1,5 +1,6 @@
 package com.builtbroken.mc.api.tile.listeners;
 
+import com.builtbroken.mc.api.data.ActionResponse;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -46,9 +47,9 @@ public interface IPlacementListener extends ITileEventListener
      * @param side
      * @return
      */
-    default boolean canPlaceOnSide(int side)
+    default ActionResponse canPlaceOnSide(int side)
     {
-        return true;
+        return ActionResponse.IGNORE;
     }
 
     /**
@@ -56,9 +57,9 @@ public interface IPlacementListener extends ITileEventListener
      *
      * @return true if can place
      */
-    default boolean canPlaceAt()
+    default ActionResponse canPlaceAt()
     {
-        return true;
+        return ActionResponse.IGNORE;
     }
 
     /**
@@ -68,7 +69,7 @@ public interface IPlacementListener extends ITileEventListener
      *               used for com.builtbroken.mc.framework.block.ItemBlockBase
      * @return true if can place
      */
-    default boolean canPlaceAt(Entity entity)
+    default ActionResponse canPlaceAt(Entity entity)
     {
         return canPlaceAt();
     }
@@ -84,9 +85,9 @@ public interface IPlacementListener extends ITileEventListener
      * @param stack
      * @return
      */
-    default boolean canReplace(World world, int x, int y, int z, int side, ItemStack stack)
+    default ActionResponse canReplace(World world, int x, int y, int z, int side, ItemStack stack)
     {
-        return true;
+        return ActionResponse.IGNORE;
     }
 
     @Override
