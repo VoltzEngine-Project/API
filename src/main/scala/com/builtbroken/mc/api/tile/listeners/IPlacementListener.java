@@ -90,9 +90,20 @@ public interface IPlacementListener extends ITileEventListener
         return ActionResponse.IGNORE;
     }
 
+    /**
+     * Checks if the block can stay after a world update
+     *
+     * @return {@link ActionResponse#CANCEL} to destroy block
+     */
+    default ActionResponse canBlockStay()
+    {
+        return ActionResponse.IGNORE;
+    }
+
     @Override
     default String getListenerKey()
     {
         return "placement";
     }
+
 }
