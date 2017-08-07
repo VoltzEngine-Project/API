@@ -1,5 +1,7 @@
 package com.builtbroken.mc.api.data.weapon;
 
+import com.builtbroken.mc.api.data.energy.IEnergyBufferData;
+import com.builtbroken.mc.api.data.energy.IEnergyChargeData;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 
 /**
@@ -40,9 +42,33 @@ public interface IGunData extends IWeaponData
     /**
      * Type of ammo this weapon can load
      *
-     * @return
+     * @return type of ammo used
      */
     IAmmoType getAmmoType();
+
+    /**
+     * Information about how the gun charges when
+     * inserted into a charger.
+     *
+     * @return charge data, can be null
+     */
+    IEnergyChargeData getChargeData();
+
+    /**
+     * Information about how energy is stored.
+     *
+     * @return buffer data, can be null
+     */
+    IEnergyBufferData getBufferData();
+
+    /**
+     * Ammo data to use always for the weapon.
+     * Main use is for energy based weapons
+     * who reload via batteries and not ammo items.
+     *
+     * @return ammo data, can be null
+     */
+    IAmmoData getOverrideAmmo();
 
     /**
      * Type of gun

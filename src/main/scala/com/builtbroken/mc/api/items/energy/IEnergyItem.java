@@ -2,7 +2,11 @@ package com.builtbroken.mc.api.items.energy;
 
 import net.minecraft.item.ItemStack;
 
-public interface IEnergyItem
+/** Applied to items that accept energy
+ * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
+ * Created by Dark(DarkGuardsman, Robert) on ????.
+ */
+public interface IEnergyItem //TODO move node system
 {
 	/**
 	 * Adds energy to an item. Returns the quantity of energy that was accepted. This should always
@@ -13,7 +17,7 @@ public interface IEnergyItem
 	 * @param doRecharge If false, the charge will only be simulated.
 	 * @return Amount of energy that was accepted by the item.
 	 */
-	int recharge(ItemStack itemStack, double energy, boolean doRecharge);
+	int recharge(ItemStack itemStack, int energy, boolean doRecharge);
 
 	/**
 	 * Removes energy from an item. Returns the quantity of energy that was removed. This should
@@ -24,5 +28,5 @@ public interface IEnergyItem
 	 * @param doDischarge If false, the discharge will only be simulated.
 	 * @return Amount of energy that was removed from the item.
 	 */
-	int discharge(ItemStack itemStack, double energy, boolean doDischarge);
+	int discharge(ItemStack itemStack, int energy, boolean doDischarge);
 }
