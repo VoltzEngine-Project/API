@@ -19,7 +19,8 @@ public interface IEnergyBufferProvider
      * Gets access to power buffer for the given side
      *
      * @param side - side, null should be treated as
-     *             {@link ForgeDirection#UNKNOWN}
+     *             {@link ForgeDirection#UNKNOWN}. Unknown should
+     *             return the internal buffer.
      * @return energy buffer or null if none provider
      */
     IEnergyBuffer getEnergyBuffer(ForgeDirection side);
