@@ -38,7 +38,7 @@ public interface ITransportCart extends IWorldPosition
      */
     default void recenterCartOnRail(ITransportRailBlock rail, int x, int y, int z, int meta, boolean trueCenter)
     {
-        this.recenterCartOnRail(rail.getAttachedDirection(world(), x, y, z, meta), rail.getFacingDirection(world(), x, y, z, meta), rail.getRailHeight(world(), x, y, z, meta), trueCenter);
+        this.recenterCartOnRail(rail.getAttachedDirection(oldWorld(), x, y, z, meta), rail.getFacingDirection(oldWorld(), x, y, z, meta), rail.getRailHeight(oldWorld(), x, y, z, meta), trueCenter);
     }
 
     /**

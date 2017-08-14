@@ -10,9 +10,10 @@ import net.minecraft.world.World;
  *
  * @author DarkGuardsman
  */
+@Deprecated
 public interface IWorldPosition extends IPos3D
 {
-    World world();
+    World oldWorld();
 
     /**
      * Converts the object to a location object.

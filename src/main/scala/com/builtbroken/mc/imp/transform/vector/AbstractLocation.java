@@ -79,7 +79,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public AbstractLocation(IWorldPosition vec)
     {
-        this(vec.world(), vec.x(), vec.y(), vec.z());
+        this(vec.oldWorld(), vec.x(), vec.y(), vec.z());
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      *
      * @return a world
      */
-    public World world()
+    public World oldWorld()
     {
         return world;
     }
@@ -257,7 +257,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public BiomeGenBase getBiomeGen()
     {
-        return world().getBiomeGenForCoords(xi(), zi());
+        return oldWorld().getBiomeGenForCoords(xi(), zi());
     }
 
     /**
@@ -392,7 +392,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     @Override
     public boolean equals(Object o)
     {
-        return o instanceof AbstractLocation && this.world == ((AbstractLocation) o).world() && ((AbstractLocation) o).x() == x() && ((AbstractLocation) o).y() == y() && ((AbstractLocation) o).z() == z();
+        return o instanceof AbstractLocation && this.world == ((AbstractLocation) o).oldWorld() && ((AbstractLocation) o).x() == x() && ((AbstractLocation) o).y() == y() && ((AbstractLocation) o).z() == z();
     }
 
     @Override

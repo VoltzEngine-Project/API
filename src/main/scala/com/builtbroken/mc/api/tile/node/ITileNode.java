@@ -88,9 +88,10 @@ public interface ITileNode extends IWorldPosition, ISave, ITile
     //========== Position data ====================
     //=============================================
 
-    default World world()
+    @Deprecated
+    default World oldWorld()
     {
-        return getHost().world();
+        return getHost().oldWorld();
     }
 
     default double x()

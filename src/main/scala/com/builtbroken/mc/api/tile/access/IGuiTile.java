@@ -38,7 +38,7 @@ public interface IGuiTile
     {
         if (currentGui == null && this instanceof ITile)
         {
-            player.openGui(Loader.instance().getIndexedModList().get(((ITile) this).modID()), getDefaultGuiID(player), ((ITile) this).world(), ((ITile) this).xi(), ((ITile) this).yi(), ((ITile) this).zi());
+            player.openGui(Loader.instance().getIndexedModList().get(((ITile) this).modID()), getDefaultGuiID(player), ((ITile) this).oldWorld(), ((ITile) this).xi(), ((ITile) this).yi(), ((ITile) this).zi());
             return true;
         }
         return false;
