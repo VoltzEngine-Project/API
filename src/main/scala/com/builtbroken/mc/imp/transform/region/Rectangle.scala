@@ -5,6 +5,7 @@ import java.math.{BigDecimal, MathContext, RoundingMode}
 import com.builtbroken.jlib.data.vector.IPos2D
 import com.builtbroken.mc.imp.transform.vector.Point
 
+//TODO convert to java
 class Rectangle(var min: Point, var max: Point) extends Shape2D(min.midpoint(max))
 {
   def this() = this(new Point, new Point)
