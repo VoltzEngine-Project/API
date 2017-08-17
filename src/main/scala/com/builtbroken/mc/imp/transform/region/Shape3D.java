@@ -3,6 +3,7 @@ package com.builtbroken.mc.imp.transform.region;
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * Created by robert on 1/12/2015.
@@ -91,5 +92,10 @@ public abstract class Shape3D
     public boolean isWithin(IPos3D vec)
     {
         return isWithin(vec.x(), vec.y(), vec.z());
+    }
+
+    public boolean isWithin(BlockPos vec)
+    {
+        return isWithin(vec.getX(), vec.getY(), vec.getZ());
     }
 }

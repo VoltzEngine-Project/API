@@ -5,10 +5,10 @@ import com.builtbroken.jlib.data.network.IByteBufWriter;
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.jlib.data.vector.ITransform;
 import com.builtbroken.jlib.helpers.MathHelper;
+import com.builtbroken.mc.data.Direction;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * This object is not immutable like other vector objects. It is designed to take the player of storing 3 separate variables for rotation. Thus it will
@@ -71,11 +71,11 @@ public class EulerAngle implements Cloneable, ITransform, IByteBufWriter, IByteB
     }
 
     /**
-     * Creates a new EulerAngle from a {@link ForgeDirection}
+     * Creates a new EulerAngle from a {@link Direction}
      *
      * @param direction - direction
      */
-    public EulerAngle(ForgeDirection direction)
+    public EulerAngle(Direction direction)
     {
         switch (direction)
         {

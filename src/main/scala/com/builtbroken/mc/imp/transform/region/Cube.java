@@ -5,13 +5,12 @@ import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.imp.transform.vector.Point;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -110,7 +109,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public AxisAlignedBB toAABB()
     {
-        return isValid() ? AxisAlignedBB.getBoundingBox(min().x(), min().y(), min().z(), max().x(), max().y(), max().z()) : AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
+        return isValid() ? new AxisAlignedBB(min().x(), min().y(), min().z(), max().x(), max().y(), max().z()) : new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     }
 
     public Rectangle toRectangle()
@@ -177,9 +176,9 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
     /// Collision Detection
     /////////////////////
 
-    public boolean intersects(Vec3 v)
+    public boolean intersects(Vec3d v)
     {
-        return intersects(v.xCoord, v.yCoord, v.zCoord);
+        return intersects(v.x, v.y, v.z);
     }
 
     public boolean intersects(IPos3D v)
@@ -237,7 +236,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return isInsideBounds(other.minX, other.minY, other.minZ, other.maxX, other.maxY, other.maxZ);
     }
 
-    public boolean isVecInYZ(Vec3 v)
+    public boolean isVecInYZ(Vec3d v)
     {
         return isWithinY(v) && isWithinZ(v);
     }
@@ -247,7 +246,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return isWithinY(v) && isWithinZ(v);
     }
 
-    public boolean isWithinXZ(Vec3 v)
+    public boolean isWithinXZ(Vec3d v)
     {
         return isWithinX(v) && isWithinZ(v);
     }
@@ -262,9 +261,9 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return isWithinRange(min().x(), max().x(), v);
     }
 
-    public boolean isWithinX(Vec3 v)
+    public boolean isWithinX(Vec3d v)
     {
-        return isWithinX(v.xCoord);
+        return isWithinX(v.x);
     }
 
     public boolean isWithinX(IPos3D v)
@@ -277,9 +276,9 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return isWithinRange(min().y(), max().y(), v);
     }
 
-    public boolean isWithinY(Vec3 v)
+    public boolean isWithinY(Vec3d v)
     {
-        return isWithinY(v.yCoord);
+        return isWithinY(v.y);
     }
 
     public boolean isWithinY(IPos3D v)
@@ -292,9 +291,9 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return isWithinRange(min().z(), max().z(), v);
     }
 
-    public boolean isWithinZ(Vec3 v)
+    public boolean isWithinZ(Vec3d v)
     {
-        return isWithinZ(v.zCoord);
+        return isWithinZ(v.z);
     }
 
     public boolean isWithinZ(IPos3D v)
@@ -452,7 +451,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return (int) getSizeX() == (int) getSizeY() && (int) getSizeY() == (int) getSizeZ();
     }
 
-    public double distance(Vec3 v)
+    public double distance(Vec3d v)
     {
         if (!isValid())
         {
@@ -549,9 +548,9 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         List<TileEntity> tilesInArea = new ArrayList();
         for (Chunk chunk : getChunks(world))
         {
-            for (Object object : chunk.chunkTileEntityMap.values())
+            for (Object object : chunk.getTileEntityMap().values())
             {
-                if (object instanceof TileEntity && ((TileEntity) object).isInvalid() && ((TileEntity) object).hasWorldObj() && isWithin(((TileEntity) object).xCoord, ((TileEntity) object).yCoord, ((TileEntity) object).zCoord))
+                if (object instanceof TileEntity && ((TileEntity) object).isInvalid() && ((TileEntity) object).getWorld() != null && isWithin(((TileEntity) object).getPos()))
                 {
                     tilesInArea.add((TileEntity) object);
                 }
@@ -585,7 +584,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         {
             for (int chunkZ = (min().zi() >> 4) - 1; chunkZ <= (max().zi() >> 4) + 1; chunkZ++)
             {
-                if (loaded || (!(world instanceof WorldServer) || ((WorldServer) world).theChunkProviderServer.chunkExists(chunkX, chunkZ)))
+                if (loaded || (!(world instanceof WorldServer) || ((WorldServer) world).getChunkProvider().chunkExists(chunkX, chunkZ)))
                 {
                     Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
                     if (chunk != null)
@@ -604,14 +603,14 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
      * @return list of coords using cube bounds
      * for an example of usage.
      */
-    public List<ChunkCoordIntPair> getChunkCoords()
+    public List<ChunkPos> getChunkCoords()
     {
-        List<ChunkCoordIntPair> chunks = new ArrayList();
+        List<ChunkPos> chunks = new ArrayList();
         for (int chunkX = (min().xi() >> 4) - 1; chunkX <= (max().xi() >> 4) + 1; chunkX++)
         {
             for (int chunkZ = (min().zi() >> 4) - 1; chunkZ <= (max().zi() >> 4) + 1; chunkZ++)
             {
-                chunks.add(new ChunkCoordIntPair(chunkX, chunkZ));
+                chunks.add(new ChunkPos(chunkX, chunkZ));
             }
         }
         return chunks;
@@ -653,12 +652,6 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
     public Cube set(Cube cube)
     {
         this.set(cube.min() != null ? new Pos(cube.min()) : null, cube.max() != null ? new Pos(cube.max()) : null);
-        return this;
-    }
-
-    public Cube setBlockBounds(Block block)
-    {
-        block.setBlockBounds((float) min().x(), (float) min().y(), (float) min().z(), (float) max().x(), (float) max().y(), (float) max().z());
         return this;
     }
 
