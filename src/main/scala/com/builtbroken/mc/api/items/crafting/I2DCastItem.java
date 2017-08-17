@@ -8,6 +8,7 @@ import net.minecraft.util.IIcon;
 /**
  * Created by Dark on 6/23/2015.
  */
+@Deprecated //Will be replace with JSON
 public interface I2DCastItem
 {
     /**

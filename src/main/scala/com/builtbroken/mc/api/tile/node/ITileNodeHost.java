@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.tile.node;
 
-import com.builtbroken.mc.api.IWorldPosition;
+import com.builtbroken.mc.api.abstraction.world.IPosWorld;
 import com.builtbroken.mc.api.data.IPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 3/31/2017.
  */
-public interface ITileNodeHost extends IWorldPosition
+public interface ITileNodeHost extends IPosWorld
 {
     /**
      * Gets the node that controls all logic
@@ -34,6 +34,10 @@ public interface ITileNodeHost extends IWorldPosition
      * @return
      */
     IPacket getPacketForData(Object... data);
+
+    void sendPacketToClient(IPacket packet, double range);
+
+    void sendPacketToServer(IPacket packet);
 
     /**
      * Checks to see if the host is

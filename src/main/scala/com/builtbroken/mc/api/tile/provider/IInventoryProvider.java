@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  *
  * @author Darkguardsman
  */
+@Deprecated //being replaced with IItemContainer
 public interface IInventoryProvider<I extends IInventory>
 {
     /** External inventory object */

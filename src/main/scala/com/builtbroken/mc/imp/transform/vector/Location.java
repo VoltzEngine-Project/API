@@ -50,7 +50,7 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
 
     public Location(IWorldPosition vec)
     {
-        this(vec.world(), vec.x(), vec.y(), vec.z());
+        this(vec.oldWorld(), vec.x(), vec.y(), vec.z());
     }
 
     public Location(ILocation loc)
@@ -81,7 +81,7 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
 
     public void playSound(String sound, float volume, float pitch)
     {
-        world().playSound(x(), y(), z(), sound, volume, pitch, false);
+        oldWorld().playSound(x(), y(), z(), sound, volume, pitch, false);
     }
 
     public void playSound(Block block)
@@ -99,7 +99,7 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
     @SideOnly(Side.CLIENT)
     public void spawnParticle(String t, double vel_x, double vel_y, double vel_z)
     {
-        world().spawnParticle(t, x(), y(), z(), vel_x, vel_y, vel_z);
+        oldWorld().spawnParticle(t, x(), y(), z(), vel_x, vel_y, vel_z);
     }
 
     @SideOnly(Side.CLIENT)
@@ -112,7 +112,7 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
             playSound(block);
 
             //Spawn random particles
-            Random rand = world().rand;
+            Random rand = oldWorld().rand;
             for (int i = 0; i < 3 + rand.nextInt(20); i++)
             {
                 Location v = addRandom(rand, 0.5);
@@ -124,24 +124,24 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
 
     public boolean isSideSolid(ForgeDirection side)
     {
-        return getBlock().isSideSolid(world(), xi(), yi(), zi(), side);
+        return getBlock().isSideSolid(oldWorld(), xi(), yi(), zi(), side);
     }
 
     @Override
     public boolean equals(Object o)
     {
-        return o instanceof IWorldPosition && this.world == ((IWorldPosition) o).world() && ((IWorldPosition) o).x() == x() && ((IWorldPosition) o).y() == y() && ((IWorldPosition) o).z() == z();
+        return o instanceof IWorldPosition && this.world == ((IWorldPosition) o).oldWorld() && ((IWorldPosition) o).x() == x() && ((IWorldPosition) o).y() == y() && ((IWorldPosition) o).z() == z();
     }
 
     @Override
     public int compareTo(IWorldPosition that)
     {
-        if (world().provider.dimensionId < that.world().provider.dimensionId || x() < that.x() || y() < that.y() || z() < that.z())
+        if (oldWorld().provider.dimensionId < that.oldWorld().provider.dimensionId || x() < that.x() || y() < that.y() || z() < that.z())
         {
             return -1;
         }
 
-        if (world().provider.dimensionId > that.world().provider.dimensionId || x() > that.x() || y() > that.y() || z() > that.z())
+        if (oldWorld().provider.dimensionId > that.oldWorld().provider.dimensionId || x() > that.x() || y() > that.y() || z() > that.z())
         {
             return 1;
         }

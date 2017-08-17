@@ -14,6 +14,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 1/30/2016.
  */
+@Deprecated //Moved to JSON system as 1.8+ does not use icons
 public interface ITexturedExplosiveHandler extends IExplosiveHandler
 {
     /**
@@ -50,7 +51,10 @@ public interface ITexturedExplosiveHandler extends IExplosiveHandler
      * is called every texture event by {@link com.builtbroken.mc.core.ClientProxy#onStitch(TextureStitchEvent.Pre)}
      */
     @SideOnly(Side.CLIENT)
-    void registerExplosiveHandlerIcons(IIconRegister reg, boolean blocks);
+    default void registerExplosiveHandlerIcons(IIconRegister reg, boolean blocks)
+    {
+
+    }
 
     @SideOnly(Side.CLIENT)
     default int getBottomLeftCornerIconColor(ItemStack item, int pass)

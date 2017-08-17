@@ -85,4 +85,38 @@ public interface IExplosiveHandler
 
     /** Gets the id this was registered with */
     String getID();
+
+    /** ID of the mod that owns this handler */
+    String getMod();
+
+    /**
+     * Gets the sub id based on the stack (suffixed to the main content ID)
+     *
+     * @param stack - an item containing this explosive type
+     * @return string, empty or null are ignored
+     */
+    default String getStateID(ItemStack stack)
+    {
+        if (stack != null && stack.getTagCompound() != null)
+        {
+            return getStateID(stack.getTagCompound());
+        }
+        return "";
+    }
+
+    /**
+     * Gets the sub id based on the save data (suffixed to the main content ID)
+     * <p>
+     * Do not change state based on size or other minor details created by
+     * changes in volume or shape. The id should be unique to the internal
+     * state differences such as items used, fragments, energy types, damage,
+     * spawned objects, etc.
+     *
+     * @param tag - save data containing information about the explosive
+     * @return string, empty or null are ignored
+     */
+    default String getStateID(NBTTagCompound tag)
+    {
+        return "";
+    }
 }

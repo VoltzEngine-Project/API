@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * Created by Dark on 6/23/2015.
  */
+@Deprecated //Will be replaced with capability/node system
 public interface ICastItem
 {
     /**

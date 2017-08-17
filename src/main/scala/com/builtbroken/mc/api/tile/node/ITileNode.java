@@ -1,9 +1,10 @@
 package com.builtbroken.mc.api.tile.node;
 
 import com.builtbroken.mc.api.ISave;
-import com.builtbroken.mc.api.IWorldPosition;
+import com.builtbroken.mc.api.abstraction.world.IPosWorld;
+import com.builtbroken.mc.api.abstraction.world.IWorld;
+import com.builtbroken.mc.api.data.IPacket;
 import com.builtbroken.mc.api.tile.ITile;
-import net.minecraft.world.World;
 
 /**
  * Replaces Tile
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 3/30/2017.
  */
-public interface ITileNode extends IWorldPosition, ISave, ITile
+public interface ITileNode extends IPosWorld, ISave, ITile
 {
     /**
      * Sets the host of the tile
@@ -85,10 +86,40 @@ public interface ITileNode extends IWorldPosition, ISave, ITile
     }
 
     //=============================================
+    //========== Packet Helpers ===================
+    //=============================================
+
+    default void sendPacketToClient(IPacket packet)
+    {
+        sendPacketToClient(packet, 64);
+    }
+
+    default void sendPacketToClient(IPacket packet, double range)
+    {
+        if(getHost() != null)
+        {
+            getHost().sendPacketToClient(packet, range);
+        }
+    }
+
+    default void sendPacketToServer(IPacket packet)
+    {
+        if(getHost() != null)
+        {
+            getHost().sendPacketToServer(packet);
+        }
+    }
+
+    default IPacket getPacketForData(Object... data)
+    {
+        return getHost().getPacketForData(data);
+    }
+
+    //=============================================
     //========== Position data ====================
     //=============================================
 
-    default World world()
+    default IWorld world()
     {
         return getHost().world();
     }

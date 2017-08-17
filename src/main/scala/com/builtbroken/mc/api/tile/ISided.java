@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  *
  * Created by robert on 1/12/2015.
  */
+@Deprecated
 public interface ISided
 {
     boolean isValidForSide(ForgeDirection from);

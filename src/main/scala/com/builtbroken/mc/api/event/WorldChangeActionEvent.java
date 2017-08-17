@@ -35,7 +35,7 @@ public abstract class WorldChangeActionEvent extends WorldEvent
         public final IWorldPosition startingPoint;
         public ActionCreated(IWorldPosition v, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
         {
-            super(v.world(), worldChangeAction, triggerCause);
+            super(v.oldWorld(), worldChangeAction, triggerCause);
             startingPoint = v;
         }
     }
@@ -48,7 +48,7 @@ public abstract class WorldChangeActionEvent extends WorldEvent
         public final IWorldPosition startingPoint;
         public PostWorldChangeEvent(IWorldPosition v, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
         {
-            super(v.world(), worldChangeAction, triggerCause);
+            super(v.oldWorld(), worldChangeAction, triggerCause);
             startingPoint = v;
         }
     }
@@ -63,7 +63,7 @@ public abstract class WorldChangeActionEvent extends WorldEvent
         public final Collection<IWorldEdit> blocks;
         public FinishedCalculatingEffectEvent(IWorldPosition v, Collection<IWorldEdit> blocks, IWorldChangeAction worldChangeAction, TriggerCause triggerCause)
         {
-            super(v.world(), worldChangeAction, triggerCause);
+            super(v.oldWorld(), worldChangeAction, triggerCause);
             this.startingPoint = v;
             this.blocks = blocks;
         }

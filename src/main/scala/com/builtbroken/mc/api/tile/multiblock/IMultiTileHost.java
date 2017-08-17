@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.tile.multiblock;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.api.IWorldPosition;
+import com.builtbroken.mc.api.abstraction.world.IPosWorld;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.HashMap;
  * Implemented by blocks that act as the host or logical brain for a multiblock structure
  * Created by Dark on 8/9/2015.
  */
-public interface IMultiTileHost extends IWorldPosition
+public interface IMultiTileHost extends IPosWorld
 {
     /**
      * Called when a peace of the structure has been added to the world
