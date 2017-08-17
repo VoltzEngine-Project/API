@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
  *
  * @author DarkGuardsman
  */
+@Deprecated //Being replaced with a different solution
 public interface IExtendedStorage
 {
 	ItemStack addStackToStorage(ItemStack stack);

@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 /** Applied to an explosive handler to change how a creeper looks when it contains the explosive
  * Created by robert on 2/3/2015.
  */
+@Deprecated //Will be replaced with JSON data
 public interface IExCreeperHandler
 {
     /**

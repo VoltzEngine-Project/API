@@ -29,7 +29,12 @@ public enum Direction
     /**
      * Used only by getOrientation, for invalid inputs
      */
-    UNKNOWN(0, 0, 0);
+    UNKNOWN(0, 0, 0),
+
+    /**
+     * Bonus check for internal calls
+     */
+    INTERNAL(0, 0, 0);
 
     public final int offsetX;
     public final int offsetY;

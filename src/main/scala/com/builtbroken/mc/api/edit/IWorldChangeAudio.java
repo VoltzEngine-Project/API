@@ -6,6 +6,7 @@ package com.builtbroken.mc.api.edit;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 11/13/2015.
  */
+@Deprecated //Will be replaced by audio triggers
 public interface IWorldChangeAudio
 {
     /**

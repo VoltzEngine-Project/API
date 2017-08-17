@@ -10,6 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  *
  * @author Darkguardsman
  */
+@Deprecated //Going to be replace with capability type system
 public interface ITileConnection
 {
     /**

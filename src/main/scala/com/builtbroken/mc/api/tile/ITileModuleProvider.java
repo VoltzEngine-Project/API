@@ -6,6 +6,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /** Applied to a TileEntity to provide access, from outside the tile, to the TileModules contained in the tile.
  *
  */
+@Deprecated //Going to be replaced with a more broad range version
 public interface ITileModuleProvider
 {
 	/**
