@@ -1,9 +1,9 @@
 package com.builtbroken.mc.api.event;
 
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.Explosion;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Object that can tell a block or entity how it was triggered. Used as
@@ -30,9 +30,9 @@ public abstract class TriggerCause
     /** Side based Trigger */
     public abstract static class TriggerCauseSide extends TriggerCause
     {
-        public final ForgeDirection triggeredSide;
+        public final Direction triggeredSide;
 
-        public TriggerCauseSide(String name, ForgeDirection side)
+        public TriggerCauseSide(String name, Direction side)
         {
             super(name);
             triggeredSide = side;
@@ -125,7 +125,7 @@ public abstract class TriggerCause
     /** Trigger by fire */
     public static class TriggerCauseFire extends TriggerCauseSide
     {
-        public TriggerCauseFire(ForgeDirection side)
+        public TriggerCauseFire(Direction side)
         {
             super("fire", side);
         }
@@ -137,7 +137,7 @@ public abstract class TriggerCause
         /** 0-15 how strong the signal of the restone was */
         public final int strength;
 
-        public TriggerCauseRedstone(ForgeDirection side, int strength)
+        public TriggerCauseRedstone(Direction side, int strength)
         {
             super("redstone", side);
             this.strength = strength;

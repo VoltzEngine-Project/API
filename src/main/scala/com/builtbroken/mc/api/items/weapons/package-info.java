@@ -5,5 +5,5 @@
 @API(apiVersion = VoltzEngineAPI.VERSION, owner = "VoltzEngine", provides = "VoltzEngineAPI|weapons") package com.builtbroken.mc.api.items.weapons;
 
 import com.builtbroken.mc.api.VoltzEngineAPI;
-import cpw.mods.fml.common.API;
+import net.minecraftforge.fml.common.API;
 

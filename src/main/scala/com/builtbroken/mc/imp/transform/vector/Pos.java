@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
@@ -78,7 +79,7 @@ public class Pos extends AbstractPos<Pos> implements IPos3D
 
     public Pos(BlockPos par1)
     {
-        this(par1.x, par1.y, par1.z);
+        this(par1.getX(), par1.getY(), par1.getZ());
     }
 
     public Pos(Direction dir)

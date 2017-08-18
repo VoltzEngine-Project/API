@@ -1,9 +1,9 @@
 package com.builtbroken.mc.api.event.blast;
 
 import com.builtbroken.mc.api.explosive.IBlast;
-import cpw.mods.fml.common.eventhandler.Cancelable;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
 /**
  * Called when a block is removed and replaced by AIR

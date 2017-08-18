@@ -26,7 +26,6 @@ public interface IPacket
      *
      * @param ctx    channel context
      * @param buffer the buffer to encode into
-     * @see {@link cpw.mods.fml.common.network.ByteBufUtils}
      * PacketManager#writeData(io.netty.buffer.ByteBuf, Object...)
      */
     void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
@@ -36,7 +35,6 @@ public interface IPacket
      *
      * @param ctx    channel context
      * @param buffer the buffer to decode from
-     * @See {@link cpw.mods.fml.common.network.ByteBufUtils}
      */
     void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
 
@@ -61,7 +59,7 @@ public interface IPacket
      */
     default void handleClientSide()
     {
-        handleClientSide(Minecraft.getMinecraft().thePlayer);
+        handleClientSide(Minecraft.getMinecraft().player);
     }
 
     default void handleClientSide(EntityPlayer player)

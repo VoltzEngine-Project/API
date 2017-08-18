@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.tile.access;
 
-import net.minecraftforge.common.util.ForgeDirection;
+
+import com.builtbroken.mc.data.Direction;
 
 /** Used by blocks that have a placement direction in the world
  *
@@ -10,5 +11,5 @@ public interface IRotation
 {
     /** Gets the facing direction of the TileEntity
      * @return  Front of the tile */
-    ForgeDirection getDirection();
+    Direction getDirection();
 }

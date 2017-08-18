@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.tile;
 
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Simple interface for checking connections to an object from a direction.
@@ -24,7 +24,7 @@ public interface ITileConnection
      *                   Side going into the machine towards the center
      * @return true if the object can connect based on direction, and type
      */
-    boolean canConnect(TileEntity connection, ConnectionType type, ForgeDirection from);
+    boolean canConnect(TileEntity connection, ConnectionType type, Direction from);
 
     /**
      * Checks if the tile has a connection on the given side
@@ -33,6 +33,6 @@ public interface ITileConnection
      * @param side - side of the tile, facing away from center
      * @return true if there is a connection of the type on the side
      */
-    boolean hasConnection(ConnectionType type, ForgeDirection side);
+    boolean hasConnection(ConnectionType type, Direction side);
 
 }

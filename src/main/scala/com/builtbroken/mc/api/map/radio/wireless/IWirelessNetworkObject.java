@@ -3,7 +3,7 @@ package com.builtbroken.mc.api.map.radio.wireless;
 import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.map.radio.IRadioWaveReceiver;
 import com.builtbroken.mc.api.map.radio.IRadioWaveSender;
-import net.minecraftforge.common.util.ForgeDirection;
+import com.builtbroken.mc.data.Direction;
 
 import java.util.List;
 
@@ -68,5 +68,5 @@ public interface IWirelessNetworkObject extends IWorldPosition
      * @param side - side of the tile, going towards the tile
      * @return true if it can accept connection
      */
-    boolean canAcceptAntennaConnection(ForgeDirection side);
+    boolean canAcceptAntennaConnection(Direction side);
 }

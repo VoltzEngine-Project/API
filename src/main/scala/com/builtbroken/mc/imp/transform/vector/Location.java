@@ -2,20 +2,27 @@ package com.builtbroken.mc.imp.transform.vector;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.api.IWorldPosition;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.builtbroken.mc.data.Direction;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.ILocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -40,12 +47,12 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
 
     public Location(Entity entity)
     {
-        this(entity.worldObj, entity.posX, entity.posY, entity.posZ);
+        this(entity.world, entity.posX, entity.posY, entity.posZ);
     }
 
     public Location(TileEntity tile)
     {
-        this(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+        super(tile);
     }
 
     public Location(IWorldPosition vec)
@@ -63,12 +70,12 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
         this(world, vector.x(), vector.y(), vector.z());
     }
 
-    public Location(World world, Vec3 vec)
+    public Location(World world, Vec3d vec)
     {
-        this(world, vec.xCoord, vec.yCoord, vec.zCoord);
+        this(world, vec.x, vec.y, vec.z);
     }
 
-    public Location(World world, MovingObjectPosition target)
+    public Location(World world, RayTraceResult target)
     {
         this(world, target.hitVec);
     }
@@ -79,37 +86,31 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
         return new Location(world, x, y, z);
     }
 
-    public void playSound(String sound, float volume, float pitch)
+    public void playSound(SoundEvent soundIn, SoundCategory category, float volume, float pitch, boolean distanceDelay)
     {
-        oldWorld().playSound(x(), y(), z(), sound, volume, pitch, false);
+        oldWorld().playSound(x(), y(), z(), soundIn, category, volume, pitch, distanceDelay);
     }
 
-    public void playSound(Block block)
+    public void playBreakSound(IBlockState block, Entity cause)
     {
-        Block.SoundType soundtype = block.stepSound;
-        playSound(soundtype.getStepResourcePath(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void spawnParticle(String t, IPos3D vel)
-    {
-        spawnParticle(t, vel.x(), vel.y(), vel.z());
+        SoundType soundtype = block.getBlock().getSoundType(block, world, toBlockPos(), cause);
+        playSound(soundtype.getBreakSound(), SoundCategory.BLOCKS, soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F, true);
     }
 
     @SideOnly(Side.CLIENT)
-    public void spawnParticle(String t, double vel_x, double vel_y, double vel_z)
+    public void spawnParticle(EnumParticleTypes t, double vel_x, double vel_y, double vel_z, int... parameters)
     {
-        oldWorld().spawnParticle(t, x(), y(), z(), vel_x, vel_y, vel_z);
+        oldWorld().spawnParticle(t, x(), y(), z(), vel_x, vel_y, vel_z, parameters);
     }
 
     @SideOnly(Side.CLIENT)
     public void playBlockBreakAnimation()
     {
-        Block block = getBlock();
-        if (block != null && block.getMaterial() != Material.air)
+        IBlockState blockState = getBlockState();
+        if (blockState != null && blockState.getMaterial() != Material.AIR)
         {
             //Play block sound
-            playSound(block);
+            playBreakSound(blockState, null); //TODO get entity cause
 
             //Spawn random particles
             Random rand = oldWorld().rand;
@@ -117,14 +118,22 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
             {
                 Location v = addRandom(rand, 0.5);
                 Pos vel = new Pos().addRandom(rand, 0.2);
-                v.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + v.getBlockMetadata(), vel);
+                v.spawnParticle(EnumParticleTypes.BLOCK_CRACK, vel.x(), vel.y(), vel.z(), Block.getStateId(blockState)); //TODO check if this works as not sure what data is required
             }
+
+            //this.world.playEvent(this.player, 2001, pos, Block.getStateId(iblockstate)); //TODO check if this is the event that triggers block particles
         }
     }
 
-    public boolean isSideSolid(ForgeDirection side)
+    public boolean isSideSolid(Direction side)
     {
-        return getBlock().isSideSolid(oldWorld(), xi(), yi(), zi(), side);
+        IBlockState state = getBlockState();
+        if (state != null && state.getBlock() != Blocks.AIR)
+        {
+            BlockFaceShape shape = state.getBlockFaceShape(world, toBlockPos(), side.getEnumFacing());
+            return shape != null && shape == BlockFaceShape.SOLID;
+        }
+        return false;
     }
 
     @Override
@@ -136,12 +145,12 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
     @Override
     public int compareTo(IWorldPosition that)
     {
-        if (oldWorld().provider.dimensionId < that.oldWorld().provider.dimensionId || x() < that.x() || y() < that.y() || z() < that.z())
+        if (oldWorld().provider.getDimension() < that.oldWorld().provider.getDimension() || x() < that.x() || y() < that.y() || z() < that.z())
         {
             return -1;
         }
 
-        if (oldWorld().provider.dimensionId > that.oldWorld().provider.dimensionId || x() > that.x() || y() > that.y() || z() > that.z())
+        if (oldWorld().provider.getDimension() > that.oldWorld().provider.getDimension() || x() > that.x() || y() > that.y() || z() > that.z())
         {
             return 1;
         }

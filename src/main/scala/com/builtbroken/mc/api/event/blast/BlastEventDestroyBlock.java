@@ -1,15 +1,16 @@
 package com.builtbroken.mc.api.event.blast;
 
 import com.builtbroken.mc.api.explosive.IBlast;
-import cpw.mods.fml.common.eventhandler.Cancelable;
 import net.minecraft.block.Block;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
 /**
  * Fired when a block is physically destroyed by a blast.
  * <p>
- * {@link Block#onBlockDestroyedByExplosion(World, int, int, int, Explosion)}
+ * {@link Block#onBlockDestroyedByExplosion(World, BlockPos, Explosion)}
  * is called during or before this event. So if you need to implement effects on a block do it
  * inside of the build int method. This way other mods can interact with you effects as well.
  * <p>

@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.rails;
 
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Applied to blocks that are rails
@@ -42,14 +42,14 @@ public interface ITransportRailBlock
      *
      * @return
      */
-    ForgeDirection getAttachedDirection(World world, int x, int y, int z, int meta);
+    Direction getAttachedDirection(World world, int x, int y, int z, int meta);
 
     /**
      * Direction the rail is facing into
      *
      * @return
      */
-    ForgeDirection getFacingDirection(World world, int x, int y, int z, int meta);
+    Direction getFacingDirection(World world, int x, int y, int z, int meta);
 
     /**
      * Height of the rail

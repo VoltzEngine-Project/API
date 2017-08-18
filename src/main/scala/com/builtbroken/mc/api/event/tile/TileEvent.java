@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.event.tile;
 
 import com.builtbroken.mc.api.event.PositionEvent;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -18,7 +19,7 @@ public class TileEvent extends PositionEvent
 
     public TileEvent(TileEntity tile)
     {
-        super(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+        super(tile.getWorld(), tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
         this.tile = tile;
     }
 
@@ -31,7 +32,7 @@ public class TileEvent extends PositionEvent
     {
         if (tile == null || tile.isInvalid())
         {
-            tile = world.getTileEntity(x, y, z);
+            tile = world.getTileEntity(new BlockPos(x, y, z)); //TODO cache pos
         }
         return tile;
     }

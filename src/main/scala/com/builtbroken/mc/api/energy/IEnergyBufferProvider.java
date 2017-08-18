@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api.energy;
 
-import net.minecraftforge.common.util.ForgeDirection;
+
+import com.builtbroken.mc.data.Direction;
 
 /**
  * Applied to tiles that provide access to an energy buffer for a side. This should
@@ -19,9 +20,9 @@ public interface IEnergyBufferProvider
      * Gets access to power buffer for the given side
      *
      * @param side - side, null should be treated as
-     *             {@link ForgeDirection#UNKNOWN}. Unknown should
+     *             {@link Direction#UNKNOWN}. Unknown should
      *             return the internal buffer.
      * @return energy buffer or null if none provider
      */
-    IEnergyBuffer getEnergyBuffer(ForgeDirection side);
+    IEnergyBuffer getEnergyBuffer(Direction side);
 }

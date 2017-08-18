@@ -1,10 +1,10 @@
 package com.builtbroken.mc.api.rails;
 
 import com.builtbroken.mc.api.IInventoryFilter;
-import com.builtbroken.mc.api.tile.provider.IInventoryProvider;
 import com.builtbroken.mc.api.tile.node.IExternalInventory;
+import com.builtbroken.mc.api.tile.provider.IInventoryProvider;
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Applied to carts that have extended inventory.
@@ -37,6 +37,6 @@ public interface ITransportCartHasCargo extends ITransportCartCargo, IInventoryP
         {
             return filter.isStackInFilter(stack);
         }
-        return canStore(stack, ForgeDirection.UNKNOWN);
+        return canStore(stack, Direction.UNKNOWN);
     }
 }

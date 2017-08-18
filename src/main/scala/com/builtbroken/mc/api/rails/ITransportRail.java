@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.rails;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import com.builtbroken.mc.data.Direction;
 
 /**
  * Applied to tiles that can be used as transport rails
@@ -29,14 +29,14 @@ public interface ITransportRail
      *
      * @return
      */
-    ForgeDirection getAttachedDirection();
+    Direction getAttachedDirection();
 
     /**
      * Direction the rail is facing into
      *
      * @return
      */
-    ForgeDirection getFacingDirection();
+    Direction getFacingDirection();
 
     /**
      * Height of the rail

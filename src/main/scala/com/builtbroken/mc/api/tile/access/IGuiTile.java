@@ -1,8 +1,8 @@
 package com.builtbroken.mc.api.tile.access;
 
 import com.builtbroken.mc.api.tile.ITile;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.Loader;
 
 /**
  * Created by robert on 1/8/2015.

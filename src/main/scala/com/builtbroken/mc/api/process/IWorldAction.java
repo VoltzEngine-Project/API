@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.process;
 
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * An action that needs to run during world tick and not outside the world tick
@@ -23,7 +23,7 @@ public interface IWorldAction
      * @param world -current world to run the action
      * @param side
      */
-    int runQue(World world, Side side);
+    int runQue(World world, Side side); //TODO remove side
 
     /**
      * Called to check if the add is done

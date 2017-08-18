@@ -1,9 +1,9 @@
 package com.builtbroken.mc.api.rails;
 
 import com.builtbroken.mc.api.tile.provider.IInventoryProvider;
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Applied to tiles that can be accessed by inventory managers on the rail system.
@@ -22,7 +22,7 @@ public interface IRailInventoryTile<I extends IInventory> extends IInventoryProv
      * @param side - side of the block pointing away from the tile
      * @return array of slots, never null
      */
-    int[] getSlotsToLoad(ForgeDirection side);
+    int[] getSlotsToLoad(Direction side);
 
     /**
      * Slots that will be accessed to load items into the cart.
@@ -30,7 +30,7 @@ public interface IRailInventoryTile<I extends IInventory> extends IInventoryProv
      * @param side - side of the block pointing away from the tile
      * @return array of slots, never null
      */
-    default int[] getSlotsToLoad(ItemStack stack, ForgeDirection side)
+    default int[] getSlotsToLoad(ItemStack stack, Direction side)
     {
         return getSlotsToLoad(side);
     }
@@ -41,7 +41,7 @@ public interface IRailInventoryTile<I extends IInventory> extends IInventoryProv
      * @param side - side of the block pointing away from the tile
      * @return array of slots, never null
      */
-    int[] getSlotsToUnload(ForgeDirection side);
+    int[] getSlotsToUnload(Direction side);
 
     /**
      * Slots that will be accessed to unload items from the cart.
@@ -49,7 +49,7 @@ public interface IRailInventoryTile<I extends IInventory> extends IInventoryProv
      * @param side - side of the block pointing away from the tile
      * @return array of slots, never null
      */
-    default int[] getSlotsToUnload(ItemStack stack, ForgeDirection side)
+    default int[] getSlotsToUnload(ItemStack stack, Direction side)
     {
         return getSlotsToUnload(side);
     }

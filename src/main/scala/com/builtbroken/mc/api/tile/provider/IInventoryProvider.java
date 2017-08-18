@@ -1,8 +1,8 @@
 package com.builtbroken.mc.api.tile.provider;
 
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Used with IExternalInventory to move the inventory functionality
@@ -20,25 +20,25 @@ public interface IInventoryProvider<I extends IInventory>
     I getInventory();
 
     /** Call back for IExternalInventory to check if the item can be stored */
-    default boolean canStore(ItemStack stack, int slot, ForgeDirection side)
+    default boolean canStore(ItemStack stack, int slot, Direction side)
     {
         return canStore(stack, side);
     }
 
     /** Call back for IExternalInventory to check if the item can be removed */
-    default boolean canRemove(ItemStack stack, int slot, ForgeDirection side)
+    default boolean canRemove(ItemStack stack, int slot, Direction side)
     {
         return canRemove(stack, side);
     }
 
     /** Call back for IExternalInventory to check if the item can be stored */
-    default boolean canStore(ItemStack stack, ForgeDirection side)
+    default boolean canStore(ItemStack stack, Direction side)
     {
         return false;
     }
 
     /** Call back for IExternalInventory to check if the item can be removed */
-    default boolean canRemove(ItemStack stack, ForgeDirection side)
+    default boolean canRemove(ItemStack stack, Direction side)
     {
         return false;
     }

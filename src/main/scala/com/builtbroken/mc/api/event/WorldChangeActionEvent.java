@@ -3,9 +3,9 @@ package com.builtbroken.mc.api.event;
 import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.edit.IWorldChangeAction;
 import com.builtbroken.mc.api.edit.IWorldEdit;
-import cpw.mods.fml.common.eventhandler.Cancelable;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
 import java.util.Collection;
 

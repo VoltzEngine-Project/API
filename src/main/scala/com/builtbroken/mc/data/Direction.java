@@ -1,5 +1,7 @@
 package com.builtbroken.mc.data;
 
+import net.minecraft.util.EnumFacing;
+
 /**
  * Based on Forge's ForgeDirection system
  *
@@ -79,5 +81,14 @@ public enum Direction
     public Direction getRotation(Direction axis)
     {
         return getOrientation(ROTATION_MATRIX[axis.ordinal()][ordinal()]);
+    }
+
+    public EnumFacing getEnumFacing()
+    {
+        if(ordinal() < UNKNOWN.ordinal())
+        {
+            return EnumFacing.values()[ordinal()];
+        }
+        return null;
     }
 }

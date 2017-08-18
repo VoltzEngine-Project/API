@@ -6,6 +6,7 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * Created by Dark on 6/23/2015.
  */
+@Deprecated
 public interface ICastingRecipe extends IMachineRecipe<ItemStack, FluidStack>
 {
     String getCastType();

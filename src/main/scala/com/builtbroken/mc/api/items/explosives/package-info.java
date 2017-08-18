@@ -5,5 +5,5 @@
 @API(apiVersion = VoltzEngineAPI.VERSION, owner = "VoltzEngine", provides = "VoltzEngineAPI|explosive-items") package com.builtbroken.mc.api.items.explosives;
 
 import com.builtbroken.mc.api.VoltzEngineAPI;
-import cpw.mods.fml.common.API;
+import net.minecraftforge.fml.common.API;
 

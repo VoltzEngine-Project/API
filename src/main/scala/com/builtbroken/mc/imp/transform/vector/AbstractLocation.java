@@ -4,16 +4,16 @@ import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.api.IWorldPosition;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.ILocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
 
@@ -29,6 +29,12 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     public AbstractLocation(World world, double x, double y, double z)
     {
         super(x, y, z);
+        this.world = world;
+    }
+
+    public AbstractLocation(World world, BlockPos pos)
+    {
+        super(pos.getX(), pos.getY(), pos.getZ());
         this.world = world;
     }
 
@@ -59,7 +65,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public AbstractLocation(Entity entity)
     {
-        this(entity.worldObj, entity.posX, entity.posY, entity.posZ);
+        this(entity.world, entity.posX, entity.posY, entity.posZ);
     }
 
     /**
@@ -69,7 +75,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public AbstractLocation(TileEntity tile)
     {
-        this(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
+        this(tile.getWorld(), tile.getPos());
     }
 
     /**
@@ -94,23 +100,23 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     }
 
     /**
-     * Creates a location from a world and {@link Vec3} combo
+     * Creates a location from a world and {@link Vec3d} combo
      *
      * @param world - valid world, can be null but not recommended
      * @param vec   - minecraft vector
      */
-    public AbstractLocation(World world, Vec3 vec)
+    public AbstractLocation(World world, Vec3d vec)
     {
-        this(world, vec.xCoord, vec.yCoord, vec.zCoord);
+        this(world, vec.x, vec.y, vec.z);
     }
 
     /**
-     * Creates a location from a world and {@link MovingObjectPosition} combo
+     * Creates a location from a world and {@link RayTraceResult} combo
      *
      * @param world  - valid world, can be null but not recommended
      * @param target - miencraft moving object position
      */
-    public AbstractLocation(World world, MovingObjectPosition target)
+    public AbstractLocation(World world, RayTraceResult target)
     {
         this(world, target.hitVec);
     }
@@ -141,7 +147,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     @Override
     public NBTTagCompound writeNBT(NBTTagCompound nbt)
     {
-        nbt.setInteger("dimension", world != null && world.provider != null ? world.provider.dimensionId : 0);
+        nbt.setInteger("dimension", world != null && world.provider != null ? world.provider.getDimension() : 0);
         nbt.setDouble("x", x());
         nbt.setDouble("y", y());
         nbt.setDouble("z", z());
@@ -151,7 +157,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     @Override
     public ByteBuf writeByteBuf(ByteBuf data)
     {
-        data.writeInt(world != null && world.provider != null ? world.provider.dimensionId : 0);
+        data.writeInt(world != null && world.provider != null ? world.provider.getDimension() : 0);
         data.writeDouble(x());
         data.writeDouble(y());
         data.writeDouble(z());
@@ -182,9 +188,10 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      *
      * @return Block or null if the chunk is not loaded
      */
+    @Deprecated //Use getBlockState()
     public Block getBlock()
     {
-        if (world != null && world.getChunkProvider().chunkExists(xi() / 16, zi() / 16))
+        if (world != null && world.getChunkProvider().isChunkGeneratedAt(xi() / 16, zi() / 16))
         {
             return super.getBlock(world);
         }
@@ -194,20 +201,15 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
         }
     }
 
-    /**
-     * Gets the meta value of the block at the location
-     *
-     * @return meta value or -1 if the world is null
-     */
-    public int getBlockMetadata()
+    public IBlockState getBlockState()
     {
-        if (world != null)
+        if (world != null && world.getChunkProvider().isChunkGeneratedAt(xi() / 16, zi() / 16))
         {
-            return super.getBlockMetadata(world);
+            return super.getBlockState(world);
         }
         else
         {
-            return -1;
+            return null;
         }
     }
 
@@ -220,7 +222,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     {
         if (world != null)
         {
-            TileEntity tile = world.getTileEntity(xi(), yi(), zi());
+            TileEntity tile = world.getTileEntity(toBlockPos());
             return tile == null || tile.isInvalid() ? null : tile;
         }
         return null;
@@ -247,17 +249,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public float getResistance(Entity cause, double xx, double yy, double zz)
     {
-        return getBlock(world).getExplosionResistance(cause, world, xi(), yi(), zi(), xx, yy, zz);
-    }
-
-    /**
-     * Grabs the BiomeGen data
-     *
-     * @return
-     */
-    public BiomeGenBase getBiomeGen()
-    {
-        return oldWorld().getBiomeGenForCoords(xi(), zi());
+        return super.getResistance(world, cause, xx, yy, zz);
     }
 
     /**
@@ -344,8 +336,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public boolean isReplaceable()
     {
-        Block block = getBlock();
-        return block == null || block == Blocks.air || block.isAir(world, xi(), yi(), zi()) || getBlock().isReplaceable(world, xi(), yi(), zi());
+        return super.isReplaceable(world);
     }
 
     /**
@@ -355,7 +346,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public boolean canSeeSky()
     {
-        return world == null ? false : world.canBlockSeeTheSky(xi(), yi(), zi());
+        return super.canSeeSky(world);
     }
 
     /**
@@ -368,9 +359,9 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
         //For some reason the server has it's own chunk provider that actually checks if the chunk exists
         if (world instanceof WorldServer)
         {
-            return ((WorldServer) world).theChunkProviderServer.chunkExists(xi() >> 4, zi() >> 4) && getChunk().isChunkLoaded;
+            return ((WorldServer) world).getChunkProvider().chunkExists(xi() >> 4, zi() >> 4) && getChunk().isLoaded();
         }
-        return world.getChunkProvider().chunkExists(xi() >> 4, zi() >> 4) && getChunk().isChunkLoaded;
+        return world.getChunkProvider().isChunkGeneratedAt(xi() >> 4, zi() >> 4) && getChunk().isLoaded();
     }
 
     /**
@@ -380,7 +371,7 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      */
     public Chunk getChunk()
     {
-        return world.getChunkFromBlockCoords(xi(), zi());
+        return world.getChunkFromBlockCoords(toBlockPos());
     }
 
     /** Marks a block for update */
@@ -398,6 +389,6 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
     @Override
     public String toString()
     {
-        return "WorldLocation [" + this.x() + "x," + this.y() + "y," + this.z() + "z," + (this.world == null ? "n" : this.world.provider == null ? "p" : this.world.provider.dimensionId) + "d]";
+        return "WorldLocation [" + this.x() + "x," + this.y() + "y," + this.z() + "z," + (this.world == null ? "n" : this.world.provider == null ? "p" : this.world.provider.getDimension()) + "d]";
     }
 }

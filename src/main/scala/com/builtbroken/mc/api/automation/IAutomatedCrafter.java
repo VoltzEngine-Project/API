@@ -1,9 +1,9 @@
 package com.builtbroken.mc.api.automation;
 
 import com.builtbroken.mc.api.tile.provider.IInventoryProvider;
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public interface IAutomatedCrafter<I extends IInventory> extends IAutomation, II
      * @param entity - what is trying to insert the item
      * @return what is left of the stack after inserting
      */
-    ItemStack insertRequiredItem(ItemStack stack, IAutomation entity, ForgeDirection side);
+    ItemStack insertRequiredItem(ItemStack stack, IAutomation entity, Direction side);
 
     /**
      * Called by automation when inserting items
@@ -56,7 +56,7 @@ public interface IAutomatedCrafter<I extends IInventory> extends IAutomation, II
      * @param entity - what is trying to insert the item
      * @return what is left of the stack after inserting
      */
-    ItemStack insertRequiredItem(ItemStack stack, int slot, IAutomation entity, ForgeDirection side);
+    ItemStack insertRequiredItem(ItemStack stack, int slot, IAutomation entity, Direction side);
 
     /**
      * Gets the slots that are used for output
@@ -65,7 +65,7 @@ public interface IAutomatedCrafter<I extends IInventory> extends IAutomation, II
      * @param side   - side being accessed from
      * @return slots, or empty array
      */
-    int[] getCraftingOutputSlots(IAutomation entity, ForgeDirection side);
+    int[] getCraftingOutputSlots(IAutomation entity, Direction side);
 
     /**
      * Gets the slots that are used for inputs
@@ -74,5 +74,5 @@ public interface IAutomatedCrafter<I extends IInventory> extends IAutomation, II
      * @param side-  side being accessed from
      * @return slots, or empty array
      */
-    int[] getCraftingInputSlots(IAutomation entity, ForgeDirection side);
+    int[] getCraftingInputSlots(IAutomation entity, Direction side);
 }

@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.tile;
 
 import com.builtbroken.mc.api.tile.access.IRotation;
-import net.minecraftforge.common.util.ForgeDirection;
+import com.builtbroken.mc.data.Direction;
 
 /**
  * Applied to any TileEntity that has a rotation based placement.
@@ -14,5 +14,5 @@ import net.minecraftforge.common.util.ForgeDirection;
 public interface IRotatable extends IRotation
 {
 	/** Sets the facing direction, is not supported by all machines */
-	void setDirection(ForgeDirection direction);
+	void setDirection(Direction direction);
 }

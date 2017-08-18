@@ -2,7 +2,7 @@ package com.builtbroken.mc.imp.transform.region;
 
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -45,33 +45,29 @@ public class Sphere extends Shape3D
     public <E extends Entity> List<E> getEntities(World world, Class<E> clazz)
     {
         List<E> list = new ArrayList();
-        int minX = MathHelper.floor_double((r - World.MAX_ENTITY_RADIUS) / 16.0D);
-        int maxX = MathHelper.floor_double((r + World.MAX_ENTITY_RADIUS) / 16.0D);
-        int minZ = MathHelper.floor_double((r - World.MAX_ENTITY_RADIUS) / 16.0D);
-        int maxZ = MathHelper.floor_double((r + World.MAX_ENTITY_RADIUS) / 16.0D);
+        int minX = MathHelper.floor((r - World.MAX_ENTITY_RADIUS) / 16.0D);
+        int maxX = MathHelper.floor((r + World.MAX_ENTITY_RADIUS) / 16.0D);
+        int minZ = MathHelper.floor((r - World.MAX_ENTITY_RADIUS) / 16.0D);
+        int maxZ = MathHelper.floor((r + World.MAX_ENTITY_RADIUS) / 16.0D);
 
         //world.getEntitiesWithinAABB()
         for (int i1 = minX; i1 <= maxX; i1++)
         {
             for (int j1 = minZ; j1 <= maxZ; j1++)
             {
-                if (world.getChunkProvider().chunkExists(i1, j1))
+                if (world.getChunkProvider().isChunkGeneratedAt(i1, j1))
                 {
                     Chunk chunk = world.getChunkFromChunkCoords(i1, j1);
 
-                    int i = MathHelper.floor_double((r - World.MAX_ENTITY_RADIUS) / 16.0D);
-                    int j = MathHelper.floor_double((r + World.MAX_ENTITY_RADIUS) / 16.0D);
-                    i = MathHelper.clamp_int(i, 0, chunk.entityLists.length - 1);
-                    j = MathHelper.clamp_int(j, 0, chunk.entityLists.length - 1);
+                    int i = MathHelper.floor((r - World.MAX_ENTITY_RADIUS) / 16.0D);
+                    int j = MathHelper.floor((r + World.MAX_ENTITY_RADIUS) / 16.0D);
+                    i = MathHelper.clamp(i, 0, chunk.getEntityLists().length - 1);
+                    j = MathHelper.clamp(j, 0, chunk.getEntityLists().length - 1);
 
                     for (int k = i; k <= j; k++)
                     {
-                        List list1 = chunk.entityLists[k];
-
-                        for (int l = 0; l < list1.size(); l++)
+                        for (Entity entity : chunk.getEntityLists()[k])
                         {
-                            Entity entity = (Entity) list1.get(l);
-
                             if (clazz.isAssignableFrom(entity.getClass()) && distance(new Pos(entity)) <= r)
                             {
                                 list.add((E)entity);

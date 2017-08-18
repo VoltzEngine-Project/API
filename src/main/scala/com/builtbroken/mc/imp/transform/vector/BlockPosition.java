@@ -1,12 +1,14 @@
 package com.builtbroken.mc.imp.transform.vector;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Pos that uses ints rather than doubles
@@ -16,80 +18,78 @@ import net.minecraftforge.common.util.ForgeDirection;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 5/17/2017.
  */
-public class BlockPos implements IPos3D, Comparable<BlockPos>
+public class BlockPosition implements IPos3D, Comparable<BlockPosition> //TODO make extend blockPos to reduce overlap
 {
-    public final int x, y, z;
+    final BlockPos blockPos;
 
-    public BlockPos(int x, int y, int z)
+    public BlockPosition(int x, int y, int z)
     {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        blockPos = new BlockPos(x, y, z);
     }
 
-    public BlockPos(IPos3D pos3D)
+    public BlockPosition(IPos3D pos3D)
     {
-        this.x = pos3D.xi();
-        this.y = pos3D.yi();
-        this.z = pos3D.zi();
+        this(pos3D.xi(),
+                pos3D.yi(),
+                pos3D.zi());
     }
 
-    public BlockPos(IPos3D pos3D, ForgeDirection dir)
+    public BlockPosition(IPos3D pos3D, Direction dir)
     {
-        this.x = pos3D.xi() + dir.offsetX;
-        this.y = pos3D.yi() + dir.offsetY;
-        this.z = pos3D.zi() + dir.offsetZ;
+        this(pos3D.xi() + dir.offsetX,
+                pos3D.yi() + dir.offsetY,
+                pos3D.zi() + dir.offsetZ);
     }
 
-    public BlockPos(IPos3D pos3D, EnumFacing dir)
+    public BlockPosition(IPos3D pos3D, EnumFacing dir)
     {
-        this.x = pos3D.xi() + dir.getFrontOffsetX();
-        this.y = pos3D.yi() + dir.getFrontOffsetY();
-        this.z = pos3D.zi() + dir.getFrontOffsetZ();
+        this(pos3D.xi() + dir.getFrontOffsetX(),
+                pos3D.yi() + dir.getFrontOffsetY(),
+                pos3D.zi() + dir.getFrontOffsetZ());
     }
 
     @Override
     public double x()
     {
-        return x;
+        return blockPos.getX();
     }
 
     @Override
     public int xi()
     {
-        return x;
+        return blockPos.getX();
     }
 
     @Override
     public double y()
     {
-        return y;
+        return blockPos.getY();
     }
 
     @Override
     public int yi()
     {
-        return y;
+        return blockPos.getY();
     }
 
     @Override
     public double z()
     {
-        return z;
+        return blockPos.getZ();
     }
 
     @Override
     public int zi()
     {
-        return z;
+        return blockPos.getZ();
     }
 
     @Override
     public int hashCode()
     {
-        long hash = (x ^ (x >>> 32));
-        hash = 31 * hash + y ^ (y >>> 32);
-        hash = 31 * hash + z ^ (z >>> 32);
+        long hash = (xi() ^ (xi() >>> 32));
+        hash = 31 * hash + yi() ^ (yi() >>> 32);
+        hash = 31 * hash + zi() ^ (zi() >>> 32);
         return (int) hash;
     }
 
@@ -110,18 +110,18 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
     }
 
     @Override
-    public int compareTo(BlockPos that)
+    public int compareTo(BlockPosition that)
     {
         return compare(that);
     }
 
     public int compare(IPos3D that)
     {
-        if (x() < that.xi() || yi() < that.yi() || z < that.zi())
+        if (x() < that.xi() || yi() < that.yi() || zi() < that.zi())
         {
             return -1;
         }
-        if (x() > that.xi() || y() > that.yi() || z > that.zi())
+        if (x() > that.xi() || y() > that.yi() || zi() > that.zi())
         {
             return 1;
         }
@@ -130,29 +130,40 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
 
     public boolean isAirBlock(World world)
     {
-        Block block = getBlock(world);
-        if (block != null)
+        IBlockState state = getBlockState(world);
+        if (state != null)
         {
-            return block.isAir(world, xi(), yi(), zi());
+            return state.getBlock().isAir(state, world, blockPos);
         }
         return false;
     }
 
+    @Deprecated
     public Block getBlock(World world)
+    {
+        IBlockState state = getBlockState(world);
+        if(state != null)
+        {
+            return state.getBlock();
+        }
+        return null;
+    }
+
+    public IBlockState getBlockState(World world)
     {
         if (world != null)
         {
-            return world.getBlock(xi(), yi(), zi()); //TODO check if chunk is loaded
+            return world.getBlockState(blockPos); //TODO check if chunk is loaded
         }
         return null;
     }
 
     public float getHardness(World world)
     {
-        Block block = getBlock(world);
+        IBlockState block = getBlockState(world);
         if (block != null)
         {
-            return block.getBlockHardness(world, xi(), yi(), zi());
+            return block.getBlockHardness(world, blockPos);
         }
         return -1;
     }
@@ -162,7 +173,7 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         Block block = getBlock(world);
         if (block != null)
         {
-            return block.isReplaceable(world, xi(), yi(), zi());
+            return block.isReplaceable(world, blockPos);
         }
         return false;
     }
@@ -172,23 +183,14 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         return 0;
     }
 
-    public BlockPos add(int x, int y, int z)
+    public BlockPosition add(int x, int y, int z)
     {
-        return new BlockPos(this.x + x, this.y + y, this.z + z);
+        return new BlockPosition(this.xi() + x, this.yi() + y, this.zi() + z);
     }
 
     public boolean canSeeSky(World world)
     {
-        return world != null && world.canBlockSeeTheSky(xi(), yi(), zi());
-    }
-
-    public int getBlockMetadata(World world)
-    {
-        if (world != null)
-        {
-            return world.getBlockMetadata(xi(), yi(), zi());
-        }
-        return 0;
+        return world != null && world.canSeeSky(blockPos);
     }
 
     public double distance(double x, double y, double z)
@@ -203,9 +205,9 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
 
     public TileEntity getTileEntity(World world)
     {
-        if(world != null)
+        if (world != null)
         {
-            return world.getTileEntity(xi(), yi(), zi());
+            return world.getTileEntity(blockPos);
         }
         return null;
     }

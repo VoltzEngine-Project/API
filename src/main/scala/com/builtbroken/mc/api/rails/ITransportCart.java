@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.rails;
 
 import com.builtbroken.mc.api.IWorldPosition;
-import net.minecraftforge.common.util.ForgeDirection;
+import com.builtbroken.mc.data.Direction;
 
 /**
  * Applied to entities that act as transport carts for cargo or other items
@@ -60,7 +60,7 @@ public interface ITransportCart extends IWorldPosition
      * @param railHeight - height of the rail the cart is on
      * @param trueCenter - will force the cart to the very center of the rail
      */
-    void recenterCartOnRail(ForgeDirection side, ForgeDirection facing, double railHeight, boolean trueCenter);
+    void recenterCartOnRail(Direction side, Direction facing, double railHeight, boolean trueCenter);
 
     /**
      * Set the movement of the cart. Do not

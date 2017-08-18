@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.energy;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import com.builtbroken.mc.data.Direction;
 
 /**
  * Applied to any tile that contains energy
@@ -14,7 +14,7 @@ public interface IEnergyCapacitor
      * @param from side coming  into the machine
      * @return amount of energy stored on the side
      */
-    int getEnergyForSide(ForgeDirection from);
+    int getEnergyForSide(Direction from);
 
     /**
      * Sets how much energy the tile contains for the side
@@ -26,7 +26,7 @@ public interface IEnergyCapacitor
      *
      * @param from side coming  into the machine
      */
-    void setEnergyForSide(ForgeDirection from, int energy);
+    void setEnergyForSide(Direction from, int energy);
 
     /**
      * Used to see how much energy the tile can stored
@@ -34,5 +34,5 @@ public interface IEnergyCapacitor
      * @param from side coming  into the machine
      * @return amount of energy the tile could stored on the side
      */
-    int getMaxEnergyForSide(ForgeDirection from);
+    int getMaxEnergyForSide(Direction from);
 }

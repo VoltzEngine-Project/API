@@ -46,7 +46,7 @@ public interface IExternalInventory extends IInventory
             for (int i = 0; i < getSizeInventory(); i++)
             {
                 int maxSpace = Math.min(getStackInSlot(i).getMaxStackSize(), getInventoryStackLimit());
-                int space = maxSpace - getStackInSlot(i).stackSize;
+                int space = maxSpace - getStackInSlot(i).getCount();
                 if (space > 0)
                 {
                     return false;

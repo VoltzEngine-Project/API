@@ -1,16 +1,17 @@
 package com.builtbroken.mc.api.tile.provider;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import com.builtbroken.mc.data.Direction;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.IFluidTank;
 
 /**
  * Allows access to an internal fluid tank
  * <p>
- * Assume {@link ForgeDirection#UNKNOWN} is an internal call
+ * Assume {@link Direction#UNKNOWN} is an internal call
  * <p>
  * Created by Dark on 8/9/2015.
  */
+@Deprecated //Being replaced by node/capability system
 public interface ITankProvider
 {
     /**
@@ -33,7 +34,7 @@ public interface ITankProvider
      * @param fluid     - fluid to match, can be null
      * @return tanks, or null if can't accept fluid of type
      */
-    default IFluidTank getTankForFluid(ForgeDirection direction, Fluid fluid)
+    default IFluidTank getTankForFluid(Direction direction, Fluid fluid)
     {
         return getTankForFluid(fluid);
     }
@@ -45,7 +46,7 @@ public interface ITankProvider
      * @param fluid
      * @return
      */
-    default boolean canFill(ForgeDirection from, Fluid fluid)
+    default boolean canFill(Direction from, Fluid fluid)
     {
         return getTankForFluid(from, fluid) != null;
     }
@@ -57,7 +58,7 @@ public interface ITankProvider
      * @param fluid
      * @return
      */
-    default boolean canDrain(ForgeDirection from, Fluid fluid)
+    default boolean canDrain(Direction from, Fluid fluid)
     {
         return getTankForFluid(from, fluid) != null;
     }
