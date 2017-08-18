@@ -91,4 +91,9 @@ public enum Direction
         }
         return null;
     }
+
+    public static Direction getOrientation(EnumFacing side)
+    {
+        return Direction.getOrientation(side.ordinal());
+    }
 }

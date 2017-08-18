@@ -2,7 +2,7 @@ package com.builtbroken.mc.api.edit;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.api.IWorldPosition;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -41,28 +41,14 @@ public interface IWorldEdit extends IWorldPosition, IPos3D
      *
      * @return block or null for no change
      */
-    Block getNewBlock();
-
-    /**
-     * Gets the meta of the block being placed
-     *
-     * @return 0 - 15
-     */
-    int getNewMeta();
+    IBlockState getNewBlockState();
 
     /**
      * Gets the block at the location.
      *
      * @return block.
      */
-    Block getBlock();
-
-    /**
-     * Gets the current block metadata.
-     *
-     * @return 0 - 15
-     */
-    int getBlockMetadata();
+    IBlockState getBlockState();
 
     /**
      * Gets the current tile entity
@@ -79,8 +65,7 @@ public interface IWorldEdit extends IWorldPosition, IPos3D
     /**
      * Called to change the edit result
      *
-     * @param newBlock
-     * @param newMeta
+     * @param state
      */
-    IWorldEdit set(Block newBlock, int newMeta);
+    IWorldEdit set(IBlockState state);
 }

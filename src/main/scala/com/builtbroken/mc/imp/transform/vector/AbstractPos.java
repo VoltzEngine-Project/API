@@ -379,24 +379,21 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
     //===================
     //===World Setters===
     //===================
-    @Deprecated
     public boolean setBlock(World world, Block block)
     {
-        return setBlock(world, block, 0);
+        return setBlock(world, block.getDefaultState());
     }
 
-    @Deprecated
-    public boolean setBlock(World world, Block block, int metadata)
+    public boolean setBlock(World world, IBlockState state)
     {
-        return setBlock(world, block, metadata, 3);
+        return setBlock(world, state, 3);
     }
 
-    @Deprecated
-    public boolean setBlock(World world, Block block, int metadata, int notify)
+    public boolean setBlock(World world, IBlockState block, int notify)
     {
         if (world != null && block != null)
         {
-            return world.setBlockState(toBlockPos(), block.getStateFromMeta(metadata), notify);
+            return world.setBlockState(toBlockPos(), block, notify);
         }
         else
         {

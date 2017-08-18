@@ -256,25 +256,22 @@ public abstract class AbstractLocation<R extends AbstractLocation> extends Abstr
      * Replaces the block at the location with a new block
      *
      * @param block    - block to place
-     * @param metadata - meta value to place 0-15
      * @param notify   - notification level to use when placing the block
      * @return true if it was repalced
      */
-    public boolean setBlock(Block block, int metadata, int notify)
+    public boolean setBlock(IBlockState block, int notify)
     {
-        return super.setBlock(world, block, metadata, notify);
+        return super.setBlock(world, block, notify);
     }
 
     /**
      * Replaces the block at the location with a new block
      *
-     * @param block    - block to place
-     * @param metadata - meta value to place 0-15
      * @return true if it was repalced
      */
-    public boolean setBlock(Block block, int metadata)
+    public boolean setBlock(IBlockState state)
     {
-        return super.setBlock(world, block, metadata);
+        return super.setBlock(world, state, 3);
     }
 
     /**
