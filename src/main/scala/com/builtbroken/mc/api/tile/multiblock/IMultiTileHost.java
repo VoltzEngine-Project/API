@@ -1,9 +1,10 @@
 package com.builtbroken.mc.api.tile.multiblock;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
-import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.abstraction.world.IPosWorld;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 
 import java.util.HashMap;
 
@@ -43,9 +44,8 @@ public interface IMultiTileHost extends IPosWorld
      * @param tile   - tile clicked
      * @param player - person who clicked the tile
      * @param side   - side clicked
-     * @param hit    - hit data of where the tile was clicked
      */
-    boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, float xHit, float yHit, float zHit);
+    boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, EnumHand hand, EnumFacing side, float xHit, float yHit, float zHit);
 
     /**
      * Called when the player left clicks a tile. No additional data is provided beyond
@@ -60,7 +60,7 @@ public interface IMultiTileHost extends IPosWorld
      * Grabs that raw data of the layout of the structure. This data will be used to generate
      * the structure
      *
-     * @return map of positions to multiTile types see {@link com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock}
+     * @return map of positions to multiTile
      */
     HashMap<IPos3D, String> getLayoutOfMultiBlock();
 }

@@ -7,6 +7,7 @@ import com.builtbroken.mc.api.abstraction.entity.IEntityData;
 import com.builtbroken.mc.api.abstraction.imp.IWrapper;
 import com.builtbroken.mc.api.abstraction.tile.ITile;
 import com.builtbroken.mc.api.abstraction.tile.ITilePosition;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -112,7 +113,7 @@ public interface IWorld extends IWrapper<World>
      */
     void runEffect(EffectInstance effectInstance);
 
-    void spawnParticle(String name, double x, double y, double z, double xx, double yy, double zz);
+    void spawnParticle(EnumParticleTypes type, double x, double y, double z, double xx, double yy, double zz, int... params);
 
     void playAudio(String audioKey, double x, double y, double z, float pitch, float volume);
 

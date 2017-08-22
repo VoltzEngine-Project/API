@@ -167,6 +167,11 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
     //======Math Operators=====
     //=========================
 
+    public R add(BlockPos other)
+    {
+        return add(other.getX(), other.getY(), other.getZ());
+    }
+
     public R add(Direction dir)
     {
         return add(dir.offsetX, dir.offsetY, dir.offsetZ);

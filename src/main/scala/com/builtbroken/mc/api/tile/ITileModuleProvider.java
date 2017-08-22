@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.tile;
 
 import com.builtbroken.mc.api.tile.node.ITileModule;
 import com.builtbroken.mc.data.Direction;
+import net.minecraft.util.EnumFacing;
 
 /** Applied to a TileEntity to provide access, from outside the tile, to the TileModules contained in the tile.
  *
@@ -14,5 +15,5 @@ public interface ITileModuleProvider
 	 * @param from     - The direction.
 	 * @return Returns the node object.
 	 */
-	<N extends ITileModule> N getModule(Class<? extends N> nodeType, Direction from);
+	<N extends ITileModule> N getModule(Class<? extends N> nodeType, EnumFacing from);
 }
