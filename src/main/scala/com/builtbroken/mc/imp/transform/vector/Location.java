@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -68,6 +69,11 @@ public class Location extends AbstractLocation<Location> implements IWorldPositi
     public Location(World world, IPos3D vector)
     {
         this(world, vector.x(), vector.y(), vector.z());
+    }
+
+    public Location(World world, BlockPos pos)
+    {
+        this(world, pos.getX(), pos.getY(), pos.getZ());
     }
 
     public Location(World world, Vec3d vec)

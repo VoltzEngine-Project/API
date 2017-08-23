@@ -5,6 +5,7 @@ import com.builtbroken.mc.api.IWorldPosition;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * Location with data on changing the block
@@ -68,4 +69,9 @@ public interface IWorldEdit extends IWorldPosition, IPos3D
      * @param state
      */
     IWorldEdit set(IBlockState state);
+
+    default BlockPos toBlockPos()
+    {
+        return new BlockPos(xi(), yi(), zi());
+    }
 }

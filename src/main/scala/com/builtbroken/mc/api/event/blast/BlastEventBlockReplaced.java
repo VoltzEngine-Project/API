@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.event.blast;
 
 import com.builtbroken.mc.api.explosive.IBlast;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
@@ -13,14 +13,12 @@ import net.minecraftforge.fml.common.eventhandler.Cancelable;
  */
 public abstract class BlastEventBlockReplaced extends BlastEventBlockEdit
 {
-    public Block newBlock;
-    public int newMeta;
+    public IBlockState newState;
 
-    public BlastEventBlockReplaced(IBlast blast, World world, Block block, int meta, Block newBlock, int newMeta, int x, int y, int z)
+    public BlastEventBlockReplaced(IBlast blast, World world, IBlockState oldState, IBlockState newState, int x, int y, int z)
     {
-        super(blast, world, block, meta, x, y, z);
-        this.newBlock = newBlock;
-        this.newMeta = newMeta;
+        super(blast, world, oldState, x, y, z);
+        this.newState = newState;
     }
 
     /**
@@ -29,17 +27,17 @@ public abstract class BlastEventBlockReplaced extends BlastEventBlockEdit
     @Cancelable
     public static class Pre extends BlastEventBlockReplaced
     {
-        public Pre(IBlast blast, World world, Block block, int meta, Block newBlock, int newMeta, int x, int y, int z)
+        public Pre(IBlast blast, World world, IBlockState oldState, IBlockState newState, int x, int y, int z)
         {
-            super(blast, world, block, meta, newBlock, newMeta, x, y, z);
+            super(blast, world, oldState, newState, x, y, z);
         }
     }
 
     public static class Post extends BlastEventBlockReplaced
     {
-        public Post(IBlast blast, World world, Block block, int meta, Block newBlock, int newMeta, int x, int y, int z)
+        public Post(IBlast blast, World world, IBlockState oldState, IBlockState newState, int x, int y, int z)
         {
-            super(blast, world, block, meta, newBlock, newMeta, x, y, z);
+            super(blast, world, oldState, newState, x, y, z);
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.event.blast;
 
 import com.builtbroken.mc.api.explosive.IBlast;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 
 /**
@@ -13,18 +13,16 @@ import net.minecraft.world.World;
 public abstract class BlastEventBlockEdit extends BlastEvent
 {
     public final World world;
-    public final Block block;
-    public final int meta;
+    public final IBlockState blockState;
     public final int x;
     public final int y;
     public final int z;
 
-    public BlastEventBlockEdit(IBlast blast, World world, Block block, int meta, int x, int y, int z)
+    public BlastEventBlockEdit(IBlast blast, World world, IBlockState state, int x, int y, int z)
     {
         super(blast);
         this.world = world;
-        this.block = block;
-        this.meta = meta;
+        this.blockState = state;
         this.x = x;
         this.y = y;
         this.z = z;

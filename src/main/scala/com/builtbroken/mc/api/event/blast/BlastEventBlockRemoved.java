@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.event.blast;
 
 import com.builtbroken.mc.api.explosive.IBlast;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 
@@ -13,9 +13,9 @@ import net.minecraftforge.fml.common.eventhandler.Cancelable;
  */
 public abstract class BlastEventBlockRemoved extends BlastEventBlockEdit
 {
-    public BlastEventBlockRemoved(IBlast blast, World world, Block block, int meta, int x, int y, int z)
+    public BlastEventBlockRemoved(IBlast blast, World world, IBlockState state, int x, int y, int z)
     {
-        super(blast, world, block, meta, x, y, z);
+        super(blast, world, state, x, y, z);
     }
 
     /**
@@ -24,17 +24,17 @@ public abstract class BlastEventBlockRemoved extends BlastEventBlockEdit
     @Cancelable
     public static class Pre extends BlastEventBlockRemoved
     {
-        public Pre(IBlast blast, World world, Block block, int meta, int x, int y, int z)
+        public Pre(IBlast blast, World world, IBlockState state, int x, int y, int z)
         {
-            super(blast, world, block, meta, x, y, z);
+            super(blast, world, state, x, y, z);
         }
     }
 
     public static class Post extends BlastEventBlockRemoved
     {
-        public Post(IBlast blast, World world, Block block, int meta, int x, int y, int z)
+        public Post(IBlast blast, World world, IBlockState state, int x, int y, int z)
         {
-            super(blast, world, block, meta, x, y, z);
+            super(blast, world, state, x, y, z);
         }
     }
 }

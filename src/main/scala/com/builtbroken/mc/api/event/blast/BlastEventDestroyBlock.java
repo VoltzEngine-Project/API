@@ -2,6 +2,7 @@ package com.builtbroken.mc.api.event.blast;
 
 import com.builtbroken.mc.api.explosive.IBlast;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -26,9 +27,9 @@ public abstract class BlastEventDestroyBlock extends BlastEventBlockEdit
     /** Type of destruction. */
     public final DestructionType destructionType;
 
-    public BlastEventDestroyBlock(IBlast blast, DestructionType type, World world, Block block, int meta, int x, int y, int z)
+    public BlastEventDestroyBlock(IBlast blast, DestructionType type, World world, IBlockState state, int x, int y, int z)
     {
-        super(blast, world, block, meta, x, y, z);
+        super(blast, world, state, x, y, z);
         this.destructionType = type;
     }
 
@@ -38,17 +39,17 @@ public abstract class BlastEventDestroyBlock extends BlastEventBlockEdit
     @Cancelable
     public static class Pre extends BlastEventDestroyBlock
     {
-        public Pre(IBlast blast, DestructionType type, World world, Block block, int meta, int x, int y, int z)
+        public Pre(IBlast blast, DestructionType type, World world, IBlockState state, int x, int y, int z)
         {
-            super(blast, type, world, block, meta, x, y, z);
+            super(blast, type, world, state, x, y, z);
         }
     }
 
     public static class Post extends BlastEventDestroyBlock
     {
-        public Post(IBlast blast, DestructionType type, World world, Block block, int meta, int x, int y, int z)
+        public Post(IBlast blast, DestructionType type, World world, IBlockState state, int x, int y, int z)
         {
-            super(blast, type, world, block, meta, x, y, z);
+            super(blast, type, world, state, x, y, z);
         }
     }
 
