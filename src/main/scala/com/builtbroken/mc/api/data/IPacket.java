@@ -2,7 +2,6 @@ package com.builtbroken.mc.api.data;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
@@ -56,17 +55,13 @@ public interface IPacket
     }
 
     /**
-     * Handle a packet on the client side. Note this occurs after decoding has completed.
+     * Called to handle client side for the player
      *
+     * @param player - local player
      */
-    default void handleClientSide()
-    {
-        handleClientSide(Minecraft.getMinecraft().thePlayer);
-    }
-
     default void handleClientSide(EntityPlayer player)
     {
-        throw new UnsupportedOperationException("Unsupported operation for Packet: " + getClass().getSimpleName());
+        handle(player);
     }
 
     /**
@@ -75,6 +70,18 @@ public interface IPacket
      * @param player the player reference
      */
     default void handleServerSide(EntityPlayer player)
+    {
+        handle(player);
+    }
+
+    /**
+     * Called to handle packet logic for both sides.
+     * <p>
+     * Called by interface defaults and not used externally.
+     *
+     * @param player - player
+     */
+    default void handle(EntityPlayer player)
     {
         throw new UnsupportedOperationException("Unsupported operation for Packet: " + getClass().getSimpleName());
     }

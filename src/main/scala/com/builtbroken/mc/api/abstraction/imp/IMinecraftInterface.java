@@ -4,6 +4,7 @@ import com.builtbroken.mc.api.abstraction.data.IItemData;
 import com.builtbroken.mc.api.abstraction.data.ITileData;
 import com.builtbroken.mc.api.abstraction.tile.ITileMaterial;
 import com.builtbroken.mc.api.abstraction.world.IWorld;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * Applied to abstraction providers that wrapper Minecraft data to Voltz Engine data providers
@@ -47,4 +48,6 @@ public interface IMinecraftInterface
 
     //TODO move to keyboard helper?
     boolean isShiftHeld();
+
+    EntityPlayer getLocalPlayer(); //TODO wrapper
 }
