@@ -95,10 +95,11 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
     @Override
     public int hashCode()
     {
-        long hash = (x ^ (x >>> 32));
-        hash = 31 * hash + y ^ (y >>> 32);
-        hash = 31 * hash + z ^ (z >>> 32);
-        return (int) hash;
+        int hash = 17;
+        hash = hash * 31 + x;
+        hash = hash * 31 + y;
+        hash = hash * 31 + z;
+        return hash;
     }
 
     @Override
