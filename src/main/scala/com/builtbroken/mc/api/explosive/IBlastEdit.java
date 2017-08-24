@@ -1,7 +1,7 @@
 package com.builtbroken.mc.api.explosive;
 
 import com.builtbroken.mc.api.edit.IWorldEdit;
-import net.minecraft.util.EnumFacing;
+import com.builtbroken.mc.data.Direction;
 
 /**
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
@@ -16,14 +16,14 @@ public interface IBlastEdit extends IWorldEdit
      *
      * @param dir
      */
-    void setBlastDirection(EnumFacing dir);
+    void setBlastDirection(Direction dir);
 
     /**
      * Path the blast pathed during the edit
      *
      * @return
      */
-    EnumFacing getBlastDirection();
+    Direction getBlastDirection();
 
     /**
      * Amount of energy passing though the block     *

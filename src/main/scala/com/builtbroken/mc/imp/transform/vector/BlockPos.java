@@ -1,6 +1,7 @@
 package com.builtbroken.mc.imp.transform.vector;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
+import com.builtbroken.mc.data.Direction;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -46,6 +47,13 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         this.x = pos3D.xi() + dir.getFrontOffsetX();
         this.y = pos3D.yi() + dir.getFrontOffsetY();
         this.z = pos3D.zi() + dir.getFrontOffsetZ();
+    }
+
+    public BlockPos(IPos3D pos3D, Direction dir)
+    {
+        this.x = pos3D.xi() + dir.offsetX;
+        this.y = pos3D.yi() + dir.offsetY;
+        this.z = pos3D.zi() + dir.offsetZ;
     }
 
     @Override
@@ -203,7 +211,7 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
 
     public TileEntity getTileEntity(World world)
     {
-        if(world != null)
+        if (world != null)
         {
             return world.getTileEntity(xi(), yi(), zi());
         }

@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.explosive;
 
-import net.minecraft.util.EnumFacing;
+import com.builtbroken.mc.data.Direction;
 
 /**
  * Applied to tiles that can be damaged by explosives rather than destroyed.
@@ -25,7 +25,7 @@ public interface IExplosiveDamageable
      * @param energy    - blast energy passing through the location, if negative the blast is not energy based
      * @return calculates how much energy
      */
-    float getEnergyCostOfTile(IExplosiveHandler explosive, IBlast blast, EnumFacing facing, float energy, float distance);
+    float getEnergyCostOfTile(IExplosiveHandler explosive, IBlast blast, Direction facing, float energy, float distance);
 
     /**
      * Gets the world edit result of the block hitting this block.
@@ -36,5 +36,5 @@ public interface IExplosiveDamageable
      * @param energy    - blast energy passing through the location, if negative the blast is not energy based
      * @return calculates how much energy
      */
-    IBlastEdit getBlockEditOnBlastImpact(IExplosiveHandler explosive, IBlast blast, EnumFacing facing, float energy, float distance);
+    IBlastEdit getBlockEditOnBlastImpact(IExplosiveHandler explosive, IBlast blast, Direction facing, float energy, float distance);
 }
