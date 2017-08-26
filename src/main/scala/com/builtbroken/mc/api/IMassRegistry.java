@@ -1,6 +1,7 @@
 package com.builtbroken.mc.api;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -114,7 +115,7 @@ public interface IMassRegistry
      *
      * @return in grams
      */
-    double getMass(Block block, int meta);
+    double getMass(IBlockState blockState);
 
     /**
      * Gets the mass of the stack
