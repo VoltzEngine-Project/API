@@ -186,6 +186,11 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         return new BlockPos(this.x + x, this.y + y, this.z + z);
     }
 
+    public BlockPos add(Direction direction)
+    {
+        return new BlockPos(this.x + direction.offsetX, this.y + direction.offsetY, this.z + direction.offsetZ);
+    }
+
     public boolean canSeeSky(World world)
     {
         return world != null && world.canBlockSeeTheSky(xi(), yi(), zi());

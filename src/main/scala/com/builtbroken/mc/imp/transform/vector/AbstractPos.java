@@ -5,6 +5,7 @@ import com.builtbroken.jlib.data.vector.ITransform;
 import com.builtbroken.jlib.data.vector.Pos3D;
 import com.builtbroken.mc.api.tile.node.ITileNode;
 import com.builtbroken.mc.api.tile.node.ITileNodeHost;
+import com.builtbroken.mc.data.Direction;
 import com.builtbroken.mc.imp.transform.rotation.EulerAngle;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -167,6 +168,11 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
     //=========================
 
     public R add(ForgeDirection dir)
+    {
+        return add(dir.offsetX, dir.offsetY, dir.offsetZ);
+    }
+
+    public R add(Direction dir)
     {
         return add(dir.offsetX, dir.offsetY, dir.offsetZ);
     }
