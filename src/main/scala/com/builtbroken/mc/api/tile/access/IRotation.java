@@ -10,5 +10,6 @@ public interface IRotation
 {
     /** Gets the facing direction of the TileEntity
      * @return  Front of the tile */
+    @Deprecated //Will be replace with Direction type
     ForgeDirection getDirection();
 }
