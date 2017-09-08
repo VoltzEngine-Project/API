@@ -72,6 +72,12 @@ public interface ITileNodeHost extends IPosWorld
      */
     int getHostMeta();
 
+
+    /**
+     * @param meta - new meta state
+     */
+    void setMetaValue(int meta);
+
     /**
      * Check to see if the node can
      * access the world at this moment.
