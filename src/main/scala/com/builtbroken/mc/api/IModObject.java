@@ -12,7 +12,23 @@ public interface IModObject
      *
      * @return
      */
-    String uniqueContentID();
+    @Deprecated
+    default String uniqueContentID()
+    {
+        return getUniqueID();
+    }
+
+    /**
+     * Unique string based ID that is only
+     * used by this object in it's content group
+     *
+     * @return
+     */
+    default String getUniqueID()
+    {
+        return null;
+    }
+
 
     /**
      * Content type (Tile, Entity, Block, Item, Gun, Ammo)
