@@ -8,6 +8,7 @@ import scala.Array._
 /**
  * @author Calclavia
  */
+//Do not use, will be removed eventually
 object Matrix
 {
   implicit def arrayToMatrix(m: Array[Array[Double]]) : Matrix = new Matrix(m)

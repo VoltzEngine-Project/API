@@ -6,12 +6,18 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
- * Object that can tell a block or entity how it was triggered. Used as
- * an internal event system for explosive triggering.
- * Created on 11/18/2014.
+ * Contains data about how an action was triggered
  * <p>
- * Make sure to register a {@link TriggerCauseRegistry.TriggerNBTBuilder} so
- * that packet syncing and NBT saving work correctly.
+ * Used primarily as an internal event system for explosive triggering in ICBM. However, can
+ * be used for just about anything including traps, region updated, events, weapons, etc.
+ *
+ * Examples of use: ICBM: Warhead, ICBM: Crashed Missile, VoltzEngine: WorldTrigger, VoltzEngine: Explosive System
+ * <p>
+ * Note: Make sure to register a {@link TriggerCauseRegistry.TriggerNBTBuilder} so
+ * that packet syncing and NBT saving work correctly. Without doing so will cause
+ * save state and client to not update correctly.
+ * <p>
+ * Created on 11/18/2014. Last Modified 9/30/2017
  *
  * @author Darkguardsman
  */
@@ -19,7 +25,7 @@ public abstract class TriggerCause
 {
     /** Name of the trigger cause, unique lookup id, and translation key. */
     public final String triggerName;
-    /** Amount to change the size of the effect */
+    /** Optional, Amount to change the size of the effect */
     public float effectScaleChange = 1;
 
     public TriggerCause(String name)

@@ -1,13 +1,14 @@
 package com.builtbroken.mc.imp.transform.region;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
+import com.builtbroken.mc.api.map.IMapArea;
 import com.builtbroken.mc.imp.transform.vector.Pos;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Created by robert on 1/12/2015.
  */
-public abstract class Shape3D
+public abstract class Shape3D implements IMapArea
 {
     //TODO replace with rotation object
     double yaw = 0;
@@ -66,9 +67,13 @@ public abstract class Shape3D
     {
         double r = getSizeX();
         if (getSizeY() > r)
+        {
             r = getSizeY();
+        }
         if (getSizeZ() > r)
+        {
             r = getSizeZ();
+        }
         return r;
     }
 
@@ -91,5 +96,34 @@ public abstract class Shape3D
     public boolean isWithin(IPos3D vec)
     {
         return isWithin(vec.x(), vec.y(), vec.z());
+    }
+
+
+    //====================
+    // IMapArea Wrapper
+    //====================
+
+    @Override
+    public IPos3D getMapAreaCenter()
+    {
+        return new Pos(center.x(), center.y(), center.y());
+    }
+
+    @Override
+    public boolean isMapArea3D()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isInsideMapArea(double x, double y, double z)
+    {
+        return isWithin(x, y, z);
+    }
+
+    @Override
+    public boolean isInsideMapArea(int x, int y, int z)
+    {
+        return isWithin(x + 0.5, y + 0.5, z + 0.5); //TODO expand a little?
     }
 }
