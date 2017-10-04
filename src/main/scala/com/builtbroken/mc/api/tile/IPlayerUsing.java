@@ -15,7 +15,11 @@ public interface IPlayerUsing
 
     default boolean addPlayerToUseList(EntityPlayer player)
     {
-        return getPlayersUsing().add(player);
+        if(getPlayersUsing() != null && !getPlayersUsing().contains(player))
+        {
+            return getPlayersUsing().add(player);
+        }
+        return false;
     }
 
     default boolean removePlayerToUseList(EntityPlayer player)
