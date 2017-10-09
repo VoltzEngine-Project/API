@@ -16,7 +16,7 @@ public class Sphere extends Shape3D
 {
     double r;
 
-    public Sphere(Pos pos, int r)
+    public Sphere(Pos pos, double r)
     {
         super(pos);
         this.r = r;
@@ -42,7 +42,7 @@ public class Sphere extends Shape3D
         return new Pos(x, y, z).subtract(x, y, z).magnitude() <= this.r;
     }
 
-    public <E extends Entity> List<E> getEntities(World world, Class<E> clazz)
+    public <E extends Entity> List<E> getEntities(World world, Class<E> clazz) //TODO change to getChunks().forEach(e -> e.getEntities().filter().... etc)
     {
         List<E> list = new ArrayList();
         int minX = MathHelper.floor_double((r - World.MAX_ENTITY_RADIUS) / 16.0D);
