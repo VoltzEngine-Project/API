@@ -105,11 +105,7 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
     @Override
     public boolean equals(Object o)
     {
-        if (o instanceof IPos3D)
-        {
-            return ((IPos3D) o).xi() == xi() && ((IPos3D) o).yi() == yi() && ((IPos3D) o).zi() == zi();
-        }
-        return false;
+        return o instanceof IPos3D && compare((IPos3D) o) == 0;
     }
 
     @Override
@@ -224,7 +220,7 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         return null;
     }
 
-    public double distance(Location center)
+    public double distance(IPos3D center)
     {
         return distance(center.x(), center.y(), center.z());
     }
