@@ -51,20 +51,22 @@ public class Sphere extends Shape3D
         int maxZ = MathHelper.floor_double((r + World.MAX_ENTITY_RADIUS) / 16.0D);
 
         //world.getEntitiesWithinAABB()
-        for (int i1 = minX; i1 <= maxX; i1++)
+        for (int dx = minX; dx <= maxX; dx++)
         {
-            for (int j1 = minZ; j1 <= maxZ; j1++)
+            for (int dz = minZ; dz <= maxZ; dz++)
             {
-                if (world.getChunkProvider().chunkExists(i1, j1))
+                int chunkX = dx + (center.xi() >> 4);
+                int chunkZ = dz + (center.zi() >> 4);
+                if (world.getChunkProvider().chunkExists(chunkX, chunkZ))
                 {
-                    Chunk chunk = world.getChunkFromChunkCoords(i1, j1);
+                    Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
 
-                    int i = MathHelper.floor_double((r - World.MAX_ENTITY_RADIUS) / 16.0D);
-                    int j = MathHelper.floor_double((r + World.MAX_ENTITY_RADIUS) / 16.0D);
-                    i = MathHelper.clamp_int(i, 0, chunk.entityLists.length - 1);
-                    j = MathHelper.clamp_int(j, 0, chunk.entityLists.length - 1);
+                    int yStart = MathHelper.floor_double((r - World.MAX_ENTITY_RADIUS + center.yi()) / 16.0D);
+                    int yEnd = MathHelper.floor_double((r + World.MAX_ENTITY_RADIUS + center.yi()) / 16.0D);
+                    yStart = MathHelper.clamp_int(yStart, 0, chunk.entityLists.length - 1);
+                    yEnd = MathHelper.clamp_int(yEnd, 0, chunk.entityLists.length - 1);
 
-                    for (int k = i; k <= j; k++)
+                    for (int k = yStart; k <= yEnd; k++)
                     {
                         List list1 = chunk.entityLists[k];
 
@@ -72,7 +74,7 @@ public class Sphere extends Shape3D
                         {
                             Entity entity = (Entity) list1.get(l);
 
-                            if (clazz.isAssignableFrom(entity.getClass()) && distance(new Pos(entity)) <= r)
+                            if ((clazz == null || clazz.isAssignableFrom(entity.getClass())) && distance(new Pos(entity)) <= r)
                             {
                                 list.add((E)entity);
                             }
