@@ -1,9 +1,12 @@
 package com.builtbroken.mc.api.tile.multiblock;
 
 import com.builtbroken.jlib.data.vector.IPos3D;
-import com.builtbroken.mc.api.IWorldPosition;
 import com.builtbroken.mc.api.abstraction.world.IPosWorld;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
 
 import java.util.HashMap;
 
@@ -43,7 +46,9 @@ public interface IMultiTileHost extends IPosWorld
      * @param tile   - tile clicked
      * @param player - person who clicked the tile
      * @param side   - side clicked
-     * @param hit    - hit data of where the tile was clicked
+     * @param xHit   - hit data of where the tile was clicked
+     * @param yHit   - hit data of where the tile was clicked
+     * @param zHit   - hit data of where the tile was clicked
      */
     boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, float xHit, float yHit, float zHit);
 
@@ -60,7 +65,39 @@ public interface IMultiTileHost extends IPosWorld
      * Grabs that raw data of the layout of the structure. This data will be used to generate
      * the structure
      *
-     * @return map of positions to multiTile types see {@link com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock}
+     * @return map of positions to multiTile types see com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock
      */
     HashMap<IPos3D, String> getLayoutOfMultiBlock();
+
+    /**
+     * Called to get host as an itemstack.
+     * <p>
+     * This is used for pick block and waila support.
+     * <p>
+     * This method should work on server and client
+     *
+     * @param player - player, can be null
+     * @param target - target, can be null
+     * @return
+     */
+    default ItemStack getHostAsStack(EntityPlayer player, MovingObjectPosition target)
+    {
+        if (this instanceof TileEntity)
+        {
+            try
+            {
+                Block block = ((TileEntity) this).getBlockType();
+                if (block != null)
+                {
+                    return block.getPickBlock(target, ((TileEntity) this).getWorldObj(), ((TileEntity) this).xCoord, ((TileEntity) this).yCoord, ((TileEntity) this).zCoord, player);
+                }
+            }
+            catch (Exception e)
+            {
+                //On rare case that pick block will not work
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }
