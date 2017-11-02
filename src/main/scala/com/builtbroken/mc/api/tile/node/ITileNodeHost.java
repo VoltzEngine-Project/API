@@ -88,4 +88,19 @@ public interface ITileNodeHost extends IPosWorld
      * @return true if can access world
      */
     boolean canAccessWorld();
+
+    /**
+     * Checks if the host is receiving redstone signal
+     *
+     * @return true if there is redstone
+     */
+    boolean isRedstonePowered();
+
+    /**
+     * Gets the redstone level
+     *
+     * @return 0-15
+     */
+    int getRedstoneLevel();
+
 }
