@@ -172,9 +172,19 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
         return add(dir.offsetX, dir.offsetY, dir.offsetZ);
     }
 
+    public R add(ForgeDirection dir, float scale)
+    {
+        return add(dir.offsetX * scale, dir.offsetY * scale, dir.offsetZ * scale);
+    }
+
     public R add(Direction dir)
     {
         return add(dir.offsetX, dir.offsetY, dir.offsetZ);
+    }
+
+    public R add(Direction dir, float scale)
+    {
+        return add(dir.offsetX * scale, dir.offsetY * scale, dir.offsetZ * scale);
     }
 
     public R add(EnumFacing face)

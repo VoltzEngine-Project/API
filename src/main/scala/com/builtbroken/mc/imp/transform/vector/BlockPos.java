@@ -4,6 +4,7 @@ import com.builtbroken.jlib.data.vector.IPos3D;
 import com.builtbroken.mc.data.Direction;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -54,6 +55,22 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         this.x = pos3D.xi() + dir.offsetX;
         this.y = pos3D.yi() + dir.offsetY;
         this.z = pos3D.zi() + dir.offsetZ;
+    }
+
+    public BlockPos(NBTTagCompound tag)
+    {
+        this.x = tag.getInteger("x");
+        this.y = tag.getInteger("y");
+        this.z = tag.getInteger("z");
+    }
+
+    public NBTTagCompound save()
+    {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setInteger("x", x);
+        tag.setInteger("y", y);
+        tag.setInteger("z", z);
+        return tag;
     }
 
     @Override
@@ -175,6 +192,11 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
     public double getResistance(Entity explosionBlameEntity, double x, double y, double z)
     {
         return 0;
+    }
+
+    public BlockPos add(IPos3D pos)
+    {
+        return add(pos.xi(), pos.yi(), pos.zi());
     }
 
     public BlockPos add(int x, int y, int z)

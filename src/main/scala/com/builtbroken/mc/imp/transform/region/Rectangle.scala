@@ -12,6 +12,8 @@ class Rectangle(var min: Point, var max: Point) extends Shape2D(min.midpoint(max
 
   def this(vec: Point, expansion: Double) = this(vec, vec.add(expansion))
 
+  def this(minX: Double, minY: Double, size: Double)  = this(new Point(minX, minY), new Point(minX + size, minY + size))
+
   def this(minX: Double, minY: Double, maxX: Double, maxY: Double) = this(new Point(minX, minY), new Point(maxX, maxY))
 
   def this(rect: Rectangle) = this(rect.min.clone, rect.max.clone)
