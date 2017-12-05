@@ -108,9 +108,25 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
     ///Conversion methods
     ///////////////////////
 
+    /**
+     * Converts the cube to an AxisAlignedBoundingBox
+     * If invalid will return an empty box
+     *
+     * @return converts cube to bound
+     */
     public AxisAlignedBB toAABB()
     {
-        return isValid() ? AxisAlignedBB.getBoundingBox(min().x(), min().y(), min().z(), max().x(), max().y(), max().z()) : AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
+        return isValid() ? getAABB() : AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
+    }
+
+    /**
+     * Gets the AxisAlignedBoundingBox for the cube
+     *
+     * @return
+     */
+    public AxisAlignedBB getAABB()
+    {
+        return AxisAlignedBB.getBoundingBox(min().x(), min().y(), min().z(), max().x(), max().y(), max().z());
     }
 
     public Rectangle toRectangle()
