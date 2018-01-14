@@ -222,6 +222,11 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
         return distance(entity.posX, entity.posY, entity.posZ);
     }
 
+    public double distance(TileEntity tileEntity)
+    {
+        return distance(tileEntity.xCoord + 0.5, tileEntity.yCoord + 0.5, tileEntity.zCoord + 0.5);
+    }
+
     public R multiply(ForgeDirection dir)
     {
         return multiply(dir.offsetX, dir.offsetY, dir.offsetZ);
