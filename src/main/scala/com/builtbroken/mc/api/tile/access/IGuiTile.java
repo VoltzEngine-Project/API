@@ -38,7 +38,13 @@ public interface IGuiTile
     {
         if (currentGui == null && this instanceof ITile)
         {
-            player.openGui(Loader.instance().getIndexedModList().get(((ITile) this).getMod()), getDefaultGuiID(player), ((ITile) this).world().unwrap(), ((ITile) this).xi(), ((ITile) this).yi(), ((ITile) this).zi());
+            ITile tile = ((ITile) this);
+            String mod_ID = ((ITile) this).getMod();
+            Object mod = Loader.instance().getIndexedModList().get(mod_ID);
+            int gui = getDefaultGuiID(player);
+
+            player.openGui(mod, gui, tile.world().unwrap(), tile.xi(), tile.yi(), tile.zi());
+
             return true;
         }
         return false;
