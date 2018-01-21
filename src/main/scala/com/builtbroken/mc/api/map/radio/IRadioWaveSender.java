@@ -1,6 +1,6 @@
 package com.builtbroken.mc.api.map.radio;
 
-import com.builtbroken.mc.api.IWorldPosition;
+import com.builtbroken.mc.api.abstraction.world.IPosWorld;
 import com.builtbroken.mc.imp.transform.region.Cube;
 
 /**
@@ -9,7 +9,7 @@ import com.builtbroken.mc.imp.transform.region.Cube;
  * @see <a href="https://github.com/BuiltBrokenModding/VoltzEngine/blob/development/license.md">License</a> for what you can and can't do with the code.
  * Created by Dark(DarkGuardsman, Robert) on 4/20/2016.
  */
-public interface IRadioWaveSender extends IWorldPosition
+public interface IRadioWaveSender extends IPosWorld
 {
     /**
      * Confirmation that the wave was received, only

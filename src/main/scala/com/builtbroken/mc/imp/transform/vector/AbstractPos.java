@@ -16,10 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -200,6 +197,11 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
     public R sub(Vec3d vec)
     {
         return add(vec.x, vec.y, vec.z);
+    }
+
+    public double distance(Vec3i vec)
+    {
+        return distance(vec.getX() + 0.5, vec.getY() + 0.5, vec.getZ() + 0.5);
     }
 
     public double distance(Vec3d vec)

@@ -112,6 +112,11 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
         return isValid() ? new AxisAlignedBB(min().x(), min().y(), min().z(), max().x(), max().y(), max().z()) : new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     }
 
+    public AxisAlignedBB getAABB()
+    {
+        return new AxisAlignedBB(min().x(), min().y(), min().z(), max().x(), max().y(), max().z());
+    }
+
     public Rectangle toRectangle()
     {
         return isValid() ? new Rectangle(new Point(min()), new Point(max())) : null;
