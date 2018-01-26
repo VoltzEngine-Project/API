@@ -109,47 +109,6 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
         return z;
     }
 
-    @Override
-    public int hashCode()
-    {
-        int hash = 17;
-        hash = hash * 31 + x;
-        hash = hash * 31 + y;
-        hash = hash * 31 + z;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        return o instanceof IPos3D && compare((IPos3D) o) == 0;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "BlockPos[" + this.xi() + "," + this.yi() + "," + this.zi() + "]";
-    }
-
-    @Override
-    public int compareTo(BlockPos that)
-    {
-        return compare(that);
-    }
-
-    public int compare(IPos3D that)
-    {
-        if (x() < that.xi() || yi() < that.yi() || z < that.zi())
-        {
-            return -1;
-        }
-        if (x() > that.xi() || y() > that.yi() || z > that.zi())
-        {
-            return 1;
-        }
-        return 0;
-    }
-
     public boolean isAirBlock(World world)
     {
         Block block = getBlock(world);
@@ -245,5 +204,51 @@ public class BlockPos implements IPos3D, Comparable<BlockPos>
     public double distance(IPos3D center)
     {
         return distance(center.x(), center.y(), center.z());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 17;
+        hash = hash * 31 + x;
+        hash = hash * 31 + y;
+        hash = hash * 31 + z;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o instanceof IPos3D)
+        {
+            IPos3D pos = (IPos3D) o;
+            return pos.xi() == xi() && pos.yi() == yi() && pos.zi() == zi();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "BlockPos[" + this.xi() + "," + this.yi() + "," + this.zi() + "]";
+    }
+
+    @Override
+    public int compareTo(BlockPos that)
+    {
+        return compare(that);
+    }
+
+    public int compare(IPos3D that)
+    {
+        if (xi() < that.xi() || yi() < that.yi() || zi() < that.zi())
+        {
+            return -1;
+        }
+        if (xi() > that.xi() || yi() > that.yi() || zi() > that.zi())
+        {
+            return 1;
+        }
+        return 0;
     }
 }
