@@ -33,7 +33,7 @@ public interface ITileNodeHost extends IPosWorld
      * @param data
      * @return
      */
-    IPacket getPacketForData(Object... data);
+    IPacket getPacketForData(int id, Object... data);
 
     void sendPacketToClient(IPacket packet, double range);
 

@@ -18,7 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * @author tgame14, DarkCow
  * @since 26/05/14
  */
-public interface IPacket
+public interface IPacket<P extends IPacket>
 {
 
     /**
@@ -26,7 +26,7 @@ public interface IPacket
      *
      * @param ctx    channel context
      * @param buffer the buffer to encode into
-     * PacketManager#writeData(io.netty.buffer.ByteBuf, Object...)
+     *               PacketManager#writeData(io.netty.buffer.ByteBuf, Object...)
      */
     void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
 
@@ -38,24 +38,13 @@ public interface IPacket
      */
     void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
 
-    /**
-     * Gets the extra data buffer that is waiting to be encoded. Can
-     * be used to encode extra data to a packet that the packet
-     * does not normally encoded. Should only be used on packets
-     * that support IPacketIDReceiver type systems.
-     * <p>
-     * Not all packets support this functionality.
-     *
-     * @return bytebuf to write extra data to
-     */
-    default ByteBuf data()
+    default P addData(Object... objects)
     {
-        return null;
+        return (P) this;
     }
 
     /**
      * Handle a packet on the client side. Note this occurs after decoding has completed.
-     *
      */
     default void handleClientSide()
     {

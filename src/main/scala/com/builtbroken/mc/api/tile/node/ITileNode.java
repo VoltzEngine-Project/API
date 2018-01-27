@@ -110,9 +110,9 @@ public interface ITileNode extends IPosWorld, ISave, ITile
         }
     }
 
-    default IPacket getPacketForData(Object... data)
+    default IPacket getPacketForData(int id, Object... data)
     {
-        return getHost().getPacketForData(data);
+        return getHost().getPacketForData(id, data);
     }
 
     //=============================================
