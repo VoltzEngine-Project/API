@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Base object for all custom packets using in VoltzEngine.
@@ -46,9 +48,10 @@ public interface IPacket<P extends IPacket>
     /**
      * Handle a packet on the client side. Note this occurs after decoding has completed.
      */
+    @SideOnly(Side.CLIENT)
     default void handleClientSide()
     {
-        handleClientSide(Minecraft.getMinecraft().player);
+        handleClientSide((EntityPlayer)Minecraft.getMinecraft().player);
     }
 
     default void handleClientSide(EntityPlayer player)
