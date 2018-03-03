@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
  *
  * Created by Dark(DarkGuardsman, Robert) on 12/28/2014.
  */
+//TODO adapt as a capability
 public interface IModuleItem
 {
     /**
