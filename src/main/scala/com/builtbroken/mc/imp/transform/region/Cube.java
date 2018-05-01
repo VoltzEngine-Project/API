@@ -165,7 +165,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public Cube add(double x, double y, double z)
     {
-        if (isValid() && canEdit)
+        if (canEdit)
         {
             pointOne = new Pos(pointOne.x() + x, pointOne.y() + y, pointOne.z() + z);
             pointTwo = new Pos(pointTwo.x() + x, pointTwo.y() + y, pointTwo.z() + z);
@@ -181,7 +181,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public Cube subtract(double x, double y, double z)
     {
-        if (isValid() && canEdit)
+        if (canEdit)
         {
             pointOne = new Pos(pointOne.x() - x, pointOne.y() - y, pointOne.z() - z);
             pointTwo = new Pos(pointTwo.x() - x, pointTwo.y() - y, pointTwo.z() - z);
@@ -216,7 +216,7 @@ public class Cube extends Shape3D implements Cloneable, IByteBufWriter
 
     public boolean doesOverlap(Cube box)
     {
-        return box.isValid() && doesOverlap(box.min().x(), box.min().y(), box.min().z(), box.max().x(), box.max().y(), box.max().z());
+        return doesOverlap(box.min().x(), box.min().y(), box.min().z(), box.max().x(), box.max().y(), box.max().z());
     }
 
     public boolean doesOverlap(double x, double y, double z, double i, double j, double k)
