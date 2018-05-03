@@ -19,7 +19,10 @@ public interface IMultiBlockHandler
      *
      * @param tileMulti - tile that was added
      */
-    void onMultiTileAdded(IMultiTile tileMulti);
+    default void onMultiTileAdded(IMultiTile tileMulti)
+    {
+
+    }
 
     /**
      * Called when a peace of the structure has been removed from the world
@@ -28,7 +31,10 @@ public interface IMultiBlockHandler
      * @param source    - what broke the block (Player or Explosion), can be null
      * @param harvest   - should the block be harvested, only used when a player breaks the tile
      */
-    boolean onMultiTileBroken(IMultiTile tileMulti, Object source, boolean harvest);
+    default boolean onMultiTileBroken(IMultiTile tileMulti, Object source, boolean harvest)
+    {
+        return false;
+    }
 
     /**
      * Called when a tile has been invalidated. Most likely this is
@@ -36,7 +42,10 @@ public interface IMultiBlockHandler
      *
      * @param tileMulti - tile that was invalidated
      */
-    void onTileInvalidate(IMultiTile tileMulti);
+    default void onTileInvalidate(IMultiTile tileMulti)
+    {
+
+    }
 
     /**
      * Called when a player right clicks a tile
@@ -48,7 +57,10 @@ public interface IMultiBlockHandler
      * @param yHit   - hit data of where the tile was clicked
      * @param zHit   - hit data of where the tile was clicked
      */
-    boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, float xHit, float yHit, float zHit);
+    default boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, float xHit, float yHit, float zHit)
+    {
+        return false;
+    }
 
     /**
      * Called when the player left clicks a tile. No additional data is provided beyond
@@ -57,7 +69,10 @@ public interface IMultiBlockHandler
      * @param tile   - tile that was clicked
      * @param player - player
      */
-    void onMultiTileClicked(IMultiTile tile, EntityPlayer player);
+    default void onMultiTileClicked(IMultiTile tile, EntityPlayer player)
+    {
+
+    }
 
     /**
      * Called to get host as an itemstack.
