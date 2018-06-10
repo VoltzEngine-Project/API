@@ -39,7 +39,10 @@ public interface IAdjustableConnections
      * @param side           - side (pointing out of the machine)
      * @return true if the connection is supported (return true if possible, not if enabled)
      */
-    boolean supportsConnection(ConnectionType connectionType, ConnectionColor color, ForgeDirection side);
+    default boolean supportsConnection(ConnectionType connectionType, ConnectionColor color, ForgeDirection side)
+    {
+        return false;
+    }
 
     /**
      * Checks if the connection is enabled for the side
@@ -49,7 +52,10 @@ public interface IAdjustableConnections
      * @param side           - side (pointing out of the machine)
      * @return true if the connection is enabled
      */
-    boolean isConnectionEnabled(ConnectionType connectionType, ConnectionColor color, ForgeDirection side);
+    default boolean isConnectionEnabled(ConnectionType connectionType, ConnectionColor color, ForgeDirection side)
+    {
+        return false;
+    }
 
     /**
      * Called to cycle the connection to the next type
@@ -59,5 +65,8 @@ public interface IAdjustableConnections
      * @param side           - side (pointing out of the machine)
      * @return true if the connection is enabled
      */
-    String cycleConnection(ConnectionType connectionType, ConnectionColor color, ForgeDirection side);
+    default String cycleConnection(ConnectionType connectionType, ConnectionColor color, ForgeDirection side)
+    {
+        return null;
+    }
 }
