@@ -25,5 +25,5 @@ public @interface DataSystemMethod
      *
      * @return
      */
-    String[] args();
+    String[] args() default "";
 }
