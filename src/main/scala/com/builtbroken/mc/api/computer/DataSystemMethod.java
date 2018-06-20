@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
+@Deprecated //Replaced with lambda expression system
 public @interface DataSystemMethod
 {
     /** Name of the method */
