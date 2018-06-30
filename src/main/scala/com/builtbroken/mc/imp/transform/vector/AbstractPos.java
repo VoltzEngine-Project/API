@@ -307,7 +307,6 @@ public abstract class AbstractPos<R extends AbstractPos> extends Pos3D<R> implem
         return rayTrace(world, new Pos(x() + dir.x() * dist, y() + dir.y() * dist, z() + dir.z() * dist));
     }
 
-
     public MovingObjectPosition rayTrace(World world, IPos3D end)
     {
         return rayTrace(world, end, false, false, false);

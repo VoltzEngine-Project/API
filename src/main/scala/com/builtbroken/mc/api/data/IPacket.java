@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.util.function.Consumer;
+
 /**
  * Base object for all custom packets using in VoltzEngine.
  * </p>
@@ -40,21 +42,6 @@ public interface IPacket
     void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer);
 
     /**
-     * Gets the extra data buffer that is waiting to be encoded. Can
-     * be used to encode extra data to a packet that the packet
-     * does not normally encoded. Should only be used on packets
-     * that support IPacketIDReceiver type systems.
-     * <p>
-     * Not all packets support this functionality.
-     *
-     * @return bytebuf to write extra data to
-     */
-    default ByteBuf data()
-    {
-        return null;
-    }
-
-    /**
      * Called to handle client side for the player
      *
      * @param player - local player
@@ -72,6 +59,35 @@ public interface IPacket
     default void handleServerSide(EntityPlayer player)
     {
         handle(player);
+    }
+
+    /**
+     * Called to add object to write to the packet ByteBuf when encoding
+     * <p>
+     * Not all packets support this feature
+     *
+     * @param data - object to write
+     * @param <A>  - this
+     * @return this
+     */
+    default <A extends IPacket> A add(Object data)
+    {
+        return (A) this;
+    }
+
+    /**
+     * Called to add a function to write to the packet ByteBuf when encoding
+     * <p>
+     * Not all packets support this feature
+     *
+     *  @param writer - function to consume the input for writing
+     * @param <A>  - this
+     * @return this
+     */
+    default <A extends IPacket> A addWriter(Consumer<ByteBuf> writer)
+    {
+        add(writer);
+        return (A) this;
     }
 
     /**
