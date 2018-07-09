@@ -62,6 +62,21 @@ public interface IGunData extends IWeaponData
     IEnergyBufferData getBufferData();
 
     /**
+     * Gets extra data used for weapons that
+     * have several barrels.
+     * <p>
+     * Positions provided are combined with
+     * {@link #getProjectileSpawnOffset()} before
+     * being used
+     *
+     * @return data if weapon has extra data
+     */
+    default IGunBarrelData getGunBarrelData()
+    {
+        return null;
+    }
+
+    /**
      * Ammo data to use always for the weapon.
      * Main use is for energy based weapons
      * who reload via batteries and not ammo items.
